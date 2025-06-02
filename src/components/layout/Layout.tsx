@@ -14,18 +14,18 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     { href: "/produits", label: "Produits" },
     { href: "/services", label: "Services" },
     { href: "/a-propos", label: "À Propos" },
-    { href: "/galeries", label: "Galeries" },
-    { href: "/blog", label: "Blog" },
+    // { href: "/galeries", label: "Galeries" }, // Uncomment if galleries are available
+    // { href: "/blog", label: "Blog" }, // Uncomment if blog is available
     { href: "/contact", label: "Contact" },
   ];
 
   const serviceLinks = [
-    { href: "/services/nettoie-pro", label: "Nettoyage Pro" },
-    { href: "/services/eco-jardin", label: "Eco-Jardin" },
-    { href: "/services/natura-potager", label: "Natura-Potager" },
-    { href: "/services/eco-event", label: "Eco-Event" },
-    { href: "/services/sante-pro", label: "Santé-Pro" },
-    { href: "/services/fom-logistics", label: "FOM Logistics" },
+    { href: "/services#nettoie-pro", label: "Nettoyage Pro" },
+    { href: "/services#eco-jardin", label: "Eco-Jardin" },
+    { href: "/services#natura-potager", label: "Natura-Potager" },
+    { href: "/services#eco-event", label: "Eco-Event" },
+    { href: "/services#sante-pro", label: "Santé-Pro" },
+    // { href: "/services/fom-logistics", label: "FOM Logistics" },
     { href: "/quote", label: "Demander un Devis" },
   ];
 
@@ -110,7 +110,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#14A800] transition-all duration-200 group-hover:w-full"></span>
                 </a>
               ))}
-              <button className="bg-[#14A800] hover:bg-[#128700] text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 transform hover:scale-105">
+              <button
+                className="bg-[#14A800] hover:bg-[#128700] text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 transform hover:scale-105"
+                onClick={() => (window.location.href = "/quote")}
+              >
                 Devis Gratuit
               </button>
             </nav>
