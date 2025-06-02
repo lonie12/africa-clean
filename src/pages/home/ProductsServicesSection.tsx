@@ -81,7 +81,7 @@ const ProductsServicesOverview: React.FC = () => {
             <h3 className="text-2xl font-bold text-[#212121] mb-6">
               Nos Services
             </h3>
-            <div className="space-y-4">
+            <div className="space-y-4 mb-8">
               {[
                 "Nettoyage professionnel (bureaux, résidences, industries)",
                 "Création et entretien d'espaces verts",
