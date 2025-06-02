@@ -17,6 +17,7 @@ import {
   CalendarDots,
   GraduationCap,
 } from "@phosphor-icons/react";
+import WhatsAppFloatingButton from "@/components/common/WhatsAppButton";
 
 interface ConceptDetail {
   id: string;
@@ -639,6 +640,9 @@ const ServicesPage: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Floating WhatsApp Button */}
+      <WhatsAppFloatingButton />
     </div>
   );
 };
