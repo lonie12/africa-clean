@@ -76,7 +76,7 @@ const ProductsPage: React.FC = () => {
       </section>
 
       {/* Poubelles EcoTrash Section - Alignée à gauche avec effet immersif */}
-      <section className="py-20 relative">
+      <section id="ecotrash" className="py-20 relative">
         <div className="w-full">
           {/* Container positionné pour créer l'effet immersif à gauche */}
           <div className="relative -ml-32 md:-ml-48 lg:-ml-64">
@@ -124,7 +124,7 @@ const ProductsPage: React.FC = () => {
       </div>
 
       {/* Produits d'Entretien Section - Alignée à droite avec effet immersif */}
-      <section className="py-20 relative">
+      <section id="ecoclean" className="py-20 relative">
         <div className="w-full">
           {/* Container positionné pour créer l'effet immersif à droite */}
           <div className="relative -mr-32 md:-mr-48 lg:-mr-64">
