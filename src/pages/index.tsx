@@ -1,11 +1,30 @@
 import RootLayout from "@/app.layout";
 import { createBrowserRouter, RouterProvider } from "react-router";
+// import HomePage from "./home";
+import NotFound from "./NotFound";
+import { mainRoutes } from "@/lib/routes/main.routes";
 import HomePage from "./home";
+import Layout from "@/components/layout/Layout";
 
 const router = createBrowserRouter([
   {
     element: <RootLayout />,
-    children: [{ path: "/", element: <HomePage /> }],
+    children: [
+      {
+        element: <Layout />,
+        children: [
+          {
+            path: "/",
+            element: <HomePage />,
+          },
+        ],
+      },
+      mainRoutes,
+      {
+        path: "*",
+        element: <NotFound />,
+      },
+    ],
   },
 ]);
 
