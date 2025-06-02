@@ -5,112 +5,32 @@ import WhatsAppFloatingButton from "@/components/common/WhatsAppButton";
 import { Award } from "iconsax-react";
 
 const ProductsPage: React.FC = () => {
-  // Images pour les poubelles EcoTrash
+  // Images pour les poubelles EcoTrash (simplifiées)
   const ecoTrashImages = [
-    {
-      id: "ecotrash-1",
-      src: "/images/products/ecotrash/1.jpg",
-      alt: "Poubelle EcoTrash modèle 1",
-      title: "EcoTrash Classic",
-    },
-    {
-      id: "ecotrash-2",
-      src: "/images/products/ecotrash/2.jpg",
-      alt: "Poubelle EcoTrash modèle 2",
-      title: "EcoTrash Pro",
-    },
-    {
-      id: "ecotrash-3",
-      src: "/images/products/ecotrash/3.jpg",
-      alt: "Poubelle EcoTrash modèle 3",
-      title: "EcoTrash Smart",
-    },
-    {
-      id: "ecotrash-4",
-      src: "/images/products/ecotrash/4.jpg",
-      alt: "Poubelle EcoTrash modèle 4",
-      title: "EcoTrash Event",
-    },
-    {
-      id: "ecotrash-5",
-      src: "/images/products/ecotrash/12.jpg",
-      alt: "Poubelle EcoTrash modèle 5",
-      title: "EcoTrash Mini",
-    },
-    {
-      id: "ecotrash-6",
-      src: "/images/products/ecotrash/6.jpg",
-      alt: "Poubelle EcoTrash modèle 6",
-      title: "EcoTrash XL",
-    },
-    {
-      id: "ecotrash-7",
-      src: "/images/products/ecotrash/7.jpg",
-      alt: "Poubelle EcoTrash modèle 6",
-      title: "EcoTrash XL",
-    },
-    {
-      id: "ecotrash-8",
-      src: "/images/products/ecotrash/8.jpg",
-      alt: "Poubelle EcoTrash modèle 6",
-      title: "EcoTrash XL",
-    },
-    {
-      id: "ecotrash-9",
-      src: "/images/products/ecotrash/9.jpg",
-      alt: "Poubelle EcoTrash modèle 6",
-      title: "EcoTrash XL",
-    },
-    {
-      id: "ecotrash-10",
-      src: "/images/products/ecotrash/10.jpg",
-      alt: "Poubelle EcoTrash modèle 6",
-      title: "EcoTrash XL",
-    },
-    {
-      id: "ecotrash-11",
-      src: "/images/products/ecotrash/11.jpg",
-      alt: "Poubelle EcoTrash modèle 6",
-      title: "EcoTrash XL",
-    },
+    { id: "ecotrash-1", src: "/images/products/ecotrash/1.jpg" },
+    { id: "ecotrash-2", src: "/images/products/ecotrash/2.jpg" },
+    { id: "ecotrash-3", src: "/images/products/ecotrash/3.jpg" },
+    { id: "ecotrash-4", src: "/images/products/ecotrash/4.jpg" },
+    { id: "ecotrash-5", src: "/images/products/ecotrash/12.jpg" },
+    { id: "ecotrash-6", src: "/images/products/ecotrash/6.jpg" },
+    { id: "ecotrash-7", src: "/images/products/ecotrash/7.jpg" },
+    { id: "ecotrash-8", src: "/images/products/ecotrash/8.jpg" },
+    { id: "ecotrash-9", src: "/images/products/ecotrash/9.jpg" },
+    { id: "ecotrash-10", src: "/images/products/ecotrash/10.jpg" },
+    { id: "ecotrash-11", src: "/images/products/ecotrash/11.jpg" },
   ];
 
-  // Images pour les produits d'entretien
+  // Images pour les produits d'entretien (simplifiées)
   const cleaningProductImages = [
-    {
-      id: "cleaning-1",
-      src: "/images/products/ecoclean/1.jpg",
-      alt: "Détergent écologique",
-      title: "Détergent Multi-surfaces",
-    },
-    {
-      id: "cleaning-2",
-      src: "/images/products/ecoclean/2.jpg",
-      alt: "Nettoyant vitres écologique",
-      title: "Nettoyant Vitres Bio",
-    },
-    {
-      id: "cleaning-3",
-      src: "/images/products/ecoclean/3.jpg",
-      alt: "Désinfectant écologique",
-      title: "Désinfectant Naturel",
-    },
-    {
-      id: "cleaning-4",
-      src: "/images/products/ecoclean/4.jpg",
-      alt: "Détartrant écologique",
-      title: "Détartrant Bio",
-    },
-    {
-      id: "cleaning-5",
-      src: "/images/products/ecoclean/5.jpg",
-      alt: "Savon écologique",
-      title: "Savon Écologique",
-    },
+    { id: "cleaning-1", src: "/images/products/ecoclean/1.jpg" },
+    { id: "cleaning-2", src: "/images/products/ecoclean/2.jpg" },
+    { id: "cleaning-3", src: "/images/products/ecoclean/3.jpg" },
+    { id: "cleaning-4", src: "/images/products/ecoclean/4.jpg" },
+    { id: "cleaning-5", src: "/images/products/ecoclean/5.jpg" },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white overflow-hidden">
       {/* Hero Section */}
       <section className="py-16 bg-gradient-to-r from-[#14A800] to-[#128700] text-white relative overflow-hidden">
         <div className="max-w-6xl mx-auto px-6 text-center relative z-10">
@@ -126,7 +46,7 @@ const ProductsPage: React.FC = () => {
           <div className="grid md:grid-cols-3 gap-8 mt-12">
             <div className="flex flex-col items-center space-y-3">
               <div className="bg-white/20 p-4 rounded-full">
-                <Award size={32} className="text-white" />
+                <Award color="white" size={32} className="text-white" />
               </div>
               <h3 className="font-semibold">Qualité Premium</h3>
               <p className="text-sm opacity-80">Produits certifiés et testés</p>
@@ -155,17 +75,35 @@ const ProductsPage: React.FC = () => {
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
       </section>
 
-      {/* Poubelles EcoTrash Section */}
-      <section className="py-20">
-        <div className="max-w-6xl mx-auto px-6">
-          <CircularProductDisplay
-            centerIcon={<Recycle size={48} />}
-            images={ecoTrashImages}
-            title="Poubelles ECOTRASH"
-            description="Les poubelles EcoTrash se distinguent par leur design pratique, durable et respectueux de l'environnement. Conçues pour le tri sélectif, elles facilitent le recyclage lors des événements, dans les entreprises ou à la maison. Fabriquées à partir de matériaux recyclés et recyclables, elles contribuent activement à une démarche zéro déchet."
-            centerColor="#14A800"
-            size="lg"
-          />
+      {/* Poubelles EcoTrash Section - Alignée à gauche avec effet immersif */}
+      <section className="py-20 relative">
+        <div className="w-full">
+          {/* Container positionné pour créer l'effet immersif à gauche */}
+          <div className="relative -ml-32 md:-ml-48 lg:-ml-64">
+            <div className="flex items-center">
+              {/* Texte à droite */}
+              <div className="flex-1 max-w-2xl ml-32 md:ml-48 lg:ml-64 mr-8">
+                <h3 className="text-2xl md:text-3xl font-bold text-[#212121] mb-4">
+                  Poubelles ECOTRASH
+                </h3>
+                <p className="text-lg text-gray-700 leading-relaxed mb-8">
+                  Les poubelles EcoTrash se distinguent par leur design pratique, durable et respectueux de l'environnement. Conçues pour le tri sélectif, elles facilitent le recyclage lors des événements, dans les entreprises ou à la maison. Fabriquées à partir de matériaux recyclés et recyclables, elles contribuent activement à une démarche zéro déchet.
+                </p>
+              </div>
+              
+              {/* Animation circulaire */}
+              <div className="flex-shrink-0">
+                <CircularProductDisplay
+                  centerIcon={<Recycle size={60} />}
+                  images={ecoTrashImages}
+                  title=""
+                  description=""
+                  centerColor="#14A800"
+                  size="lg"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -185,17 +123,35 @@ const ProductsPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Produits d'Entretien Section */}
-      <section className="py-20">
-        <div className="max-w-6xl mx-auto px-6">
-          <CircularProductDisplay
-            centerIcon={<Leaf size={48} />}
-            images={cleaningProductImages}
-            title="Produits d'Entretien Écologiques"
-            description="Nos produits d'entretien écologiques sont formulés à base d'ingrédients naturels, biodégradables et sans substances nocives. Parfaits pour un usage régulier, ils assurent une efficacité optimale tout en préservant votre santé et la planète. Que ce soit pour des événements, des espaces publics ou des foyers, nos solutions garantissent propreté, hygiène et impact réduit sur l'environnement."
-            centerColor="#22C55E"
-            size="lg"
-          />
+      {/* Produits d'Entretien Section - Alignée à droite avec effet immersif */}
+      <section className="py-20 relative">
+        <div className="w-full">
+          {/* Container positionné pour créer l'effet immersif à droite */}
+          <div className="relative -mr-32 md:-mr-48 lg:-mr-64">
+            <div className="flex items-center">
+              {/* Animation circulaire */}
+              <div className="flex-shrink-0">
+                <CircularProductDisplay
+                  centerIcon={<Leaf size={60} />}
+                  images={cleaningProductImages}
+                  title=""
+                  description=""
+                  centerColor="#22C55E"
+                  size="lg"
+                />
+              </div>
+              
+              {/* Texte à gauche */}
+              <div className="flex-1 max-w-2xl mr-32 md:mr-48 lg:mr-64 ml-8">
+                <h3 className="text-2xl md:text-3xl font-bold text-[#212121] mb-4">
+                  Produits d'Entretien Écologiques
+                </h3>
+                <p className="text-lg text-gray-700 leading-relaxed mb-8">
+                  Nos produits d'entretien écologiques sont formulés à base d'ingrédients naturels, biodégradables et sans substances nocives. Parfaits pour un usage régulier, ils assurent une efficacité optimale tout en préservant votre santé et la planète. Que ce soit pour des événements, des espaces publics ou des foyers, nos solutions garantissent propreté, hygiène et impact réduit sur l'environnement.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -272,26 +228,27 @@ const ProductsPage: React.FC = () => {
             </button>
           </div>
         </div>
-
-        <style>
-          {`
-            @keyframes spin-slow {
-              from {
-                transform: rotate(0deg);
-              }
-              to {
-                transform: rotate(360deg);
-              }
-            }
-
-            .animate-spin-slow {
-              animation: spin-slow 20s linear infinite;
-            }
-        `}
-        </style>
       </section>
 
       <WhatsAppFloatingButton />
+
+      {/* Styles CSS pour les animations */}
+      <style>
+        {`
+          @keyframes spin-slow {
+            from {
+              transform: rotate(0deg);
+            }
+            to {
+              transform: rotate(360deg);
+            }
+          }
+
+          .animate-spin-slow {
+            animation: spin-slow 25s linear infinite;
+          }
+        `}
+      </style>
     </div>
   );
 };
