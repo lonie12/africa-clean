@@ -40,9 +40,12 @@ const ProductsServicesOverview: React.FC = () => {
                       de déchets électroniques. Design durable et respectueux de
                       l'environnement.
                     </p>
-                    <button className="text-[#14A800] font-semibold hover:underline">
+                    <a
+                      href="/produits#ecotrash"
+                      className="text-[#14A800] font-semibold hover:underline"
+                    >
                       En savoir plus →
-                    </button>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -61,9 +64,12 @@ const ProductsServicesOverview: React.FC = () => {
                       substances nocives, pour une efficacité optimale en
                       respectant votre santé et la planète.
                     </p>
-                    <button className="text-[#14A800] font-semibold hover:underline">
+                    <a
+                      href="/produits#ecoclean"
+                      className="text-[#14A800] font-semibold hover:underline"
+                    >
                       En savoir plus →
-                    </button>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -93,9 +99,9 @@ const ProductsServicesOverview: React.FC = () => {
                 </div>
               ))}
             </div>
-            <button className="mt-6 bg-[#14A800] hover:bg-[#128700] text-white px-6 py-3 rounded-lg font-semibold transition-all">
+            <a href="/services" className="mt-6 bg-[#14A800] hover:bg-[#128700] text-white px-6 py-3 rounded-lg font-semibold transition-all">
               Voir tous nos services
-            </button>
+            </a>
           </div>
         </div>
       </div>

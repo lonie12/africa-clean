@@ -22,7 +22,7 @@ const ConceptsSection: React.FC = () => {
         "Solutions de nettoyage professionnel pour bureaux, résidences, industries et centres de santé avec une approche éco-responsable.",
       image: "/images/services/nettoie-pro.jpg",
       category: "Nettoyage",
-      href: "/services/nettoie-pro",
+      href: "/services#nettoie-pro",
       color: "#14A800", // Vert principal
     },
     {
@@ -32,7 +32,7 @@ const ConceptsSection: React.FC = () => {
         "Conception paysagiste 3D, aménagement et entretien d'espaces verts durables et esthétiques.",
       image: "/images/services/eco-jardin.jpg",
       category: "Espaces Verts",
-      href: "/services/eco-jardin",
+      href: "/services#eco-jardin",
       color: "#22C55E", // Vert plus clair
     },
     {
@@ -42,7 +42,7 @@ const ConceptsSection: React.FC = () => {
         "Création et gestion de jardins potagers biologiques pour une alimentation saine et locale.",
       image: "/images/services/natura-potager.jpg",
       category: "Agriculture Bio",
-      href: "/services/natura-potager",
+      href: "/services#natura-potager",
       color: "#16A34A", // Vert nature
     },
     {
@@ -52,7 +52,7 @@ const ConceptsSection: React.FC = () => {
         "Services complets de nettoyage avant, pendant et après vos événements pour garantir la propreté.",
       image: "/images/services/nettoie-event.jpg",
       category: "Événementiel",
-      href: "/services/nettoie-event",
+      href: "/services#nettoie-event",
       color: "#0EA5E9", // Bleu
     },
     {
@@ -62,7 +62,7 @@ const ConceptsSection: React.FC = () => {
         "Gestion écologique des déchets événementiels avec collecte, tri et recyclage pour un impact minimal.",
       image: "/images/services/eco-event.jpg",
       category: "Événementiel",
-      href: "/services/eco-event",
+      href: "/services#eco-event",
       color: "#0284C7", // Bleu plus foncé
     },
     {
@@ -72,7 +72,7 @@ const ConceptsSection: React.FC = () => {
         "Nous garantissons l'hygiène et la propreté dans vos centres de santé.",
       image: "/images/services/sante-pro.png",
       category: "Santé",
-      href: "/services/sante-pro",
+      href: "/services#sante-pro",
       color: "#DC2626", // Rouge médical
     },
   ];
