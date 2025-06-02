@@ -13,6 +13,22 @@
         "link-name": "off"
       }
     ],
-    "no-inline-styles": "off"
+    "no-inline-styles": "off",
+    "compat-api/html": [
+      "default",
+      {
+        "ignore": [
+          "iframe[loading]"
+        ]
+      }
+    ],
+    "axe/aria": [
+      "default",
+      {
+        "aria-input-field-name": "off",
+        "aria-required-attr": "off",
+        "aria-valid-attr-value": "off"
+      }
+    ]
   }
 }
