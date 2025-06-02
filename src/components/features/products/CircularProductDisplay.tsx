@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 interface ProductImage {
   id: string;
   src: string;
-  alt: string;
-  title?: string;
 }
 
 interface CircularProductDisplayProps {
@@ -27,28 +25,28 @@ const CircularProductDisplay: React.FC<CircularProductDisplayProps> = ({
   const [hoveredImage, setHoveredImage] = useState<string | null>(null);
   const [isPaused, setIsPaused] = useState(false);
 
-  // Size configurations
+  // Size configurations - agrandies
   const sizeConfig = {
     sm: {
-      containerSize: "w-80 h-80",
-      centerSize: "w-20 h-20",
-      imageSize: "w-16 h-16",
-      radius: 140,
-      imageHoverSize: "w-20 h-20",
+      containerSize: "w-[400px] h-[400px]",
+      centerSize: "w-24 h-24",
+      imageSize: "w-20 h-20",
+      radius: 160,
+      imageHoverSize: "w-28 h-28",
     },
     md: {
-      containerSize: "w-96 h-96",
-      centerSize: "w-24 h-24",
-      imageSize: "w-18 h-18",
-      radius: 160,
-      imageHoverSize: "w-24 h-24",
-    },
-    lg: {
       containerSize: "w-[500px] h-[500px]",
       centerSize: "w-32 h-32",
-      imageSize: "w-20 h-20",
+      imageSize: "w-24 h-24",
       radius: 200,
-      imageHoverSize: "w-28 h-28",
+      imageHoverSize: "w-32 h-32",
+    },
+    lg: {
+      containerSize: "w-[600px] h-[600px]",
+      centerSize: "w-40 h-40",
+      imageSize: "w-28 h-28",
+      radius: 240,
+      imageHoverSize: "w-36 h-36",
     },
   };
 
@@ -110,7 +108,7 @@ const CircularProductDisplay: React.FC<CircularProductDisplayProps> = ({
               isPaused ? "" : "animate-spin-slow"
             }`}
             style={{
-              animationDuration: "20s",
+              animationDuration: "25s",
               animationPlayState: isPaused ? "paused" : "running",
             }}
           >
@@ -139,23 +137,13 @@ const CircularProductDisplay: React.FC<CircularProductDisplayProps> = ({
                   >
                     <img
                       src={image.src}
-                      alt={image.alt}
+                      alt={`Produit ${image.id}`}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                       onError={(e) => {
-                        e.currentTarget.src = "/api/placeholder/80/80";
+                        e.currentTarget.src = "/api/placeholder/100/100";
                       }}
                     />
                   </div>
-
-                  {/* Hover tooltip */}
-                  {hoveredImage === image.id && image.title && (
-                    <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 z-30">
-                      <div className="bg-gray-900 text-white px-3 py-1 rounded-full text-xs whitespace-nowrap">
-                        {image.title}
-                        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1 border-l-4 border-r-4 border-b-4 border-transparent border-b-gray-900" />
-                      </div>
-                    </div>
-                  )}
 
                   {/* Glow effect on hover */}
                   {hoveredImage === image.id && (
@@ -175,33 +163,6 @@ const CircularProductDisplay: React.FC<CircularProductDisplayProps> = ({
           <div className="absolute inset-8 border border-gray-200 rounded-full opacity-30" />
           <div className="absolute inset-16 border border-gray-100 rounded-full opacity-20" />
         </div>
-      </div>
-
-      {/* Action Buttons */}
-      <div className="flex flex-col sm:flex-row gap-4 mt-8">
-        <button
-          className="px-8 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg text-white"
-          style={{ backgroundColor: centerColor }}
-        >
-          Voir tous les produits
-        </button>
-        <button
-          className="px-8 py-3 rounded-full border-2 font-semibold transition-all duration-300 transform hover:scale-105"
-          style={{
-            borderColor: centerColor,
-            color: centerColor,
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = centerColor;
-            e.currentTarget.style.color = "white";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = "transparent";
-            e.currentTarget.style.color = centerColor;
-          }}
-        >
-          Demander un devis
-        </button>
       </div>
     </div>
   );
