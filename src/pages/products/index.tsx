@@ -79,18 +79,23 @@ const ProductsPage: React.FC = () => {
       <section id="ecotrash" className="py-20 relative">
         <div className="w-full">
           {/* Container positionné pour créer l'effet immersif à gauche */}
-          <div className="relative -ml-32 md:-ml-48 lg:-ml-64">
+          <div className="flex items-center">
             <div className="flex items-center">
               {/* Texte à droite */}
-              <div className="flex-1 max-w-2xl ml-32 md:ml-48 lg:ml-64 mr-8">
+              <div className="flex-1">
                 <h3 className="text-2xl md:text-3xl font-bold text-[#212121] mb-4">
                   Poubelles ECOTRASH
                 </h3>
                 <p className="text-lg text-gray-700 leading-relaxed mb-8">
-                  Les poubelles EcoTrash se distinguent par leur design pratique, durable et respectueux de l'environnement. Conçues pour le tri sélectif, elles facilitent le recyclage lors des événements, dans les entreprises ou à la maison. Fabriquées à partir de matériaux recyclés et recyclables, elles contribuent activement à une démarche zéro déchet.
+                  Les poubelles EcoTrash se distinguent par leur design
+                  pratique, durable et respectueux de l'environnement. Conçues
+                  pour le tri sélectif, elles facilitent le recyclage lors des
+                  événements, dans les entreprises ou à la maison. Fabriquées à
+                  partir de matériaux recyclés et recyclables, elles contribuent
+                  activement à une démarche zéro déchet.
                 </p>
               </div>
-              
+
               {/* Animation circulaire */}
               <div className="flex-shrink-0">
                 <CircularProductDisplay
@@ -127,7 +132,7 @@ const ProductsPage: React.FC = () => {
       <section id="ecoclean" className="py-20 relative">
         <div className="w-full">
           {/* Container positionné pour créer l'effet immersif à droite */}
-          <div className="relative -mr-32 md:-mr-48 lg:-mr-64">
+          <div className="flex items-center">
             <div className="flex items-center">
               {/* Animation circulaire */}
               <div className="flex-shrink-0">
@@ -140,14 +145,20 @@ const ProductsPage: React.FC = () => {
                   size="lg"
                 />
               </div>
-              
+
               {/* Texte à gauche */}
-              <div className="flex-1 max-w-2xl mr-32 md:mr-48 lg:mr-64 ml-8">
+              <div className="flex-1 ">
                 <h3 className="text-2xl md:text-3xl font-bold text-[#212121] mb-4">
                   Produits d'Entretien Écologiques
                 </h3>
                 <p className="text-lg text-gray-700 leading-relaxed mb-8">
-                  Nos produits d'entretien écologiques sont formulés à base d'ingrédients naturels, biodégradables et sans substances nocives. Parfaits pour un usage régulier, ils assurent une efficacité optimale tout en préservant votre santé et la planète. Que ce soit pour des événements, des espaces publics ou des foyers, nos solutions garantissent propreté, hygiène et impact réduit sur l'environnement.
+                  Nos produits d'entretien écologiques sont formulés à base
+                  d'ingrédients naturels, biodégradables et sans substances
+                  nocives. Parfaits pour un usage régulier, ils assurent une
+                  efficacité optimale tout en préservant votre santé et la
+                  planète. Que ce soit pour des événements, des espaces publics
+                  ou des foyers, nos solutions garantissent propreté, hygiène et
+                  impact réduit sur l'environnement.
                 </p>
               </div>
             </div>
