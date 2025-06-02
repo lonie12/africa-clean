@@ -1,6 +1,6 @@
 # 🌿 Africa Clean
 
-![Africa Clean Screenshot](./public/images/screenshot.jpg)
+![Africa Clean Screenshot](https://github.com/goddivor/africa-clean/blob/main/public/images/Screenshot.jpg)
 
 > **Pour une Afrique Propre et Durable !**  
 > Professional cleaning solutions and ecological services for a sustainable future in West Africa.
