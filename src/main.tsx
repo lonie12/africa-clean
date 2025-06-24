@@ -4,12 +4,15 @@ import { AppRouter } from "./pages";
 import { ToastProvider } from "./context/toast-context";
 import { ToastContainer } from "./components/Toast";
 import { AuthProvider } from "./context/auth-context";
+import { BlogProvider } from "./context/blog-context";
 
 createRoot(document.getElementById("root")!).render(
  <AuthProvider>
-    <ToastProvider>
-      <AppRouter />
-      <ToastContainer />
-    </ToastProvider>
+    <BlogProvider>
+      <ToastProvider>
+        <AppRouter />
+        <ToastContainer />
+      </ToastProvider>
+    </BlogProvider>
   </AuthProvider>
 );

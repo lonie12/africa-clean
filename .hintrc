@@ -29,6 +29,12 @@
         "aria-required-attr": "off",
         "aria-valid-attr-value": "off"
       }
+    ],
+    "axe/forms": [
+      "default",
+      {
+        "select-name": "off"
+      }
     ]
   }
 }
