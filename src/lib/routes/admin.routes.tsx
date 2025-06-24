@@ -1,20 +1,29 @@
 // src/lib/routes/admin.routes.tsx
-// src/lib/routes/admin.routes.tsx
-import type { RouteObject } from 'react-router';
-import ProtectedRoute from '../../components/auth/ProtectedRoute';
-import AdminPage from '../../pages/admin';
-import AuthPage from '../../pages/auth';
+import { lazy } from 'react'
+import ProtectedRoute from '../../components/auth/ProtectedRoute'
 
-export const adminRoutes: RouteObject = {
+const AdminPage = lazy(() => import('../../pages/admin'))
+const AuthPage = lazy(() => import('../../pages/auth'))
+
+export const adminRoutes = {
   path: '/admin',
   element: (
     <ProtectedRoute requireAdmin={true}>
       <AdminPage />
     </ProtectedRoute>
   ),
-};
+}
 
-export const authRoutes: RouteObject = {
+export const authRoutes = {
   path: '/auth',
-  element: <AuthPage />,
-};
+  children: [
+    {
+      path: 'login',
+      element: <AuthPage />,
+    },
+    {
+      path: '',
+      element: <AuthPage />, // Redirect /auth to /auth/login
+    },
+  ],
+}

@@ -1,19 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // src/pages/auth/index.tsx
-import React, { useState } from 'react';
-import { Navigate, useLocation } from 'react-router';
-import { 
-  EnvelopeSimple, 
-  Lock, 
-  Eye, 
+import React, { useState } from "react";
+import { Navigate, useLocation } from "react-router";
+import {
+  EnvelopeSimple,
+  Lock,
+  Eye,
   EyeClosed,
-  SignIn
-} from '@phosphor-icons/react';
-import { useAuth } from '../../context/auth-context';
-import { Input } from '../../components/forms/Input';
-import { useToast } from '../../context/toast-context';
-import Button from '../../components/actions/button';
+  SignIn,
+} from "@phosphor-icons/react";
+import { useAuth } from "../../context/auth-context";
+import { Input } from "../../components/forms/Input";
+import { useToast } from "../../context/toast-context";
+import Button from "../../components/actions/button";
 
 interface AuthFormData {
   email: string;
@@ -24,24 +24,24 @@ const AuthPage: React.FC = () => {
   const { login, loginWithGoogle, isAuthenticated, isLoading } = useAuth();
   const { success, error } = useToast();
   const location = useLocation();
-  
+
   const [formData, setFormData] = useState<AuthFormData>({
-    email: '',
-    password: ''
+    email: "",
+    password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Redirect if already authenticated
   if (isAuthenticated) {
-    const from = (location.state as any)?.from?.pathname || '/admin';
+    const from = (location.state as any)?.from?.pathname || "/admin";
     return <Navigate to={from} replace />;
   }
 
   const handleInputChange = (field: keyof AuthFormData, value: string) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [field]: value
+      [field]: value,
     }));
   };
 
@@ -52,37 +52,34 @@ const AuthPage: React.FC = () => {
     try {
       await login(formData.email, formData.password);
       success(
-        'Connexion réussie !',
-        'Bienvenue dans l\'espace d\'administration.',
+        "Connexion réussie !",
+        "Bienvenue dans l'espace d'administration."
       );
     } catch (err) {
-      error(
-        'Erreur de connexion',
-        'Email ou mot de passe incorrect.'
-      );
+      error("Erreur de connexion", "Email ou mot de passe incorrect.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const handleGoogleLogin = async () => {
-    setIsSubmitting(true);
-    
-    try {
-      await loginWithGoogle();
-      success(
-        'Connexion Google réussie !',
-        'Bienvenue dans l\'espace d\'administration.',
-      );
-    } catch (err) {
-      error(
-        'Erreur de connexion Google',
-        'Une erreur est survenue lors de la connexion avec Google.'
-      );
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  // const handleGoogleLogin = async () => {
+  //   setIsSubmitting(true);
+
+  //   try {
+  //     await loginWithGoogle();
+  //     success(
+  //       'Connexion Google réussie !',
+  //       'Bienvenue dans l\'espace d\'administration.',
+  //     );
+  //   } catch (err) {
+  //     error(
+  //       'Erreur de connexion Google',
+  //       'Une erreur est survenue lors de la connexion avec Google.'
+  //     );
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // };
 
   const isFormValid = formData.email && formData.password;
 
@@ -116,13 +113,13 @@ const AuthPage: React.FC = () => {
         <div className="bg-white py-8 px-4 shadow-xl rounded-2xl sm:px-10 border border-gray-200">
           <form className="space-y-6" onSubmit={handleSubmit}>
             {/* Email Field */}
-            <div className='relative'>
+            <div className="relative">
               <Input
                 label="Adresse email"
                 type="email"
                 placeholder="exemple@gmail.com"
                 value={formData.email}
-                onChange={(e) => handleInputChange('email', e.target.value)}
+                onChange={(e) => handleInputChange("email", e.target.value)}
                 className="pl-12"
                 required
               />
@@ -135,10 +132,10 @@ const AuthPage: React.FC = () => {
             <div className="relative">
               <Input
                 label="Mot de passe"
-                type={showPassword ? 'text' : 'password'}
+                type={showPassword ? "text" : "password"}
                 placeholder="••••••••"
                 value={formData.password}
-                onChange={(e) => handleInputChange('password', e.target.value)}
+                onChange={(e) => handleInputChange("password", e.target.value)}
                 className="pl-12 pr-12"
                 required
               />
@@ -151,9 +148,15 @@ const AuthPage: React.FC = () => {
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? (
-                  <EyeClosed size={20} className="text-gray-400 hover:text-gray-600" />
+                  <EyeClosed
+                    size={20}
+                    className="text-gray-400 hover:text-gray-600"
+                  />
                 ) : (
-                  <Eye size={20} className="text-gray-400 hover:text-gray-600" />
+                  <Eye
+                    size={20}
+                    className="text-gray-400 hover:text-gray-600"
+                  />
                 )}
               </button>
             </div>
@@ -174,9 +177,9 @@ const AuthPage: React.FC = () => {
               type="submit"
               disabled={!isFormValid || isSubmitting}
               className={`w-full py-3 px-4 rounded-lg font-semibold text-white transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 ${
-                isFormValid && !isSubmitting 
-                  ? 'bg-[#14A800] hover:bg-[#128700] hover:shadow-lg' 
-                  : 'bg-gray-400 cursor-not-allowed'
+                isFormValid && !isSubmitting
+                  ? "bg-[#14A800] hover:bg-[#128700] hover:shadow-lg"
+                  : "bg-gray-400 cursor-not-allowed"
               }`}
             >
               {isSubmitting ? (
@@ -194,7 +197,7 @@ const AuthPage: React.FC = () => {
           </form>
 
           {/* Divider */}
-          <div className="mt-6">
+          {/* <div className="mt-6">
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-gray-300" />
@@ -203,10 +206,10 @@ const AuthPage: React.FC = () => {
                 <span className="px-2 bg-white text-gray-500">Ou</span>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Google Login Button */}
-          <div className="mt-6">
+          {/* <div className="mt-6">
             <button
               onClick={handleGoogleLogin}
               disabled={isSubmitting}
@@ -232,14 +235,14 @@ const AuthPage: React.FC = () => {
               </svg>
               Continuer avec Google
             </button>
-          </div>
+          </div> */}
 
           {/* Footer Links */}
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
-              Retour au{' '}
-              <a 
-                href="/" 
+              Retour au{" "}
+              <a
+                href="/"
                 className="font-medium text-[#14A800] hover:text-[#128700] transition-colors"
               >
                 site principal
