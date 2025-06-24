@@ -5,6 +5,7 @@ import NotFound from "./NotFound";
 import { mainRoutes } from "@/lib/routes/main.routes";
 import HomePage from "./home";
 import Layout from "@/components/layout/Layout";
+import { adminRoutes, authRoutes } from "@/lib/routes/admin.routes";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,8 @@ const router = createBrowserRouter([
         ],
       },
       mainRoutes,
+      adminRoutes,
+      authRoutes,
       {
         path: "*",
         element: <NotFound />,

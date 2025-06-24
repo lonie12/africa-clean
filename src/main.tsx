@@ -3,10 +3,13 @@ import "./index.css";
 import { AppRouter } from "./pages";
 import { ToastProvider } from "./context/toast-context";
 import { ToastContainer } from "./components/Toast";
+import { AuthProvider } from "./context/auth-context";
 
 createRoot(document.getElementById("root")!).render(
-  <ToastProvider>
-    <AppRouter />
-    <ToastContainer />
-  </ToastProvider>
+ <AuthProvider>
+    <ToastProvider>
+      <AppRouter />
+      <ToastContainer />
+    </ToastProvider>
+  </AuthProvider>
 );
