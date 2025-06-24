@@ -1,39 +1,94 @@
 // src/pages/blog/index.tsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Calendar, 
   User, 
   Tag, 
   ArrowRight,
   MagnifyingGlass,
-  Clock
+  Clock,
+  SpinnerGap
 } from '@phosphor-icons/react';
 import { useBlog } from '../../context/blog-context';
 import { SearchInput } from '../../components/forms/search-input';
 import WhatsAppFloatingButton from '@/components/common/WhatsAppButton';
 
 const BlogPage: React.FC = () => {
-  const { posts } = useBlog();
+  const { 
+    publishedPosts, 
+    isLoading, 
+    error, 
+    searchPosts, 
+    getPostsByTag, 
+    getAllTags 
+  } = useBlog();
+  
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTag, setSelectedTag] = useState<string>('');
+  const [filteredPosts, setFilteredPosts] = useState(publishedPosts);
+  const [allTags, setAllTags] = useState<string[]>([]);
+  const [isSearching, setIsSearching] = useState(false);
 
-  // Filter only published posts
-  const publishedPosts = posts.filter(post => post.status === 'published');
-
-  // Get all unique tags
-  const allTags = Array.from(new Set(publishedPosts.flatMap(post => post.tags)));
-
-  // Filter posts based on search and tag
-  const filteredPosts = publishedPosts.filter(post => {
-    const matchesSearch = searchTerm === '' || 
-      post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      post.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      post.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
+  // Load all tags on component mount
+  useEffect(() => {
+    const loadTags = async () => {
+      try {
+        const tags = await getAllTags();
+        setAllTags(tags);
+      } catch (err) {
+        console.error('Error loading tags:', err);
+      }
+    };
     
-    const matchesTag = selectedTag === '' || post.tags.includes(selectedTag);
-    
-    return matchesSearch && matchesTag;
-  });
+    loadTags();
+  }, [getAllTags]);
+
+  // Update filtered posts when published posts change
+  useEffect(() => {
+    if (!searchTerm && !selectedTag) {
+      setFilteredPosts(publishedPosts);
+    }
+  }, [publishedPosts, searchTerm, selectedTag]);
+
+  // Handle search and filtering
+  useEffect(() => {
+    const performSearch = async () => {
+      if (!searchTerm && !selectedTag) {
+        setFilteredPosts(publishedPosts);
+        return;
+      }
+
+      setIsSearching(true);
+      try {
+        let results = publishedPosts;
+
+        if (searchTerm) {
+          results = await searchPosts(searchTerm);
+        }
+
+        if (selectedTag) {
+          if (searchTerm) {
+            // Filter search results by tag
+            results = results.filter(post => post.tags.includes(selectedTag));
+          } else {
+            // Get posts by tag
+            results = await getPostsByTag(selectedTag);
+          }
+        }
+
+        setFilteredPosts(results);
+      } catch (err) {
+        console.error('Error performing search:', err);
+        setFilteredPosts([]);
+      } finally {
+        setIsSearching(false);
+      }
+    };
+
+    // Debounce search
+    const timeoutId = setTimeout(performSearch, 300);
+    return () => clearTimeout(timeoutId);
+  }, [searchTerm, selectedTag, publishedPosts, searchPosts, getPostsByTag]);
 
   const handleSearch = (value: string) => {
     setSearchTerm(value);
@@ -41,6 +96,11 @@ const BlogPage: React.FC = () => {
 
   const clearSearch = () => {
     setSearchTerm('');
+  };
+
+  const clearFilters = () => {
+    setSearchTerm('');
+    setSelectedTag('');
   };
 
   const formatDate = (date: Date) => {
@@ -57,6 +117,39 @@ const BlogPage: React.FC = () => {
     const readingTime = Math.ceil(words / wordsPerMinute);
     return `${readingTime} min de lecture`;
   };
+
+  // Show loading state
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <SpinnerGap size={48} className="text-[#14A800] animate-spin mx-auto mb-4" />
+          <p className="text-gray-600">Chargement des articles...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show error state
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center max-w-md mx-auto px-4">
+          <div className="bg-red-100 rounded-full p-6 w-24 h-24 mx-auto mb-6 flex items-center justify-center">
+            <MagnifyingGlass size={32} className="text-red-600" />
+          </div>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Erreur de chargement</h2>
+          <p className="text-gray-600 mb-6">{error}</p>
+          <button
+            onClick={() => window.location.reload()}
+            className="bg-[#14A800] hover:bg-[#128700] text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300"
+          >
+            Réessayer
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -131,7 +224,21 @@ const BlogPage: React.FC = () => {
                     </button>
                   </span>
                 )}
+                <button
+                  onClick={clearFilters}
+                  className="text-sm text-gray-500 hover:text-gray-700 underline"
+                >
+                  Effacer tous les filtres
+                </button>
               </div>
+            </div>
+          )}
+
+          {/* Search Loading */}
+          {isSearching && (
+            <div className="mt-4 flex items-center space-x-2 text-gray-600">
+              <SpinnerGap size={16} className="animate-spin" />
+              <span className="text-sm">Recherche en cours...</span>
             </div>
           )}
         </div>
@@ -140,7 +247,7 @@ const BlogPage: React.FC = () => {
       {/* Blog Posts */}
       <section className="py-16">
         <div className="max-w-6xl mx-auto px-6">
-          {filteredPosts.length === 0 ? (
+          {filteredPosts.length === 0 && !isSearching ? (
             <div className="text-center py-12">
               <MagnifyingGlass size={48} className="text-gray-300 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
@@ -154,10 +261,7 @@ const BlogPage: React.FC = () => {
               </p>
               {(searchTerm || selectedTag) && (
                 <button
-                  onClick={() => {
-                    setSearchTerm('');
-                    setSelectedTag('');
-                  }}
+                  onClick={clearFilters}
                   className="bg-[#14A800] hover:bg-[#128700] text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300"
                 >
                   Voir tous les articles
