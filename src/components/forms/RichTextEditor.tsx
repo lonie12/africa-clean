@@ -588,8 +588,8 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
 
       {/* Link Input Modal */}
       {showLinkInput && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md mx-4">
+        <div className="fixed inset-0 backdrop-blur-sm bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white shadow-2xl rounded-lg p-6 w-full max-w-md mx-4">
             <h3 className="text-lg font-semibold mb-4">Insérer un lien</h3>
             <p className="text-sm text-gray-600 mb-4">
               Texte sélectionné: <strong>"{selectedText}"</strong>
@@ -628,8 +628,8 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
 
       {/* Image Input Modal */}
       {showImageInput && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 w-full max-w-lg mx-4">
+        <div className="fixed backdrop-blur-sm inset-0 bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white shadow-2xl rounded-lg p-6 w-full max-w-lg mx-4">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold">Insérer une image</h3>
               <button
