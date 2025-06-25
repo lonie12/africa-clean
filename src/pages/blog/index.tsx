@@ -169,9 +169,17 @@ const BlogPage: React.FC = () => {
     });
   };
 
+  // Convert HTML content to plain text for reading time calculation
+  const htmlToPlainText = (html: string): string => {
+    const div = document.createElement("div");
+    div.innerHTML = html;
+    return div.textContent || div.innerText || "";
+  };
+
   const getReadingTime = (content: string) => {
     const wordsPerMinute = 200;
-    const words = content.split(/\s+/).length;
+    const plainText = htmlToPlainText(content);
+    const words = plainText.split(/\s+/).length;
     const readingTime = Math.ceil(words / wordsPerMinute);
     return `${readingTime} min de lecture`;
   };
@@ -322,15 +330,12 @@ const BlogPage: React.FC = () => {
             </div>
           )}
 
+          {/* Updated Article Content with Rich Text Support */}
           <article className="prose prose-lg max-w-none">
-            {currentPost.content.split("\n").map((paragraph, index) => (
-              <p
-                key={index}
-                className="mb-6 leading-relaxed text-gray-700 text-lg"
-              >
-                {paragraph}
-              </p>
-            ))}
+            <div 
+              className="blog-content"
+              dangerouslySetInnerHTML={{ __html: currentPost.content }}
+            />
           </article>
 
           {/* Article Footer */}
@@ -355,6 +360,128 @@ const BlogPage: React.FC = () => {
         </main>
 
         <WhatsAppFloatingButton />
+
+        {/* Blog Content Styles */}
+        <style>{`
+          .blog-content h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 2rem 0 1rem 0;
+            line-height: 1.2;
+            color: #1f2937;
+          }
+
+          .blog-content h2 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 1.5rem 0 0.75rem 0;
+            line-height: 1.3;
+            color: #1f2937;
+          }
+
+          .blog-content h3 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin: 1.25rem 0 0.5rem 0;
+            line-height: 1.4;
+            color: #1f2937;
+          }
+
+          .blog-content p {
+            margin: 1rem 0;
+            line-height: 1.7;
+            color: #374151;
+            font-size: 1.125rem;
+          }
+
+          .blog-content blockquote {
+            border-left: 4px solid #14A800;
+            margin: 1.5rem 0;
+            padding: 1rem 0 1rem 1.5rem;
+            background-color: #f9fafb;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: #4b5563;
+          }
+
+          .blog-content pre {
+            background-color: #f3f4f6;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+            color: #1f2937;
+          }
+
+          .blog-content ul, .blog-content ol {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+          }
+
+          .blog-content li {
+            margin: 0.5rem 0;
+            line-height: 1.6;
+            color: #374151;
+          }
+
+          .blog-content ul li {
+            list-style-type: disc;
+          }
+
+          .blog-content ol li {
+            list-style-type: decimal;
+          }
+
+          .blog-content a {
+            color: #14A800;
+            text-decoration: underline;
+            font-weight: 500;
+          }
+
+          .blog-content a:hover {
+            color: #128700;
+            text-decoration: none;
+          }
+
+          .blog-content strong {
+            font-weight: 700;
+            color: #1f2937;
+          }
+
+          .blog-content em {
+            font-style: italic;
+          }
+
+          .blog-content u {
+            text-decoration: underline;
+          }
+
+          .blog-content img {
+            max-width: 100%;
+            height: auto;
+            margin: 2rem 0;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+          }
+
+          .blog-content hr {
+            border: none;
+            border-top: 2px solid #e5e7eb;
+            margin: 2rem 0;
+          }
+
+          /* Ensure proper spacing for first and last elements */
+          .blog-content > *:first-child {
+            margin-top: 0;
+          }
+
+          .blog-content > *:last-child {
+            margin-bottom: 0;
+          }
+        `}</style>
       </div>
     );
   }

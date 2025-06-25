@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// src/components/admin/BlogEditor.tsx
+// src/pages/admin/BlogEditor.tsx
 import React, { useState, useEffect, useRef } from "react";
 import {
   ArrowLeft,
@@ -18,6 +18,7 @@ import Button from "@/components/actions/button";
 import { CustomSelect } from "@/components/forms/custom-select";
 import { Input } from "@/components/forms/Input";
 import { TagSelector } from "@/components/forms/tag-selector";
+import RichTextEditor from "@/components/forms/RichTextEditor";
 
 interface BlogEditorProps {
   post?: BlogPost | null;
@@ -116,6 +117,13 @@ const generateSignature = async (
   return hashHex;
 };
 
+// Convert HTML to plain text for preview and excerpt generation
+const htmlToPlainText = (html: string): string => {
+  const div = document.createElement("div");
+  div.innerHTML = html;
+  return div.textContent || div.innerText || "";
+};
+
 const BlogEditor: React.FC<BlogEditorProps> = ({ post, onClose }) => {
   const { createPost, updatePost } = useBlog();
   const { user } = useAuth();
@@ -153,6 +161,14 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ post, onClose }) => {
     setFormData((prev) => ({
       ...prev,
       [field]: value,
+    }));
+  };
+
+  // Handle rich text content change
+  const handleContentChange = (content: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      content: content,
     }));
   };
 
@@ -237,11 +253,14 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ post, onClose }) => {
     setIsSubmitting(true);
 
     try {
+      // Generate excerpt from content if not provided
+      const plainTextContent = htmlToPlainText(formData.content);
+      const autoExcerpt = plainTextContent.substring(0, 150) + "...";
+
       const postData = {
         title: formData.title.trim(),
         content: formData.content.trim(),
-        excerpt:
-          formData.excerpt.trim() || formData.content.substring(0, 150) + "...",
+        excerpt: formData.excerpt.trim() || autoExcerpt,
         imageUrl: formData.imageUrl.trim(),
         status: publishNow ? ("published" as const) : formData.status,
         author: user?.name || "Admin",
@@ -337,13 +356,11 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ post, onClose }) => {
               )}
             </header>
 
-            <div className="prose prose-lg max-w-none">
-              {formData.content.split("\n").map((paragraph, index) => (
-                <p key={index} className="mb-4 leading-relaxed text-gray-700">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
+            {/* Render HTML content directly */}
+            <div 
+              className="prose prose-lg max-w-none"
+              dangerouslySetInnerHTML={{ __html: formData.content }}
+            />
           </article>
         </main>
       </div>
@@ -422,21 +439,21 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ post, onClose }) => {
               />
             </div>
 
-            {/* Content */}
+            {/* Rich Text Content Editor */}
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <Textarea
+              <RichTextEditor
                 label="Contenu de l'article *"
-                placeholder="Rédigez le contenu de votre article..."
                 value={formData.content}
-                onChange={(e: { target: { value: any } }) =>
-                  handleInputChange("content", e.target.value)
-                }
+                onChange={handleContentChange}
+                placeholder="Rédigez le contenu de votre article..."
                 rows={20}
-                className="text-base leading-relaxed"
               />
-              <p className="mt-2 text-sm text-gray-500">
-                {formData.content.length} caractères
-              </p>
+              <div className="mt-2 flex items-center justify-between text-sm text-gray-500">
+                <span>{htmlToPlainText(formData.content).length} caractères</span>
+                <span className="text-xs">
+                  Raccourcis: Ctrl+B (gras), Ctrl+I (italique), Ctrl+U (souligné), Ctrl+K (lien)
+                </span>
+              </div>
             </div>
 
             {/* Excerpt */}
@@ -450,7 +467,7 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ post, onClose }) => {
               />
               <p className="mt-2 text-sm text-gray-500">
                 {formData.excerpt ? formData.excerpt.length : 0} caractères
-                {!formData.excerpt && " (généré automatiquement si vide)"}
+                {!formData.excerpt && " (généré automatiquement à partir du contenu si vide)"}
               </p>
             </div>
           </div>
