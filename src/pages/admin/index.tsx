@@ -2,7 +2,6 @@
 // src/pages/admin/index.tsx
 import React, { useState } from "react";
 import {
-  Crown,
   User,
   SignOut,
   House,
