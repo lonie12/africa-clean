@@ -42,6 +42,7 @@ const BlogPage: React.FC = () => {
   const [currentPost, setCurrentPost] = useState<BlogPost | null>(null);
   const [isLoadingPost, setIsLoadingPost] = useState(false);
   const [postError, setPostError] = useState<string | null>(null);
+  const [recentPosts, setRecentPosts] = useState<BlogPost[]>([]);
 
   // Determine if we're showing a single post or the list
   const isShowingSinglePost = !!slug;
@@ -56,6 +57,12 @@ const BlogPage: React.FC = () => {
           const post = await getPostBySlug(slug);
           if (post) {
             setCurrentPost(post);
+            // Get 3 most recent posts excluding current post
+            const recent = publishedPosts
+              .filter(p => p.id !== post.id)
+              .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+              .slice(0, 3);
+            setRecentPosts(recent);
           } else {
             setPostError("Article non trouvé");
           }
@@ -72,8 +79,9 @@ const BlogPage: React.FC = () => {
       setCurrentPost(null);
       setIsLoadingPost(false);
       setPostError(null);
+      setRecentPosts([]);
     }
-  }, [slug, getPostBySlug]);
+  }, [slug, getPostBySlug, publishedPosts]);
 
   // Load all tags on component mount (for list view)
   useEffect(() => {
@@ -358,6 +366,80 @@ const BlogPage: React.FC = () => {
             </div>
           </footer>
         </main>
+
+        {/* Recent Articles Section */}
+        {recentPosts.length > 0 && (
+          <section className="py-16 bg-white border-t">
+            <div className="max-w-4xl mx-auto px-6">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
+                Articles récents
+              </h2>
+              
+              <div className="grid md:grid-cols-3 gap-8">
+                {recentPosts.map((post) => (
+                  <article
+                    key={post.id}
+                    className="bg-gray-50 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
+                    onClick={() => navigate(`/blog/${post.slug}`)}
+                  >
+                    {post.imageUrl && (
+                      <img
+                        src={post.imageUrl}
+                        alt={post.title}
+                        className="w-full h-40 object-cover"
+                        onError={(e) => {
+                          e.currentTarget.src = "/api/placeholder/400/200";
+                        }}
+                      />
+                    )}
+
+                    <div className="p-4">
+                      <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2">
+                        {post.title}
+                      </h3>
+
+                      <p className="text-gray-600 text-sm mb-3 line-clamp-2">
+                        {post.excerpt}
+                      </p>
+
+                      <div className="flex items-center justify-between text-xs text-gray-500">
+                        <div className="flex items-center space-x-1">
+                          <Calendar size={12} />
+                          <span>{formatDate(post.createdAt)}</span>
+                        </div>
+                        <div className="flex items-center space-x-1">
+                          <Clock size={12} />
+                          <span>{getReadingTime(post.content)}</span>
+                        </div>
+                      </div>
+
+                      <div className="mt-3 flex items-center justify-between">
+                        <div className="flex items-center space-x-1 text-xs text-gray-500">
+                          <User size={12} />
+                          <span>{post.author}</span>
+                        </div>
+                        <div className="inline-flex items-center space-x-1 text-[#14A800] hover:text-[#128700] text-sm font-medium transition-colors">
+                          <span>Lire</span>
+                          <ArrowRight size={12} />
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+
+              <div className="text-center mt-8">
+                <button
+                  onClick={() => navigate("/blog")}
+                  className="bg-[#14A800] hover:bg-[#128700] text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 inline-flex items-center space-x-2"
+                >
+                  <span>Voir tous les articles</span>
+                  <ArrowRight size={16} />
+                </button>
+              </div>
+            </div>
+          </section>
+        )}
 
         <WhatsAppFloatingButton />
 
