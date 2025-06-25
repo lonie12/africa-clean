@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // src/components/admin/BlogEditor.tsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   ArrowLeft,
   FloppyDisk,
@@ -9,6 +9,8 @@ import {
   Globe,
   Image as ImageIcon,
   X,
+  Upload,
+  CloudArrowUp,
 } from "@phosphor-icons/react";
 import { useBlog, type BlogPost } from "../../context/blog-context";
 import { useAuth } from "../../context/auth-context";
@@ -18,7 +20,6 @@ import Button from "@/components/actions/button";
 import { CustomSelect } from "@/components/forms/custom-select";
 import { Input } from "@/components/forms/Input";
 import { TagSelector } from "@/components/forms/tag-selector";
-// import Button from '../actions/button';
 
 interface BlogEditorProps {
   post?: BlogPost | null;
@@ -34,12 +35,98 @@ interface FormData {
   tags: Array<{ id: string; label: string }>;
 }
 
+// Cloudinary upload function with signature generation
+const uploadImageToCloudinary = async (file: File): Promise<string> => {
+  const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+  const apiKey = import.meta.env.VITE_CLOUDINARY_API_KEY;
+  const apiSecret = import.meta.env.VITE_CLOUDINARY_API_SECRET;
+
+  if (!cloudName || !apiKey || !apiSecret) {
+    throw new Error(
+      "Cloudinary configuration is missing. Please check your environment variables."
+    );
+  }
+
+  // Generate timestamp
+  const timestamp = Math.round(new Date().getTime() / 1000);
+
+  // Upload parameters
+  const uploadParams = {
+    timestamp: timestamp.toString(),
+    folder: "africa_clean_blog", // Optional: organize uploads in a folder
+    // Add other parameters as needed
+  };
+
+  // Generate signature (this is a simplified version - in production, do this on backend)
+  const signature = await generateSignature(uploadParams, apiSecret);
+
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("api_key", apiKey);
+  formData.append("timestamp", uploadParams.timestamp);
+  formData.append("signature", signature);
+  formData.append("folder", uploadParams.folder);
+
+  try {
+    const response = await fetch(
+      `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error("Cloudinary error:", errorData);
+      throw new Error(
+        errorData.error?.message || "Failed to upload image to Cloudinary"
+      );
+    }
+
+    const data = await response.json();
+    return data.secure_url;
+  } catch (error) {
+    console.error("Cloudinary upload error:", error);
+    throw new Error("Failed to upload image. Please try again.");
+  }
+};
+
+// Helper function to generate signature (WARNING: This exposes API secret in frontend)
+// In production, this should be done on your backend
+const generateSignature = async (
+  params: Record<string, string>,
+  apiSecret: string
+): Promise<string> => {
+  // Sort parameters
+  const sortedParams = Object.keys(params)
+    .sort()
+    .map((key) => `${key}=${params[key]}`)
+    .join("&");
+
+  const stringToSign = sortedParams + apiSecret;
+
+  // Use SubtleCrypto API to generate SHA-1 hash
+  const encoder = new TextEncoder();
+  const data = encoder.encode(stringToSign);
+  const hashBuffer = await crypto.subtle.digest("SHA-1", data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const hashHex = hashArray
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
+
+  return hashHex;
+};
+
 const BlogEditor: React.FC<BlogEditorProps> = ({ post, onClose }) => {
   const { createPost, updatePost } = useBlog();
   const { user } = useAuth();
   const { success, error } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
+  const [dragActive, setDragActive] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [formData, setFormData] = useState<FormData>({
     title: "",
@@ -69,6 +156,78 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ post, onClose }) => {
       ...prev,
       [field]: value,
     }));
+  };
+
+  // Handle file upload from input or drag & drop
+  const handleImageUpload = async (file: File) => {
+    // Validate file type
+    if (!file.type.startsWith("image/")) {
+      error("Type de fichier invalide", "Veuillez sélectionner une image.");
+      return;
+    }
+
+    // Validate file size (max 10MB)
+    if (file.size > 10 * 1024 * 1024) {
+      error(
+        "Fichier trop volumineux",
+        "La taille maximale autorisée est de 10MB."
+      );
+      return;
+    }
+
+    setIsUploadingImage(true);
+    try {
+      const uploadedUrl = await uploadImageToCloudinary(file);
+      handleInputChange("imageUrl", uploadedUrl);
+      success("Image téléchargée", "L'image a été téléchargée avec succès.");
+    } catch (err) {
+      console.error("Upload error:", err);
+      error(
+        "Erreur de téléchargement",
+        err instanceof Error
+          ? err.message
+          : "Impossible de télécharger l'image."
+      );
+    } finally {
+      setIsUploadingImage(false);
+    }
+  };
+
+  // Handle file input change
+  const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      handleImageUpload(file);
+    }
+  };
+
+  // Handle drag events
+  const handleDragEnter = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragActive(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragActive(false);
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragActive(false);
+
+    const files = e.dataTransfer.files;
+    if (files && files[0]) {
+      handleImageUpload(files[0]);
+    }
   };
 
   const handleSave = async (publishNow = false) => {
@@ -343,13 +502,14 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ post, onClose }) => {
               </div>
             </div>
 
-            {/* Featured Image */}
+            {/* Enhanced Featured Image Section */}
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">
                 Image mise en avant
               </h3>
 
               <div className="space-y-4">
+                {/* URL Input */}
                 <Input
                   label="URL de l'image"
                   placeholder="https://example.com/image.jpg"
@@ -359,6 +519,65 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ post, onClose }) => {
                   }
                 />
 
+                {/* Separator */}
+                <div className="flex items-center space-x-4">
+                  <div className="flex-1 border-t border-gray-200"></div>
+                  <span className="text-sm text-gray-500">ou</span>
+                  <div className="flex-1 border-t border-gray-200"></div>
+                </div>
+
+                {/* File Upload Area */}
+                <div
+                  className={`border-2 border-dashed rounded-lg p-6 text-center transition-colors ${
+                    dragActive
+                      ? "border-[#14A800] bg-[#14A800]/5"
+                      : "border-gray-300 hover:border-gray-400"
+                  } ${
+                    isUploadingImage
+                      ? "opacity-50 cursor-not-allowed"
+                      : "cursor-pointer"
+                  }`}
+                  onDragEnter={handleDragEnter}
+                  onDragLeave={handleDragLeave}
+                  onDragOver={handleDragOver}
+                  onDrop={handleDrop}
+                  onClick={() =>
+                    !isUploadingImage && fileInputRef.current?.click()
+                  }
+                >
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileInputChange}
+                    className="hidden"
+                    disabled={isUploadingImage}
+                  />
+
+                  {isUploadingImage ? (
+                    <div className="flex flex-col items-center space-y-2">
+                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#14A800]"></div>
+                      <p className="text-sm text-gray-600">
+                        Téléchargement en cours...
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center space-y-2">
+                      <CloudArrowUp size={32} className="text-gray-400" />
+                      <p className="text-sm text-gray-600">
+                        <span className="font-medium text-[#14A800]">
+                          Cliquez pour choisir
+                        </span>{" "}
+                        ou glissez-déposez
+                      </p>
+                      <p className="text-xs text-gray-500">
+                        PNG, JPG, GIF jusqu'à 10MB
+                      </p>
+                    </div>
+                  )}
+                </div>
+
+                {/* Image Preview */}
                 {formData.imageUrl && (
                   <div className="relative">
                     <img
@@ -372,21 +591,10 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ post, onClose }) => {
                     <button
                       onClick={() => handleInputChange("imageUrl", "")}
                       className="absolute top-2 right-2 p-1 bg-red-500 hover:bg-red-600 text-white rounded-full transition-colors"
+                      disabled={isUploadingImage}
                     >
                       <X size={12} />
                     </button>
-                  </div>
-                )}
-
-                {!formData.imageUrl && (
-                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
-                    <ImageIcon
-                      size={32}
-                      className="text-gray-400 mx-auto mb-2"
-                    />
-                    <p className="text-sm text-gray-600">
-                      Ajoutez une URL d'image ci-dessus
-                    </p>
                   </div>
                 )}
               </div>
