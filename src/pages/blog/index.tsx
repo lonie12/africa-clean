@@ -1,43 +1,43 @@
 // src/pages/blog/index.tsx
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router';
-import { 
-  Calendar, 
-  User, 
-  Tag, 
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router";
+import {
+  Calendar,
+  User,
+  Tag,
   ArrowRight,
   ArrowLeft,
   MagnifyingGlass,
   Clock,
   SpinnerGap,
-  Share
-} from '@phosphor-icons/react';
-import { useBlog } from '../../context/blog-context';
-import { SearchInput } from '../../components/forms/search-input';
-import WhatsAppFloatingButton from '@/components/common/WhatsAppButton';
-import type { BlogPost } from '../../context/blog-context';
+  Share,
+} from "@phosphor-icons/react";
+import { useBlog } from "../../context/blog-context";
+import { SearchInput } from "../../components/forms/search-input";
+import WhatsAppFloatingButton from "@/components/common/WhatsAppButton";
+import type { BlogPost } from "../../context/blog-context";
 
 const BlogPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
-  
-  const { 
-    publishedPosts, 
-    isLoadingPublished, 
-    publicError, 
+
+  const {
+    publishedPosts,
+    isLoadingPublished,
+    publicError,
     getPostBySlug,
-    searchPublishedPosts, 
-    getPublishedPostsByTag, 
-    getPublishedTags 
+    searchPublishedPosts,
+    getPublishedPostsByTag,
+    getPublishedTags,
   } = useBlog();
-  
+
   // State for blog list view
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedTag, setSelectedTag] = useState<string>('');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedTag, setSelectedTag] = useState<string>("");
   const [filteredPosts, setFilteredPosts] = useState(publishedPosts);
   const [allTags, setAllTags] = useState<string[]>([]);
   const [isSearching, setIsSearching] = useState(false);
-  
+
   // State for individual post view
   const [currentPost, setCurrentPost] = useState<BlogPost | null>(null);
   const [isLoadingPost, setIsLoadingPost] = useState(false);
@@ -57,16 +57,16 @@ const BlogPage: React.FC = () => {
           if (post) {
             setCurrentPost(post);
           } else {
-            setPostError('Article non trouvé');
+            setPostError("Article non trouvé");
           }
         } catch (err) {
-          console.error('Error loading post:', err);
-          setPostError('Erreur lors du chargement de l\'article');
+          console.error("Error loading post:", err);
+          setPostError("Erreur lors du chargement de l'article");
         } finally {
           setIsLoadingPost(false);
         }
       };
-      
+
       loadPost();
     } else {
       setCurrentPost(null);
@@ -83,10 +83,10 @@ const BlogPage: React.FC = () => {
           const tags = await getPublishedTags();
           setAllTags(tags);
         } catch (err) {
-          console.error('Error loading tags:', err);
+          console.error("Error loading tags:", err);
         }
       };
-      
+
       loadTags();
     }
   }, [getPublishedTags, isShowingSinglePost]);
@@ -119,7 +119,7 @@ const BlogPage: React.FC = () => {
         if (selectedTag) {
           if (searchTerm) {
             // Filter search results by tag
-            results = results.filter(post => post.tags.includes(selectedTag));
+            results = results.filter((post) => post.tags.includes(selectedTag));
           } else {
             // Get posts by tag
             results = await getPublishedPostsByTag(selectedTag);
@@ -128,7 +128,7 @@ const BlogPage: React.FC = () => {
 
         setFilteredPosts(results);
       } catch (err) {
-        console.error('Error performing search:', err);
+        console.error("Error performing search:", err);
         setFilteredPosts([]);
       } finally {
         setIsSearching(false);
@@ -138,7 +138,14 @@ const BlogPage: React.FC = () => {
     // Debounce search
     const timeoutId = setTimeout(performSearch, 300);
     return () => clearTimeout(timeoutId);
-  }, [searchTerm, selectedTag, publishedPosts, searchPublishedPosts, getPublishedPostsByTag, isShowingSinglePost]);
+  }, [
+    searchTerm,
+    selectedTag,
+    publishedPosts,
+    searchPublishedPosts,
+    getPublishedPostsByTag,
+    isShowingSinglePost,
+  ]);
 
   // Utility functions
   const handleSearch = (value: string) => {
@@ -146,19 +153,19 @@ const BlogPage: React.FC = () => {
   };
 
   const clearSearch = () => {
-    setSearchTerm('');
+    setSearchTerm("");
   };
 
   const clearFilters = () => {
-    setSearchTerm('');
-    setSelectedTag('');
+    setSearchTerm("");
+    setSelectedTag("");
   };
 
   const formatDate = (date: Date) => {
-    return date.toLocaleDateString('fr-FR', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
+    return date.toLocaleDateString("fr-FR", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     });
   };
 
@@ -172,7 +179,7 @@ const BlogPage: React.FC = () => {
   const handleSharePost = async (post: BlogPost) => {
     const url = `${window.location.origin}/blog/${post.slug}`;
     const title = post.title;
-    
+
     if (navigator.share) {
       try {
         await navigator.share({
@@ -181,16 +188,16 @@ const BlogPage: React.FC = () => {
           url,
         });
       } catch (err) {
-        console.log('Error sharing:', err);
+        console.log("Error sharing:", err);
       }
     } else {
       // Fallback: copy to clipboard
       try {
         await navigator.clipboard.writeText(url);
         // You could show a toast here
-        alert('Lien copié dans le presse-papier !');
+        alert("Lien copié dans le presse-papier !");
       } catch (err) {
-        console.log('Error copying to clipboard:', err);
+        console.log("Error copying to clipboard:", err);
       }
     }
   };
@@ -201,7 +208,10 @@ const BlogPage: React.FC = () => {
       return (
         <div className="min-h-screen bg-gray-50 flex items-center justify-center">
           <div className="text-center">
-            <SpinnerGap size={48} className="text-[#14A800] animate-spin mx-auto mb-4" />
+            <SpinnerGap
+              size={48}
+              className="text-[#14A800] animate-spin mx-auto mb-4"
+            />
             <p className="text-gray-600">Chargement de l'article...</p>
           </div>
         </div>
@@ -215,12 +225,15 @@ const BlogPage: React.FC = () => {
             <div className="bg-red-100 rounded-full p-6 w-24 h-24 mx-auto mb-6 flex items-center justify-center">
               <MagnifyingGlass size={32} className="text-red-600" />
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Article non trouvé</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              Article non trouvé
+            </h2>
             <p className="text-gray-600 mb-6">
-              {postError || 'L\'article que vous recherchez n\'existe pas ou a été supprimé.'}
+              {postError ||
+                "L'article que vous recherchez n'existe pas ou a été supprimé."}
             </p>
             <button
-              onClick={() => navigate('/blog')}
+              onClick={() => navigate("/blog")}
               className="bg-[#14A800] hover:bg-[#128700] text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300"
             >
               Retour au blog
@@ -236,17 +249,17 @@ const BlogPage: React.FC = () => {
         <header className="bg-white border-b">
           <div className="max-w-4xl mx-auto px-6 py-6">
             <button
-              onClick={() => navigate('/blog')}
+              onClick={() => navigate("/blog")}
               className="inline-flex items-center space-x-2 text-[#14A800] hover:text-[#128700] font-medium mb-6 transition-colors"
             >
               <ArrowLeft size={16} />
               <span>Retour au blog</span>
             </button>
-            
+
             <div className="mb-6">
               {currentPost.tags.length > 0 && (
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {currentPost.tags.map(tag => (
+                  {currentPost.tags.map((tag) => (
                     <span
                       key={tag}
                       className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-[#14A800]/10 text-[#14A800] font-medium"
@@ -257,15 +270,15 @@ const BlogPage: React.FC = () => {
                   ))}
                 </div>
               )}
-              
+
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
                 {currentPost.title}
               </h1>
-              
+
               <p className="text-xl text-gray-600 leading-relaxed mb-6">
                 {currentPost.excerpt}
               </p>
-              
+
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-6 text-sm text-gray-500">
                   <div className="flex items-center space-x-2">
@@ -281,7 +294,7 @@ const BlogPage: React.FC = () => {
                     <span>{getReadingTime(currentPost.content)}</span>
                   </div>
                 </div>
-                
+
                 <button
                   onClick={() => handleSharePost(currentPost)}
                   className="flex items-center space-x-2 text-gray-500 hover:text-[#14A800] transition-colors"
@@ -303,15 +316,18 @@ const BlogPage: React.FC = () => {
                 alt={currentPost.title}
                 className="w-full h-64 md:h-96 object-cover rounded-2xl shadow-lg"
                 onError={(e) => {
-                  e.currentTarget.src = '/api/placeholder/800/400';
+                  e.currentTarget.src = "/api/placeholder/800/400";
                 }}
               />
             </div>
           )}
 
           <article className="prose prose-lg max-w-none">
-            {currentPost.content.split('\n').map((paragraph, index) => (
-              <p key={index} className="mb-6 leading-relaxed text-gray-700 text-lg">
+            {currentPost.content.split("\n").map((paragraph, index) => (
+              <p
+                key={index}
+                className="mb-6 leading-relaxed text-gray-700 text-lg"
+              >
                 {paragraph}
               </p>
             ))}
@@ -321,10 +337,12 @@ const BlogPage: React.FC = () => {
           <footer className="mt-12 pt-8 border-t border-gray-200">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Auteur</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  Auteur
+                </h3>
                 <p className="text-gray-600">{currentPost.author}</p>
               </div>
-              
+
               <button
                 onClick={() => handleSharePost(currentPost)}
                 className="bg-[#14A800] hover:bg-[#128700] text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center space-x-2"
@@ -347,7 +365,10 @@ const BlogPage: React.FC = () => {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <SpinnerGap size={48} className="text-[#14A800] animate-spin mx-auto mb-4" />
+          <SpinnerGap
+            size={48}
+            className="text-[#14A800] animate-spin mx-auto mb-4"
+          />
           <p className="text-gray-600">Chargement des articles...</p>
         </div>
       </div>
@@ -362,7 +383,9 @@ const BlogPage: React.FC = () => {
           <div className="bg-red-100 rounded-full p-6 w-24 h-24 mx-auto mb-6 flex items-center justify-center">
             <MagnifyingGlass size={32} className="text-red-600" />
           </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Erreur de chargement</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            Erreur de chargement
+          </h2>
           <p className="text-gray-600 mb-6">{publicError}</p>
           <button
             onClick={() => window.location.reload()}
@@ -384,8 +407,8 @@ const BlogPage: React.FC = () => {
             Blog Africa Clean
           </h1>
           <p className="text-xl md:text-2xl mb-8 opacity-90 max-w-3xl mx-auto">
-            Découvrez nos conseils, actualités et expertise en nettoyage écologique 
-            et services durables
+            Découvrez nos conseils, actualités et expertise en nettoyage
+            écologique et services durables
           </p>
         </div>
       </section>
@@ -407,15 +430,19 @@ const BlogPage: React.FC = () => {
 
             {/* Tag Filter */}
             <div className="flex items-center space-x-4">
-              <span className="text-sm text-gray-600 whitespace-nowrap">Filtrer par tag:</span>
+              <span className="text-sm text-gray-600 whitespace-nowrap">
+                Filtrer par tag:
+              </span>
               <select
                 value={selectedTag}
                 onChange={(e) => setSelectedTag(e.target.value)}
                 className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#14A800] focus:border-transparent"
               >
                 <option value="">Tous les tags</option>
-                {allTags.map(tag => (
-                  <option key={tag} value={tag}>{tag}</option>
+                {allTags.map((tag) => (
+                  <option key={tag} value={tag}>
+                    {tag}
+                  </option>
                 ))}
               </select>
             </div>
@@ -441,7 +468,7 @@ const BlogPage: React.FC = () => {
                   <span className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-green-100 text-green-800">
                     Tag: {selectedTag}
                     <button
-                      onClick={() => setSelectedTag('')}
+                      onClick={() => setSelectedTag("")}
                       className="ml-2 text-green-600 hover:text-green-800"
                     >
                       ×
@@ -473,15 +500,17 @@ const BlogPage: React.FC = () => {
         <div className="max-w-6xl mx-auto px-6">
           {filteredPosts.length === 0 && !isSearching ? (
             <div className="text-center py-12">
-              <MagnifyingGlass size={48} className="text-gray-300 mx-auto mb-4" />
+              <MagnifyingGlass
+                size={48}
+                className="text-gray-300 mx-auto mb-4"
+              />
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
                 Aucun article trouvé
               </h3>
               <p className="text-gray-600 mb-6">
-                {searchTerm || selectedTag 
-                  ? 'Essayez de modifier vos critères de recherche.'
-                  : 'Aucun article n\'a encore été publié.'
-                }
+                {searchTerm || selectedTag
+                  ? "Essayez de modifier vos critères de recherche."
+                  : "Aucun article n'a encore été publié."}
               </p>
               {(searchTerm || selectedTag) && (
                 <button
@@ -497,13 +526,15 @@ const BlogPage: React.FC = () => {
               {/* Results count */}
               <div className="mb-8">
                 <p className="text-gray-600">
-                  {filteredPosts.length} article{filteredPosts.length > 1 ? 's' : ''} trouvé{filteredPosts.length > 1 ? 's' : ''}
+                  {filteredPosts.length} article
+                  {filteredPosts.length > 1 ? "s" : ""} trouvé
+                  {filteredPosts.length > 1 ? "s" : ""}
                 </p>
               </div>
 
               {/* Articles Grid */}
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredPosts.map(post => (
+                {filteredPosts.map((post) => (
                   <article
                     key={post.id}
                     className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
@@ -515,16 +546,16 @@ const BlogPage: React.FC = () => {
                         alt={post.title}
                         className="w-full h-48 object-cover"
                         onError={(e) => {
-                          e.currentTarget.src = '/api/placeholder/400/300';
+                          e.currentTarget.src = "/api/placeholder/400/300";
                         }}
                       />
                     )}
-                    
+
                     <div className="p-6">
                       <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
                         {post.title}
                       </h3>
-                      
+
                       <p className="text-gray-600 mb-4 line-clamp-3">
                         {post.excerpt}
                       </p>
@@ -542,7 +573,7 @@ const BlogPage: React.FC = () => {
 
                       {post.tags.length > 0 && (
                         <div className="flex flex-wrap gap-1 mb-4">
-                          {post.tags.slice(0, 3).map(tag => (
+                          {post.tags.slice(0, 3).map((tag) => (
                             <span
                               key={tag}
                               className="inline-block px-2 py-1 rounded-full text-xs bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer"
@@ -567,7 +598,7 @@ const BlogPage: React.FC = () => {
                           <User size={14} />
                           <span>{post.author}</span>
                         </div>
-                        
+
                         <div className="inline-flex items-center space-x-2 text-[#14A800] hover:text-[#128700] font-semibold transition-colors">
                           <span>Lire</span>
                           <ArrowRight size={14} />
@@ -589,17 +620,18 @@ const BlogPage: React.FC = () => {
             Restez informé de nos actualités
           </h2>
           <p className="text-xl mb-8 opacity-90">
-            Découvrez nos derniers conseils et innovations en matière de nettoyage écologique
+            Découvrez nos derniers conseils et innovations en matière de
+            nettoyage écologique
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
-              onClick={() => navigate('/contact')}
+              onClick={() => navigate("/contact")}
               className="bg-white text-[#14A800] px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105"
             >
               Nous contacter
             </button>
             <button
-              onClick={() => navigate('/services')}
+              onClick={() => navigate("/services")}
               className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:bg-white hover:text-[#14A800]"
             >
               Découvrir nos services

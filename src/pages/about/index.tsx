@@ -17,7 +17,7 @@ import {
   Phone,
   EnvelopeSimple,
 } from "@phosphor-icons/react";
-import { Award } from "iconsax-react";
+import { Award, Lock } from "iconsax-react";
 import WhatsAppFloatingButton from "@/components/common/WhatsAppButton";
 
 interface Achievement {
@@ -104,6 +104,13 @@ const AboutPage: React.FC = () => {
       description:
         "Nous innovons constamment pour proposer des solutions toujours plus efficaces et respectueuses.",
       color: "#7C3AED",
+    },
+    {
+      icon: <Lock color="white" size={40} />,
+      title: "Confidentialité",
+      description:
+        "La confidentialité est pour nous un principe sacré : tout ce que nous voyons, entendons ou découvrons reste strictement confidentiel.",
+      color: "#FF0000",
     },
   ];
 
@@ -196,15 +203,17 @@ const AboutPage: React.FC = () => {
           </h2>
           <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-3xl p-8 lg:p-12">
             <p className="text-lg text-gray-700 leading-relaxed mb-6">
-              <strong className="text-[#14A800]">Africa Clean</strong> propose
-              des solutions professionnelles et écologiques adaptées à vos
-              besoins : nettoyage de bureaux, résidences, centres de santé,
-              hôtels, espaces commerciaux et fin de chantier.
+              Chez <strong className="text-[#14A800]">AFRICA CLEAN</strong> nous
+              mettons la technologie et l'innovation au service de l’hygiène et
+              de l’environnement, avec un objectif clair : vous offrir des
+              solutions efficaces, durables et personnalisées.
             </p>
             <p className="text-lg text-gray-700 leading-relaxed mb-6">
-              Nous intervenons également dans l'entretien de jardins, la
-              création de potagers naturels, l'organisation d'événements
-              éco-responsables et les services logistiques.
+              AFRICA CLEAN est une startup spécialisée dans le secteur de
+              CleanTech : la fabrication de poubelles écologiques à partir de
+              matériaux recyclés, la gestion des déchets et le nettoyage lors
+              d’événements et la création d’espaces verts et des jardins
+              potagers.
             </p>
             <p className="text-xl font-semibold text-[#14A800]">
               Chaque service est pensé pour allier efficacité, qualité et

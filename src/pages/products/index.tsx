@@ -149,7 +149,7 @@ const ProductsPage: React.FC = () => {
               {/* Texte à gauche */}
               <div className="flex-1 ">
                 <h3 className="text-2xl md:text-3xl font-bold text-[#212121] mb-4">
-                  Produits d'Entretien Écologiques
+                  Produits d'Entretien Écologiques EcoClean
                 </h3>
                 <p className="text-lg text-gray-700 leading-relaxed mb-8">
                   Nos produits d'entretien écologiques sont formulés à base

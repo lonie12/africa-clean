@@ -67,17 +67,20 @@ const TrustSection: React.FC = () => {
                 {[...clients, ...clients].map((client, index) => (
                   <div
                     key={`${client.name}-${index}`}
-                    className="flex-shrink-0 flex items-center justify-center h-16 px-6 mx-4 group"
+                    className="flex-shrink-0 flex flex-col items-center justify-center h-16 px-6 mx-4 group"
                     style={{ minWidth: "220px" }}
                   >
                     <img
                       src={client.logo}
                       alt={client.name}
-                      className="max-h-12 max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100 group-hover:scale-110"
+                      className="max-h-16 max-w-full object-contain transition-all duration-300 opacity-70 hover:opacity-100 group-hover:scale-110"
                       onError={(e) => {
                         e.currentTarget.src = "/api/placeholder/120/48";
                       }}
                     />
+                    <p className="text-[12px] mt-1 text-gray-500">
+                      {client.name}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -104,17 +107,20 @@ const TrustSection: React.FC = () => {
                   (partner, index) => (
                     <div
                       key={`${partner.name}-${index}`}
-                      className="flex-shrink-0 flex items-center justify-center h-16 px-8 mx-6 group"
+                      className="flex-shrink-0 flex flex-col items-center justify-center h-16 px-8 mx-6 group"
                       style={{ minWidth: "220px" }}
                     >
                       <img
                         src={partner.logo}
                         alt={partner.name}
-                        className="max-h-12 max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100 group-hover:scale-110"
+                        className="max-h-16 max-w-full object-contain transition-all duration-300 opacity-70 hover:opacity-100 group-hover:scale-110"
                         onError={(e) => {
                           e.currentTarget.src = "/api/placeholder/140/48";
                         }}
                       />
+                      <p className="text-[12px] text-gray-500">
+                        {partner.name}
+                      </p>
                     </div>
                   )
                 )}

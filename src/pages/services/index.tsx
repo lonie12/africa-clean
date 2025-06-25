@@ -542,8 +542,8 @@ const ServicesPage: React.FC = () => {
               </h2>
             </div>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto mb-8">
-              Nous disposons d'un centre de formation aux métiers de Technicien
-              de surfaces professionnel
+              Nous disposons d'un centre de formation professionnelle aux
+              métiers d'hygiène, de propreté et des services associés
             </p>
             <div className="bg-white rounded-2xl p-8 shadow-lg max-w-4xl mx-auto">
               <h3 className="text-2xl font-bold text-[#212121] mb-6">

@@ -6,16 +6,14 @@ const ProductsServicesOverview: React.FC = () => {
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-[#212121] mb-4">
-            Nos Produits & Services
+            Introduction
           </h2>
           <p className="text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed">
-            Chez Africa Clean, nous proposons des solutions professionnelles et
-            écologiques adaptées à vos besoins : nettoyage de bureaux,
-            résidences, centres de santé, hôtels, espaces commerciaux et fin de
-            chantier. Nous intervenons également dans l'entretien de jardins, la
-            création de potagers naturels, l'organisation d'événements
-            éco-responsables et les services logistiques. Chaque service est
-            pensé pour allier efficacité, qualité et respect de l'environnement.
+            AFRICA CLEAN est STARTUP spécialisée dans le secteur de CleanTech,
+            il offre des Services d'Entretien et nettoyage des locaux, création
+            et entretien d'espaces verts, gestion des Déchets, Fabrication des
+            poubelles et détergents écologiques avec une équipe dynamique et
+            professionnelle. Disponible 7jr/7 H24
           </p>
         </div>
 
@@ -88,7 +86,7 @@ const ProductsServicesOverview: React.FC = () => {
                 "Jardins potagers bio",
                 "Gestion de déchets événementiels",
                 "Transport et déménagement",
-                "Formation aux métiers du nettoyage",
+                "Formation aux métiers d'hygiène, de propreté et des services associés",
               ].map((service, index) => (
                 <div key={index} className="flex items-center space-x-3">
                   <CheckCircle
@@ -99,7 +97,10 @@ const ProductsServicesOverview: React.FC = () => {
                 </div>
               ))}
             </div>
-            <a href="/services" className="mt-6 bg-[#14A800] hover:bg-[#128700] text-white px-6 py-3 rounded-lg font-semibold transition-all">
+            <a
+              href="/services"
+              className="mt-6 bg-[#14A800] hover:bg-[#128700] text-white px-6 py-3 rounded-lg font-semibold transition-all"
+            >
               Voir tous nos services
             </a>
           </div>

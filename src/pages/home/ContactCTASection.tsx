@@ -11,7 +11,8 @@ const ContactCTA: React.FC = () => {
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Vous avez un Projet d'envergure à réaliser ?
+            Vous avez un projet ambitieux à concrétiser ou souhaitez devenir
+            apporteur d’affaires ?
           </h2>
           <p className="text-xl opacity-90 mb-8">
             Vous souhaitez discuter d'un partenariat B2B / B2C ? <br />
