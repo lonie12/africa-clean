@@ -17,6 +17,7 @@ import { useAuth } from "../../context/auth-context";
 import { useBlog, type BlogPost } from "../../context/blog-context";
 import { useToast } from "../../context/toast-context";
 import BlogEditor from "./BlogEditor";
+import ConfirmationModal from "../../components/ui/ConfirmationModal";
 
 const AdminPage: React.FC = () => {
   const { user, logout } = useAuth();
@@ -27,6 +28,11 @@ const AdminPage: React.FC = () => {
   const [filterStatus, setFilterStatus] = useState<
     "all" | "published" | "draft"
   >("all");
+
+  // Modal confirmation state
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [postToDelete, setPostToDelete] = useState<BlogPost | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const handleLogout = () => {
     logout();
@@ -47,18 +53,31 @@ const AdminPage: React.FC = () => {
     setEditingPost(null);
   };
 
-  const handleDelete = async (post: BlogPost) => {
-    if (
-      window.confirm(
-        `Êtes-vous sûr de vouloir supprimer l'article "${post.title}" ?`
-      )
-    ) {
-      try {
-        await deletePost(post.id);
-        success("Article supprimé", "L'article a été supprimé avec succès.");
-      } catch (err) {
-        error("Erreur", "Impossible de supprimer l'article.");
-      }
+  // Open confirmation modal for delete
+  const handleDelete = (post: BlogPost) => {
+    setPostToDelete(post);
+    setShowConfirmModal(true);
+  };
+
+  // Close confirmation modal
+  const handleCloseConfirmModal = () => {
+    setShowConfirmModal(false);
+    setPostToDelete(null);
+    setIsDeleting(false);
+  };
+
+  // Confirm delete action
+  const handleConfirmDelete = async () => {
+    if (!postToDelete) return;
+
+    try {
+      setIsDeleting(true);
+      await deletePost(postToDelete.id);
+      success("Article supprimé", "L'article a été supprimé avec succès.");
+      handleCloseConfirmModal();
+    } catch (err) {
+      error("Erreur", "Impossible de supprimer l'article.");
+      setIsDeleting(false);
     }
   };
 
@@ -96,9 +115,6 @@ const AdminPage: React.FC = () => {
           <div className="flex justify-between items-center h-16">
             {/* Logo and Title */}
             <div className="flex items-center space-x-4">
-              {/* <div className="h-10 w-10 bg-[#14A800] rounded-lg flex items-center justify-center">
-                <Crown size={24} color="white" />
-              </div> */}
               <div>
                 <h1 className="text-xl font-bold text-gray-900">
                   Gestion du Blog
@@ -317,6 +333,19 @@ const AdminPage: React.FC = () => {
           </a>
         </div>
       </main>
+
+      {/* Confirmation Modal */}
+      <ConfirmationModal
+        isOpen={showConfirmModal}
+        onClose={handleCloseConfirmModal}
+        onConfirm={handleConfirmDelete}
+        title="Supprimer l'article"
+        message={`Êtes-vous sûr de vouloir supprimer définitivement l'article "${postToDelete?.title}" ? Cette action est irréversible.`}
+        confirmText="Supprimer"
+        cancelText="Annuler"
+        variant="danger"
+        isLoading={isDeleting}
+      />
     </div>
   );
 };
