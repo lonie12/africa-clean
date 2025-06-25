@@ -4,6 +4,7 @@ import React, {
   useContext,
   useState,
   useEffect,
+  useCallback,
   type ReactNode,
 } from "react";
 import {
@@ -22,6 +23,7 @@ import {
   type CreateBlogPost,
   type UpdateBlogPost,
 } from "../lib/supabase";
+import { useAuth } from "./auth-context";
 
 // Convert Supabase blog post to frontend format
 export interface BlogPost {
@@ -83,10 +85,24 @@ const convertToUpdateBlogPost = (post: Partial<BlogPost>): UpdateBlogPost => ({
 });
 
 export interface BlogContextType {
-  posts: BlogPost[];
+  // Public data (always available)
   publishedPosts: BlogPost[];
-  isLoading: boolean;
-  error: string | null;
+  isLoadingPublished: boolean;
+  publicError: string | null;
+
+  // Admin data (only available when authenticated)
+  posts: BlogPost[];
+  isLoadingAdmin: boolean;
+  adminError: string | null;
+
+  // Public methods (no auth required)
+  getPostBySlug: (slug: string) => Promise<BlogPost | null>;
+  searchPublishedPosts: (query: string) => Promise<BlogPost[]>;
+  getPublishedPostsByTag: (tag: string) => Promise<BlogPost[]>;
+  getPublishedTags: () => Promise<string[]>;
+  refreshPublishedPosts: () => Promise<void>;
+
+  // Admin methods (auth required)
   createPost: (
     post: Omit<
       BlogPost,
@@ -96,13 +112,10 @@ export interface BlogContextType {
   updatePost: (id: string, post: Partial<BlogPost>) => Promise<void>;
   deletePost: (id: string) => Promise<void>;
   getPost: (id: string) => BlogPost | undefined;
-  getPostBySlug: (slug: string) => Promise<BlogPost | null>;
   publishPost: (id: string) => Promise<void>;
   unpublishPost: (id: string) => Promise<void>;
-  searchPosts: (query: string) => Promise<BlogPost[]>;
-  getPostsByTag: (tag: string) => Promise<BlogPost[]>;
-  getAllTags: () => Promise<string[]>;
-  refreshPosts: () => Promise<void>;
+  searchAllPosts: (query: string) => Promise<BlogPost[]>;
+  refreshAllPosts: () => Promise<void>;
 }
 
 const BlogContext = createContext<BlogContextType | undefined>(undefined);
@@ -120,41 +133,159 @@ interface BlogProviderProps {
 }
 
 export const BlogProvider: React.FC<BlogProviderProps> = ({ children }) => {
-  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const { isAuthenticated } = useAuth();
+
+  // Public state (always loaded)
   const [publishedPosts, setPublishedPosts] = useState<BlogPost[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [isLoadingPublished, setIsLoadingPublished] = useState(true);
+  const [publicError, setPublicError] = useState<string | null>(null);
 
-  // Load posts from Supabase
-  const loadPosts = async () => {
+  // Admin state (only loaded when authenticated)
+  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [isLoadingAdmin, setIsLoadingAdmin] = useState(false);
+  const [adminError, setAdminError] = useState<string | null>(null);
+
+  // Load published posts (public - always available)
+  const loadPublishedPosts = useCallback(async () => {
     try {
-      setIsLoading(true);
-      setError(null);
+      setIsLoadingPublished(true);
+      setPublicError(null);
 
-      const [allPostsData, publishedPostsData] = await Promise.all([
-        getBlogPosts(),
-        getPublishedBlogPosts(),
-      ]);
+      // Add timeout to prevent infinite loading
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error("Request timeout")), 15000)
+      );
 
-      const convertedPosts = allPostsData.map(convertSupabaseBlogPost);
+      const dataPromise = getPublishedBlogPosts();
+      const publishedPostsData = (await Promise.race([
+        dataPromise,
+        timeoutPromise,
+      ])) as SupabaseBlogPost[];
+
       const convertedPublishedPosts = publishedPostsData.map(
         convertSupabaseBlogPost
       );
 
-      setPosts(convertedPosts);
       setPublishedPosts(convertedPublishedPosts);
     } catch (err) {
-      console.error("Error loading blog posts:", err);
-      setError("Failed to load blog posts");
+      console.error("Error loading published blog posts:", err);
+      const errorMessage =
+        err instanceof Error
+          ? err.message
+          : "Failed to load published blog posts";
+      setPublicError(errorMessage);
+      setPublishedPosts([]);
     } finally {
-      setIsLoading(false);
+      setIsLoadingPublished(false);
+    }
+  }, []);
+
+  // Load all posts (admin only)
+  const loadAllPosts = useCallback(async () => {
+    if (!isAuthenticated) return;
+
+    try {
+      setIsLoadingAdmin(true);
+      setAdminError(null);
+
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error("Request timeout")), 15000)
+      );
+
+      const dataPromise = getBlogPosts();
+      const allPostsData = (await Promise.race([
+        dataPromise,
+        timeoutPromise,
+      ])) as SupabaseBlogPost[];
+
+      const convertedPosts = allPostsData.map(convertSupabaseBlogPost);
+      setPosts(convertedPosts);
+    } catch (err) {
+      console.error("Error loading all blog posts:", err);
+      const errorMessage =
+        err instanceof Error ? err.message : "Failed to load blog posts";
+      setAdminError(errorMessage);
+      setPosts([]);
+    } finally {
+      setIsLoadingAdmin(false);
+    }
+  }, [isAuthenticated]);
+
+  // Initialize published posts on mount (public access)
+  useEffect(() => {
+    let isMounted = true;
+
+    const initializePublishedPosts = async () => {
+      if (isMounted) {
+        await loadPublishedPosts();
+      }
+    };
+
+    initializePublishedPosts();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [loadPublishedPosts]);
+
+  // Load admin posts when authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      loadAllPosts();
+    } else {
+      // Clear admin data when not authenticated
+      setPosts([]);
+      setIsLoadingAdmin(false);
+      setAdminError(null);
+    }
+  }, [isAuthenticated, loadAllPosts]);
+
+  // PUBLIC METHODS (no auth required)
+
+  const getPostBySlug = async (slug: string): Promise<BlogPost | null> => {
+    try {
+      const post = await getBlogPostBySlug(slug);
+      return post ? convertSupabaseBlogPost(post) : null;
+    } catch (err) {
+      console.error("Error fetching blog post by slug:", err);
+      return null;
     }
   };
 
-  // Initialize data on mount
-  useEffect(() => {
-    loadPosts();
-  }, []);
+  const searchPublishedPosts = async (query: string): Promise<BlogPost[]> => {
+    try {
+      const searchResults = await searchBlogPosts(query, false); // false = only published
+      return searchResults.map(convertSupabaseBlogPost);
+    } catch (err) {
+      console.error("Error searching published blog posts:", err);
+      return [];
+    }
+  };
+
+  const getPublishedPostsByTag = async (tag: string): Promise<BlogPost[]> => {
+    try {
+      const tagResults = await getBlogPostsByTag(tag, false); // false = only published
+      return tagResults.map(convertSupabaseBlogPost);
+    } catch (err) {
+      console.error("Error fetching published blog posts by tag:", err);
+      return [];
+    }
+  };
+
+  const getPublishedTags = async (): Promise<string[]> => {
+    try {
+      return await getBlogTags();
+    } catch (err) {
+      console.error("Error fetching published blog tags:", err);
+      return [];
+    }
+  };
+
+  const refreshPublishedPosts = async (): Promise<void> => {
+    await loadPublishedPosts();
+  };
+
+  // ADMIN METHODS (auth required)
 
   const createPost = async (
     postData: Omit<
@@ -162,14 +293,21 @@ export const BlogProvider: React.FC<BlogProviderProps> = ({ children }) => {
       "id" | "createdAt" | "updatedAt" | "slug" | "publishedAt"
     >
   ): Promise<void> => {
+    if (!isAuthenticated) {
+      throw new Error("Authentication required to create posts");
+    }
+
     try {
-      setIsLoading(true);
-      setError(null);
+      setAdminError(null);
 
       const slug = postData.title
         .toLowerCase()
-        .replace(/[^a-z0-9]+/g, "-")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "") // Remove accents
+        .replace(/[^a-z0-9\s-]/g, "") // Remove special characters
+        .replace(/\s+/g, "-")
         .replace(/(^-|-$)+/g, "");
+
       const createData = convertToCreateBlogPost({ ...postData, slug });
       const createdPost = await createBlogPostApi(createData);
       const convertedPost = convertSupabaseBlogPost(createdPost);
@@ -182,10 +320,8 @@ export const BlogProvider: React.FC<BlogProviderProps> = ({ children }) => {
       }
     } catch (err) {
       console.error("Error creating blog post:", err);
-      setError("Failed to create blog post");
+      setAdminError("Failed to create blog post");
       throw err;
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -193,9 +329,12 @@ export const BlogProvider: React.FC<BlogProviderProps> = ({ children }) => {
     id: string,
     updatedData: Partial<BlogPost>
   ): Promise<void> => {
+    if (!isAuthenticated) {
+      throw new Error("Authentication required to update posts");
+    }
+
     try {
-      setIsLoading(true);
-      setError(null);
+      setAdminError(null);
 
       const updateData = convertToUpdateBlogPost(updatedData);
       const updatedPost = await updateBlogPostApi(id, updateData);
@@ -221,17 +360,18 @@ export const BlogProvider: React.FC<BlogProviderProps> = ({ children }) => {
       }
     } catch (err) {
       console.error("Error updating blog post:", err);
-      setError("Failed to update blog post");
+      setAdminError("Failed to update blog post");
       throw err;
-    } finally {
-      setIsLoading(false);
     }
   };
 
   const deletePost = async (id: string): Promise<void> => {
+    if (!isAuthenticated) {
+      throw new Error("Authentication required to delete posts");
+    }
+
     try {
-      setIsLoading(true);
-      setError(null);
+      setAdminError(null);
 
       await deleteBlogPostApi(id);
 
@@ -239,10 +379,8 @@ export const BlogProvider: React.FC<BlogProviderProps> = ({ children }) => {
       setPublishedPosts((prev) => prev.filter((post) => post.id !== id));
     } catch (err) {
       console.error("Error deleting blog post:", err);
-      setError("Failed to delete blog post");
+      setAdminError("Failed to delete blog post");
       throw err;
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -250,17 +388,11 @@ export const BlogProvider: React.FC<BlogProviderProps> = ({ children }) => {
     return posts.find((post) => post.id === id);
   };
 
-  const getPostBySlug = async (slug: string): Promise<BlogPost | null> => {
-    try {
-      const post = await getBlogPostBySlug(slug);
-      return post ? convertSupabaseBlogPost(post) : null;
-    } catch (err) {
-      console.error("Error fetching blog post by slug:", err);
-      return null;
-    }
-  };
-
   const publishPost = async (id: string): Promise<void> => {
+    if (!isAuthenticated) {
+      throw new Error("Authentication required to publish posts");
+    }
+
     try {
       const publishedPost = await publishBlogPostApi(id);
       const convertedPost = convertSupabaseBlogPost(publishedPost);
@@ -279,12 +411,16 @@ export const BlogProvider: React.FC<BlogProviderProps> = ({ children }) => {
       });
     } catch (err) {
       console.error("Error publishing blog post:", err);
-      setError("Failed to publish blog post");
+      setAdminError("Failed to publish blog post");
       throw err;
     }
   };
 
   const unpublishPost = async (id: string): Promise<void> => {
+    if (!isAuthenticated) {
+      throw new Error("Authentication required to unpublish posts");
+    }
+
     try {
       const unpublishedPost = await unpublishBlogPostApi(id);
       const convertedPost = convertSupabaseBlogPost(unpublishedPost);
@@ -296,60 +432,60 @@ export const BlogProvider: React.FC<BlogProviderProps> = ({ children }) => {
       setPublishedPosts((prev) => prev.filter((post) => post.id !== id));
     } catch (err) {
       console.error("Error unpublishing blog post:", err);
-      setError("Failed to unpublish blog post");
+      setAdminError("Failed to unpublish blog post");
       throw err;
     }
   };
 
-  const searchPosts = async (query: string): Promise<BlogPost[]> => {
+  const searchAllPosts = async (query: string): Promise<BlogPost[]> => {
+    if (!isAuthenticated) {
+      throw new Error("Authentication required to search all posts");
+    }
+
     try {
-      const searchResults = await searchBlogPosts(query, "published");
+      const searchResults = await searchBlogPosts(query, true); // true = include unpublished
       return searchResults.map(convertSupabaseBlogPost);
     } catch (err) {
-      console.error("Error searching blog posts:", err);
+      console.error("Error searching all blog posts:", err);
       return [];
     }
   };
 
-  const getPostsByTag = async (tag: string): Promise<BlogPost[]> => {
-    try {
-      const tagResults = await getBlogPostsByTag(tag, "published");
-      return tagResults.map(convertSupabaseBlogPost);
-    } catch (err) {
-      console.error("Error fetching blog posts by tag:", err);
-      return [];
+  const refreshAllPosts = async (): Promise<void> => {
+    if (!isAuthenticated) {
+      throw new Error("Authentication required to refresh all posts");
     }
-  };
 
-  const getAllTags = async (): Promise<string[]> => {
-    try {
-      return await getBlogTags();
-    } catch (err) {
-      console.error("Error fetching blog tags:", err);
-      return [];
-    }
-  };
-
-  const refreshPosts = async (): Promise<void> => {
-    await loadPosts();
+    await loadAllPosts();
   };
 
   const value: BlogContextType = {
-    posts,
+    // Public data
     publishedPosts,
-    isLoading,
-    error,
+    isLoadingPublished,
+    publicError,
+
+    // Admin data
+    posts,
+    isLoadingAdmin,
+    adminError,
+
+    // Public methods
+    getPostBySlug,
+    searchPublishedPosts,
+    getPublishedPostsByTag,
+    getPublishedTags,
+    refreshPublishedPosts,
+
+    // Admin methods
     createPost,
     updatePost,
     deletePost,
     getPost,
-    getPostBySlug,
     publishPost,
     unpublishPost,
-    searchPosts,
-    getPostsByTag,
-    getAllTags,
-    refreshPosts,
+    searchAllPosts,
+    refreshAllPosts,
   };
 
   return <BlogContext.Provider value={value}>{children}</BlogContext.Provider>;

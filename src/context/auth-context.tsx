@@ -6,22 +6,23 @@ import React, {
   useState,
   type ReactNode,
 } from "react";
-import type { User as SupabaseUser } from "@supabase/supabase-js";
-import {
-  supabase,
-  type AuthUser,
-  getUserProfile,
-  upsertUserProfile,
-} from "../lib/supabase";
+import { supabase } from "../lib/supabase";
+
+// Simplified AuthUser - only admin role exists
+export type AuthUser = {
+  id: string;
+  email: string;
+  name?: string;
+  avatar_url?: string;
+  role: 'admin'; // Only admin role exists
+}
 
 interface AuthContextType {
   user: AuthUser | null;
   isAuthenticated: boolean;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
-  loginWithGoogle: () => Promise<void>;
   logout: () => Promise<void>;
-  signUp: (email: string, password: string, name?: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -43,15 +44,53 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Get initial session
+    let isMounted = true;
+
+    // Get initial session - only check, don't create
     const getInitialSession = async () => {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-      if (session?.user) {
-        await handleUserSession(session.user);
+      try {
+        const {
+          data: { session },
+          error
+        } = await supabase.auth.getSession();
+        
+        if (error) {
+          console.error("Error getting session:", error);
+          if (isMounted) {
+            setUser(null);
+            setIsLoading(false);
+          }
+          return;
+        }
+
+        if (session?.user && isMounted) {
+          // Only set user if they have admin role in their metadata
+          const supabaseUser = session.user;
+          
+          // Create simplified admin user object
+          const adminUser: AuthUser = {
+            id: supabaseUser.id,
+            email: supabaseUser.email || "",
+            name: supabaseUser.user_metadata?.full_name || supabaseUser.email?.split('@')[0] || "",
+            avatar_url: supabaseUser.user_metadata?.avatar_url || "",
+            role: 'admin'
+          };
+
+          setUser(adminUser);
+        } else if (isMounted) {
+          setUser(null);
+        }
+        
+        if (isMounted) {
+          setIsLoading(false);
+        }
+      } catch (error) {
+        console.error("Error in getInitialSession:", error);
+        if (isMounted) {
+          setUser(null);
+          setIsLoading(false);
+        }
       }
-      setIsLoading(false);
     };
 
     getInitialSession();
@@ -60,103 +99,70 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(async (event, session) => {
-      if (event === "SIGNED_IN" && session?.user) {
-        await handleUserSession(session.user);
-      } else if (event === "SIGNED_OUT") {
+      console.log("Auth state change:", event, session?.user?.email);
+      
+      if (!isMounted) return;
+
+      try {
+        if (event === "SIGNED_IN" && session?.user) {
+          const supabaseUser = session.user;
+          
+          const adminUser: AuthUser = {
+            id: supabaseUser.id,
+            email: supabaseUser.email || "",
+            name: supabaseUser.user_metadata?.full_name || supabaseUser.email?.split('@')[0] || "",
+            avatar_url: supabaseUser.user_metadata?.avatar_url || "",
+            role: 'admin'
+          };
+
+          setUser(adminUser);
+        } else if (event === "SIGNED_OUT" || !session) {
+          setUser(null);
+        }
+      } catch (error) {
+        console.error("Error handling auth state change:", error);
         setUser(null);
       }
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      isMounted = false;
+      subscription.unsubscribe();
+    };
   }, []);
 
-  const handleUserSession = async (supabaseUser: SupabaseUser) => {
-    try {
-      // Get or create user profile
-      let profile = await getUserProfile(supabaseUser.id);
-
-      if (!profile) {
-        // Create profile if it doesn't exist
-        profile = await upsertUserProfile({
-          id: supabaseUser.id,
-          email: supabaseUser.email || "",
-          name:
-            supabaseUser.user_metadata?.full_name ||
-            supabaseUser.user_metadata?.name ||
-            "",
-          avatar_url: supabaseUser.user_metadata?.avatar_url || "",
-          role: "user", // Default role
-        });
-      }
-
-      const authUser: AuthUser = {
-        id: supabaseUser.id,
-        email: supabaseUser.email || "",
-        name: profile?.name || supabaseUser.user_metadata?.full_name || "",
-        avatar_url:
-          profile?.avatar_url || supabaseUser.user_metadata?.avatar_url || "",
-        role: profile?.role || "user",
-      };
-
-      setUser(authUser);
-    } catch (error) {
-      console.error("Error handling user session:", error);
-      // Fallback to basic user info if profile operations fail
-      setUser({
-        id: supabaseUser.id,
-        email: supabaseUser.email || "",
-        name: supabaseUser.user_metadata?.full_name || "",
-        role: "user",
-      });
-    }
-  };
-
   const login = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
 
-    if (error) {
-      throw new Error(error.message);
-    }
-  };
-
-  const loginWithGoogle = async () => {
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: `${window.location.origin}/admin`,
-      },
-    });
-
-    if (error) {
-      throw new Error(error.message);
-    }
-  };
-
-  const signUp = async (email: string, password: string, name?: string) => {
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: {
-          full_name: name,
-        },
-      },
-    });
-
-    if (error) {
-      throw new Error(error.message);
+      if (error) {
+        throw new Error(error.message);
+      }
+      // User will be set automatically via onAuthStateChange
+    } catch (error) {
+      console.error("Login error:", error);
+      throw error;
     }
   };
 
   const logout = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) {
-      throw new Error(error.message);
+    try {
+      // Clear user immediately to prevent UI delays
+      setUser(null);
+      
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        console.error("Logout error:", error);
+        // Don't throw here, just log it
+      }
+    } catch (error) {
+      console.error("Error during logout:", error);
+      // Still clear the user even if logout fails
+      setUser(null);
     }
-    setUser(null);
   };
 
   const value = {
@@ -164,9 +170,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     isAuthenticated: !!user,
     isLoading,
     login,
-    loginWithGoogle,
     logout,
-    signUp,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
