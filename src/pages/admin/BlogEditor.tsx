@@ -7,9 +7,7 @@ import {
   FloppyDisk,
   Eye,
   Globe,
-  Image as ImageIcon,
   X,
-  Upload,
   CloudArrowUp,
 } from "@phosphor-icons/react";
 import { useBlog, type BlogPost } from "../../context/blog-context";
