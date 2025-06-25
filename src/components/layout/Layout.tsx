@@ -15,7 +15,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     { href: "/services", label: "Services" },
     { href: "/a-propos", label: "À Propos" },
     // { href: "/galeries", label: "Galeries" }, // Uncomment if galleries are available
-    // { href: "/blog", label: "Blog" }, // Uncomment if blog is available
+    { href: "/blog", label: "Blog" }, // Uncomment if blog is available
     { href: "/contact", label: "Contact" },
   ];
 
