@@ -332,7 +332,7 @@ const BlogPage: React.FC = () => {
 
           {/* Updated Article Content with Rich Text Support */}
           <article className="prose prose-lg max-w-none">
-            <div 
+            <div
               className="blog-content"
               dangerouslySetInnerHTML={{ __html: currentPost.content }}
             />

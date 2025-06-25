@@ -127,7 +127,6 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
   const [selectedText, setSelectedText] = useState("");
   const [isUploadingImage, setIsUploadingImage] = useState(false);
   const [dragActive, setDragActive] = useState(false);
-  const [savedRange, setSavedRange] = useState<Range | null>(null);
 
   // Toolbar configuration
   const toolbarGroups = [
