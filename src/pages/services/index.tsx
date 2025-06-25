@@ -11,7 +11,6 @@ import {
 } from "@phosphor-icons/react";
 import {
   Building,
-  SprayBottle,
   LetterCircleH,
   Park,
   CalendarDots,
@@ -68,7 +67,7 @@ const ServicesPage: React.FC = () => {
       subtitle: "Vos locaux toujours propres, notre engagement au quotidien",
       description:
         "Solutions de nettoyage professionnel pour tous types d'espaces avec une approche éco-responsable et des équipes qualifiées.",
-      icon: <SprayBottle size={40} />,
+      icon: <img src="/images/services/nettoie-pro.jpg" className="size-8" />,
       color: "#14A800",
       gradient: "from-green-500 to-green-600",
       services: [
@@ -403,7 +402,7 @@ const ServicesPage: React.FC = () => {
                 <div className="lg:w-1/2 p-8 lg:p-12">
                   <div className="flex items-center mb-6">
                     <div
-                      className="p-3 rounded-full mr-4"
+                      className="p-4 rounded-full mr-4 shrink-0"
                       style={{ backgroundColor: concept.color, color: "white" }}
                     >
                       {concept.icon}

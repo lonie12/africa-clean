@@ -357,7 +357,7 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ post, onClose }) => {
             </header>
 
             {/* Render HTML content directly */}
-            <div 
+            <div
               className="prose prose-lg max-w-none"
               dangerouslySetInnerHTML={{ __html: formData.content }}
             />
@@ -439,7 +439,23 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ post, onClose }) => {
               />
             </div>
 
-            {/* Rich Text Content Editor */}
+            {/* Excerpt */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <Textarea
+                label="Extrait *"
+                placeholder="Résumé de l'article qui apparaîtra dans la liste des articles..."
+                value={formData.excerpt}
+                onChange={(e) => handleInputChange("excerpt", e.target.value)}
+                rows={3}
+                required
+              />
+              <p className="mt-2 text-sm text-gray-500">
+                {formData.excerpt ? formData.excerpt.length : 0} caractères
+                {!formData.excerpt && " (généré automatiquement si vide)"}
+              </p>
+            </div>
+
+            {/* Content */}
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
               <RichTextEditor
                 label="Contenu de l'article *"
@@ -449,26 +465,14 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ post, onClose }) => {
                 rows={20}
               />
               <div className="mt-2 flex items-center justify-between text-sm text-gray-500">
-                <span>{htmlToPlainText(formData.content).length} caractères</span>
+                <span>
+                  {htmlToPlainText(formData.content).length} caractères
+                </span>
                 <span className="text-xs">
-                  Raccourcis: Ctrl+B (gras), Ctrl+I (italique), Ctrl+U (souligné), Ctrl+K (lien)
+                  Raccourcis: Ctrl+B (gras), Ctrl+I (italique), Ctrl+U
+                  (souligné), Ctrl+K (lien)
                 </span>
               </div>
-            </div>
-
-            {/* Excerpt */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <Textarea
-                label="Extrait (optionnel)"
-                placeholder="Résumé de l'article qui apparaîtra dans la liste des articles..."
-                value={formData.excerpt}
-                onChange={(e) => handleInputChange("excerpt", e.target.value)}
-                rows={3}
-              />
-              <p className="mt-2 text-sm text-gray-500">
-                {formData.excerpt ? formData.excerpt.length : 0} caractères
-                {!formData.excerpt && " (généré automatiquement à partir du contenu si vide)"}
-              </p>
             </div>
           </div>
 

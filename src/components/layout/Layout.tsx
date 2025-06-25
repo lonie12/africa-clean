@@ -84,19 +84,21 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <div className="flex items-center space-x-2">
-              <img
-                src="/images/logos/logo-africa-clean.png"
-                alt="AFRICA CLEAN"
-                className="h-10 w-auto"
-                onError={(e) => {
-                  e.currentTarget.src = "/logo.png";
-                }}
-              />
-              <span className="text-xl font-bold text-[#212121]">
-                AFRICA CLEAN
-              </span>
-            </div>
+            <a href="/">
+              <div className="flex items-center space-x-2">
+                <img
+                  src="/images/logos/logo-africa-clean.png"
+                  alt="AFRICA CLEAN"
+                  className="h-10 w-auto"
+                  onError={(e) => {
+                    e.currentTarget.src = "/logo.png";
+                  }}
+                />
+                <span className="text-xl font-bold text-[#212121]">
+                  AFRICA CLEAN
+                </span>
+              </div>
+            </a>
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
