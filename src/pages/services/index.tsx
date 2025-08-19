@@ -4,18 +4,11 @@ import {
   CheckCircle,
   Sparkle,
   Leaf,
-  Recycle,
   Phone,
   Clock,
   Star,
 } from "@phosphor-icons/react";
-import {
-  Building,
-  LetterCircleH,
-  Park,
-  CalendarDots,
-  GraduationCap,
-} from "@phosphor-icons/react";
+import { Building, GraduationCap } from "@phosphor-icons/react";
 import WhatsAppFloatingButton from "@/components/common/WhatsAppButton";
 
 interface ConceptDetail {
@@ -67,8 +60,14 @@ const ServicesPage: React.FC = () => {
       subtitle: "Vos locaux toujours propres, notre engagement au quotidien",
       description:
         "Solutions de nettoyage professionnel pour tous types d'espaces avec une approche éco-responsable et des équipes qualifiées.",
-      icon: <img src="/images/services/nettoie-pro.jpg" className="size-8" />,
+      icon: (
+        <img
+          src="/images/services/nettoiepro-logo.png"
+          className="w-full h-full object-cover object-center scale-150"
+        />
+      ),
       color: "#14A800",
+      // color: "#14A800",
       gradient: "from-green-500 to-green-600",
       services: [
         "Entretien courant de bureaux",
@@ -106,7 +105,12 @@ const ServicesPage: React.FC = () => {
         "Nous garantissons l'hygiène et la propreté dans vos centres de santé",
       description:
         "Expertise spécialisée en hygiène hospitalière et pharmaceutique avec des protocoles stricts et du personnel qualifié.",
-      icon: <LetterCircleH size={40} />,
+      icon: (
+        <img
+          src="/images/services/santepro-logo.png"
+          className="w-full h-full object-cover object-center scale-150"
+        />
+      ),
       color: "#DC2626",
       gradient: "from-red-500 to-red-600",
       services: [
@@ -139,7 +143,12 @@ const ServicesPage: React.FC = () => {
       subtitle: "Conception et création d'espaces verts durables",
       description:
         "Aménagement paysager professionnel avec conception 3D, création et entretien d'espaces verts respectueux de l'environnement.",
-      icon: <Park size={40} />,
+      icon: (
+        <img
+          src="/images/services/ecojardin-logo.png"
+          className="w-full h-full object-cover object-center scale-150"
+        />
+      ),
       color: "#22C55E",
       gradient: "from-green-400 to-green-500",
       services: [
@@ -172,7 +181,12 @@ const ServicesPage: React.FC = () => {
       subtitle: "Jardins potagers biologiques pour une alimentation saine",
       description:
         "Création et gestion de potagers bio avec étude de sol, sélection de légumes adaptés et techniques de culture naturelle.",
-      icon: <Leaf size={40} />,
+      icon: (
+        <img
+          src="/images/services/naturapotager-logo.jpg"
+          className="w-full h-full object-cover object-center scale-150"
+        />
+      ),
       color: "#16A34A",
       gradient: "from-green-600 to-green-700",
       services: [
@@ -204,7 +218,12 @@ const ServicesPage: React.FC = () => {
       subtitle: "Gestion écologique des déchets événementiels",
       description:
         "Solutions complètes de gestion des déchets pour événements avec tri, recyclage et communication écologique.",
-      icon: <Recycle size={40} />,
+      icon: (
+        <img
+          src="/images/services/ecoevent-logo.jpg"
+          className="w-full h-full object-cover object-center scale-150"
+        />
+      ),
       color: "#0284C7",
       gradient: "from-blue-500 to-blue-600",
       services: [
@@ -237,7 +256,12 @@ const ServicesPage: React.FC = () => {
       subtitle: "Nettoyage événementiel avant, pendant et après",
       description:
         "Services complets de nettoyage pour tous types d'événements avec intervention stratégique et équipes dédiées.",
-      icon: <CalendarDots size={40} />,
+      icon: (
+        <img
+          src="/images/services/nettoieevent-logo.jpg"
+          className="w-full h-full object-cover object-center scale-150"
+        />
+      ),
       color: "#0EA5E9",
       gradient: "from-sky-500 to-sky-600",
       services: [
@@ -402,8 +426,8 @@ const ServicesPage: React.FC = () => {
                 <div className="lg:w-1/2 p-8 lg:p-12">
                   <div className="flex items-center mb-6">
                     <div
-                      className="p-4 rounded-full mr-4 shrink-0"
-                      style={{ backgroundColor: concept.color, color: "white" }}
+                      className="p-4 rounded-full mr-4 shrink-0 border border-gray-300 size-24 overflow-hidden"
+                      // style={{ backgroundColor: concept.color, color: "white" }}
                     >
                       {concept.icon}
                     </div>

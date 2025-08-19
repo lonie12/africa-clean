@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
-import { 
-  Phone, 
-  EnvelopeSimple, 
-  MapPin, 
-  Clock, 
-//   User, 
+import {
+  Phone,
+  EnvelopeSimple,
+  MapPin,
+  Clock,
+  //   User,
   Buildings,
   ChatCircle,
   CheckCircle,
@@ -49,7 +49,7 @@ const ContactPage: React.FC = () => {
     subject: "",
     service: "",
     message: "",
-    urgency: ""
+    urgency: "",
   });
 
   const serviceOptions = [
@@ -62,13 +62,13 @@ const ContactPage: React.FC = () => {
     { value: "formation", label: "Formation - Technicien de surfaces" },
     { value: "devis", label: "Demande de devis général" },
     { value: "partenariat", label: "Partenariat B2B/B2C" },
-    { value: "autre", label: "Autre demande" }
+    { value: "autre", label: "Autre demande" },
   ];
 
   const urgencyOptions = [
     { value: "normal", label: "Normal (sous 48h)" },
     { value: "urgent", label: "Urgent (sous 24h)" },
-    { value: "tres-urgent", label: "Très urgent (même jour)" }
+    { value: "tres-urgent", label: "Très urgent (même jour)" },
   ];
 
   const contactInfo = [
@@ -77,15 +77,15 @@ const ContactPage: React.FC = () => {
       title: "Adresse",
       info: "Djidjolé, derrière le CMS",
       subInfo: "Lomé-Togo",
-      color: "#14A800"
+      color: "#14A800",
     },
     {
       icon: <Phone size={24} />,
       title: "Téléphone",
       info: "+228 90 45 31 53",
-      subInfo: "+225 01 51 15 46 16",
+      subInfo: "+225 01 52 89 16 90",
       color: "#0284C7",
-      action: () => window.open('tel:+22890453153')
+      action: () => window.open("tel:+22890453153"),
     },
     {
       icon: <EnvelopeSimple size={24} />,
@@ -93,15 +93,15 @@ const ContactPage: React.FC = () => {
       info: "africaclean.contact@gmail.com",
       subInfo: "Réponse sous 24h",
       color: "#DC2626",
-      action: () => window.open('mailto:africaclean.contact@gmail.com')
+      action: () => window.open("mailto:africaclean.contact@gmail.com"),
     },
     {
       icon: <Clock size={24} />,
       title: "Horaires",
       info: "Lun - Sam: 7h00 - 18h00",
       subInfo: "Urgences: 24h/24",
-      color: "#7C3AED"
-    }
+      color: "#7C3AED",
+    },
   ];
 
   const socialLinks = [
@@ -109,38 +109,38 @@ const ContactPage: React.FC = () => {
       name: "WhatsApp",
       icon: <WhatsappLogo size={24} />,
       url: "https://wa.me/22890453153",
-      color: "#25D366"
+      color: "#25D366",
     },
     {
       name: "Facebook",
       icon: <FacebookLogo size={24} />,
       url: "https://www.facebook.com/share/1CPRhr5DdT/",
-      color: "#1877F2"
+      color: "#1877F2",
     },
     {
       name: "LinkedIn",
       icon: <LinkedinLogo size={24} />,
       url: "https://www.linkedin.com/company/africacleantg/",
-      color: "#0A66C2"
+      color: "#0A66C2",
     },
     {
       name: "Twitter",
       icon: <TwitterLogo size={24} />,
       url: "https://x.com/africacleanTg",
-      color: "#1DA1F2"
+      color: "#1DA1F2",
     },
     {
       name: "YouTube",
       icon: <YoutubeLogo size={24} />,
       url: "https://www.youtube.com/@AFRICACLEANSARL",
-      color: "#FF0000"
-    }
+      color: "#FF0000",
+    },
   ];
 
   const handleInputChange = (field: keyof ContactFormData, value: string) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [field]: value
+      [field]: value,
     }));
   };
 
@@ -150,16 +150,16 @@ const ContactPage: React.FC = () => {
 
     try {
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
       success(
         "Message envoyé avec succès !",
         "Nous vous répondrons dans les plus brefs délais.",
         {
           action: {
             label: "Voir nos services",
-            onClick: () => window.location.href = '/services'
-          }
+            onClick: () => (window.location.href = "/services"),
+          },
         }
       );
 
@@ -173,9 +173,8 @@ const ContactPage: React.FC = () => {
         subject: "",
         service: "",
         message: "",
-        urgency: ""
+        urgency: "",
       });
-
     } catch (err) {
       error(
         "Erreur lors de l'envoi",
@@ -186,7 +185,12 @@ const ContactPage: React.FC = () => {
     }
   };
 
-  const isFormValid = formData.firstName && formData.lastName && formData.email && formData.phone && formData.message;
+  const isFormValid =
+    formData.firstName &&
+    formData.lastName &&
+    formData.email &&
+    formData.phone &&
+    formData.message;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -198,7 +202,8 @@ const ContactPage: React.FC = () => {
             Contactez-Nous
           </h1>
           <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-            Une question, un projet, une urgence ? Notre équipe est à votre disposition pour vous accompagner.
+            Une question, un projet, une urgence ? Notre équipe est à votre
+            disposition pour vous accompagner.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <a
@@ -219,12 +224,15 @@ const ContactPage: React.FC = () => {
             </a>
           </div>
         </div>
-        
+
         {/* Floating elements */}
         <div className="absolute top-20 left-10 opacity-20 animate-pulse">
           <ChatCircle size={40} />
         </div>
-        <div className="absolute bottom-20 right-10 opacity-20 animate-pulse" style={{ animationDelay: '1s' }}>
+        <div
+          className="absolute bottom-20 right-10 opacity-20 animate-pulse"
+          style={{ animationDelay: "1s" }}
+        >
           <Send size={35} />
         </div>
       </section>
@@ -233,7 +241,6 @@ const ContactPage: React.FC = () => {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-3 gap-12">
-            
             {/* Contact Form */}
             <div className="lg:col-span-2">
               <div className="bg-white rounded-3xl shadow-xl p-8 lg:p-12">
@@ -242,7 +249,8 @@ const ContactPage: React.FC = () => {
                     Envoyez-nous un message
                   </h2>
                   <p className="text-gray-600 text-lg">
-                    Remplissez le formulaire ci-dessous et nous vous répondrons rapidement.
+                    Remplissez le formulaire ci-dessous et nous vous répondrons
+                    rapidement.
                   </p>
                 </div>
 
@@ -253,14 +261,18 @@ const ContactPage: React.FC = () => {
                       label="Prénom *"
                       placeholder="Votre prénom"
                       value={formData.firstName}
-                      onChange={(e) => handleInputChange('firstName', e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("firstName", e.target.value)
+                      }
                       required
                     />
                     <Input
                       label="Nom *"
                       placeholder="Votre nom"
                       value={formData.lastName}
-                      onChange={(e) => handleInputChange('lastName', e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("lastName", e.target.value)
+                      }
                       required
                     />
                   </div>
@@ -271,7 +283,9 @@ const ContactPage: React.FC = () => {
                       type="email"
                       placeholder="votre@email.com"
                       value={formData.email}
-                      onChange={(e) => handleInputChange('email', e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("email", e.target.value)
+                      }
                       required
                     />
                     <Input
@@ -279,7 +293,9 @@ const ContactPage: React.FC = () => {
                       type="tel"
                       placeholder="+228 XX XX XX XX"
                       value={formData.phone}
-                      onChange={(e) => handleInputChange('phone', e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("phone", e.target.value)
+                      }
                       required
                     />
                   </div>
@@ -289,7 +305,9 @@ const ContactPage: React.FC = () => {
                     label="Entreprise / Organisation"
                     placeholder="Nom de votre entreprise (optionnel)"
                     value={formData.company}
-                    onChange={(e) => handleInputChange('company', e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("company", e.target.value)
+                    }
                   />
 
                   {/* Subject */}
@@ -297,7 +315,9 @@ const ContactPage: React.FC = () => {
                     label="Sujet"
                     placeholder="Objet de votre demande"
                     value={formData.subject}
-                    onChange={(e) => handleInputChange('subject', e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("subject", e.target.value)
+                    }
                   />
 
                   {/* Service & Urgency */}
@@ -306,14 +326,18 @@ const ContactPage: React.FC = () => {
                       label="Service concerné"
                       options={serviceOptions}
                       value={formData.service}
-                      onChange={(value) => handleInputChange('service', value || '')}
+                      onChange={(value) =>
+                        handleInputChange("service", value || "")
+                      }
                       placeholder="Sélectionner un service"
                     />
                     <CustomSelect
                       label="Urgence"
                       options={urgencyOptions}
                       value={formData.urgency}
-                      onChange={(value) => handleInputChange('urgency', value || '')}
+                      onChange={(value) =>
+                        handleInputChange("urgency", value || "")
+                      }
                       placeholder="Niveau d'urgence"
                     />
                   </div>
@@ -324,7 +348,9 @@ const ContactPage: React.FC = () => {
                     placeholder="Décrivez votre demande en détail..."
                     rows={6}
                     value={formData.message}
-                    onChange={(e) => handleInputChange('message', e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("message", e.target.value)
+                    }
                     required
                   />
 
@@ -333,9 +359,9 @@ const ContactPage: React.FC = () => {
                     type="submit"
                     disabled={!isFormValid || isSubmitting}
                     className={`w-full py-4 px-8 rounded-full font-semibold text-white transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 ${
-                      isFormValid && !isSubmitting 
-                        ? 'bg-[#14A800] hover:bg-[#128700] hover:shadow-xl' 
-                        : 'bg-gray-400 cursor-not-allowed'
+                      isFormValid && !isSubmitting
+                        ? "bg-[#14A800] hover:bg-[#128700] hover:shadow-xl"
+                        : "bg-gray-400 cursor-not-allowed"
                     }`}
                   >
                     {isSubmitting ? (
@@ -363,18 +389,18 @@ const ContactPage: React.FC = () => {
             <div className="space-y-6">
               {/* Contact Cards */}
               {contactInfo.map((contact, index) => (
-                <div 
+                <div
                   key={index}
                   className={`bg-white rounded-2xl p-6 shadow-lg border-l-4 transition-all duration-300 hover:shadow-xl ${
-                    contact.action ? 'cursor-pointer hover:scale-105' : ''
+                    contact.action ? "cursor-pointer hover:scale-105" : ""
                   }`}
                   style={{ borderColor: contact.color }}
                   onClick={contact.action}
                 >
                   <div className="flex items-start">
-                    <div 
+                    <div
                       className="p-3 rounded-full mr-4 flex-shrink-0"
-                      style={{ backgroundColor: contact.color, color: 'white' }}
+                      style={{ backgroundColor: contact.color, color: "white" }}
                     >
                       {contact.icon}
                     </div>
@@ -382,7 +408,9 @@ const ContactPage: React.FC = () => {
                       <h3 className="font-semibold text-lg text-[#212121] mb-1">
                         {contact.title}
                       </h3>
-                      <p className="text-gray-700 font-medium">{contact.info}</p>
+                      <p className="text-gray-700 font-medium">
+                        {contact.info}
+                      </p>
                       <p className="text-gray-500 text-sm">{contact.subInfo}</p>
                     </div>
                   </div>
@@ -402,7 +430,10 @@ const ContactPage: React.FC = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="p-3 rounded-xl transition-all duration-300 hover:scale-110 hover:shadow-lg flex items-center justify-center"
-                      style={{ backgroundColor: `${social.color}20`, color: social.color }}
+                      style={{
+                        backgroundColor: `${social.color}20`,
+                        color: social.color,
+                      }}
                       title={social.name}
                     >
                       {social.icon}
@@ -416,7 +447,7 @@ const ContactPage: React.FC = () => {
                 <h3 className="font-semibold text-lg mb-4">Actions Rapides</h3>
                 <div className="space-y-3">
                   <button
-                    onClick={() => window.location.href = '/quote'}
+                    onClick={() => (window.location.href = "/quote")}
                     className="w-full bg-white/20 hover:bg-white/30 p-3 rounded-xl transition-all duration-300 flex items-center space-x-3"
                   >
                     <ChatCircle size={20} />
@@ -424,7 +455,7 @@ const ContactPage: React.FC = () => {
                     <ArrowRight size={16} className="ml-auto" />
                   </button>
                   <button
-                    onClick={() => window.location.href = '/services'}
+                    onClick={() => (window.location.href = "/services")}
                     className="w-full bg-white/20 hover:bg-white/30 p-3 rounded-xl transition-all duration-300 flex items-center space-x-3"
                   >
                     <Buildings size={20} />
@@ -463,15 +494,20 @@ const ContactPage: React.FC = () => {
           <div className="bg-white rounded-3xl shadow-xl overflow-hidden">
             <div className="lg:flex">
               <div className="lg:w-1/3 p-8 lg:p-12 bg-gradient-to-br from-[#14A800] to-[#128700] text-white">
-                <h3 className="text-2xl font-bold mb-6">Informations pratiques</h3>
-                
+                <h3 className="text-2xl font-bold mb-6">
+                  Informations pratiques
+                </h3>
+
                 <div className="space-y-6">
                   <div className="flex items-start">
                     <MapPin size={24} className="mr-4 mt-1 flex-shrink-0" />
                     <div>
-                      <h4 className="font-semibold text-lg mb-1">Adresse complète</h4>
+                      <h4 className="font-semibold text-lg mb-1">
+                        Adresse complète
+                      </h4>
                       <p className="opacity-90">
-                        Djidjolé, derrière le CMS<br />
+                        Djidjolé, derrière le CMS
+                        <br />
                         Lomé, Togo
                       </p>
                     </div>
@@ -480,11 +516,17 @@ const ContactPage: React.FC = () => {
                   <div className="flex items-start">
                     <Clock size={24} className="mr-4 mt-1 flex-shrink-0" />
                     <div>
-                      <h4 className="font-semibold text-lg mb-1">Horaires de bureau</h4>
+                      <h4 className="font-semibold text-lg mb-1">
+                        Horaires de bureau
+                      </h4>
                       <p className="opacity-90">
-                        Lundi - Samedi: 7h00 - 18h00<br />
-                        Dimanche: Sur rendez-vous<br />
-                        <span className="text-yellow-300">Urgences: 24h/24</span>
+                        Lundi - Samedi: 7h00 - 18h00
+                        <br />
+                        Dimanche: Sur rendez-vous
+                        <br />
+                        <span className="text-yellow-300">
+                          Urgences: 24h/24
+                        </span>
                       </p>
                     </div>
                   </div>
@@ -492,10 +534,13 @@ const ContactPage: React.FC = () => {
                   <div className="flex items-start">
                     <Phone size={24} className="mr-4 mt-1 flex-shrink-0" />
                     <div>
-                      <h4 className="font-semibold text-lg mb-1">Contact direct</h4>
+                      <h4 className="font-semibold text-lg mb-1">
+                        Contact direct
+                      </h4>
                       <p className="opacity-90">
-                        +228 90 45 31 53<br />
-                        +225 01 51 15 46 16
+                        +228 90 45 31 53
+                        <br />
+                        +225 01 52 89 16 90
                       </p>
                     </div>
                   </div>
@@ -503,8 +548,8 @@ const ContactPage: React.FC = () => {
 
                 <div className="mt-8 pt-6 border-t border-white/20">
                   <p className="text-sm opacity-90">
-                    <strong>Transport :</strong> Accessible en taxi, moto-taxi et transport en commun. 
-                    Parking disponible sur site.
+                    <strong>Transport :</strong> Accessible en taxi, moto-taxi
+                    et transport en commun. Parking disponible sur site.
                   </p>
                 </div>
               </div>
@@ -522,12 +567,14 @@ const ContactPage: React.FC = () => {
                     referrerPolicy="no-referrer-when-downgrade"
                     title="Localisation Africa Clean"
                   ></iframe>
-                  
+
                   {/* Overlay info */}
                   <div className="absolute top-4 right-4 bg-white rounded-lg p-3 shadow-lg">
                     <div className="flex items-center space-x-2">
                       <div className="w-3 h-3 bg-[#14A800] rounded-full"></div>
-                      <span className="text-sm font-medium text-gray-700">Africa Clean</span>
+                      <span className="text-sm font-medium text-gray-700">
+                        Africa Clean
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -543,13 +590,16 @@ const ContactPage: React.FC = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-[#212121] mb-8">
             Besoin d'aide immédiate ?
           </h2>
-          
+
           <div className="grid md:grid-cols-2 gap-8 mb-12">
             <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6">
               <Phone size={40} className="text-blue-600 mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-[#212121] mb-3">Urgences 24h/24</h3>
+              <h3 className="text-xl font-bold text-[#212121] mb-3">
+                Urgences 24h/24
+              </h3>
               <p className="text-gray-700 mb-4">
-                Pour les interventions urgentes de nettoyage, désinfection ou gestion de déchets.
+                Pour les interventions urgentes de nettoyage, désinfection ou
+                gestion de déchets.
               </p>
               <a
                 href="tel:+22890453153"
@@ -562,9 +612,12 @@ const ContactPage: React.FC = () => {
 
             <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-6">
               <WhatsappLogo size={40} className="text-green-600 mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-[#212121] mb-3">Chat en direct</h3>
+              <h3 className="text-xl font-bold text-[#212121] mb-3">
+                Chat en direct
+              </h3>
               <p className="text-gray-700 mb-4">
-                Posez vos questions et obtenez des réponses rapides via WhatsApp.
+                Posez vos questions et obtenez des réponses rapides via
+                WhatsApp.
               </p>
               <a
                 href="https://wa.me/22890453153"
@@ -581,8 +634,8 @@ const ContactPage: React.FC = () => {
           <div className="bg-gradient-to-r from-[#14A800] to-[#128700] rounded-3xl p-8 text-white">
             <h3 className="text-2xl font-bold mb-4">Engagement Qualité</h3>
             <p className="text-lg opacity-90 mb-6">
-              Nous nous engageons à répondre à toutes vos demandes dans les plus brefs délais. 
-              Votre satisfaction est notre priorité.
+              Nous nous engageons à répondre à toutes vos demandes dans les plus
+              brefs délais. Votre satisfaction est notre priorité.
             </p>
             <div className="flex items-center justify-center space-x-8 text-sm">
               <div className="flex items-center space-x-2">

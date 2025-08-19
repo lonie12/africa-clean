@@ -35,7 +35,7 @@ const ContactCTA: React.FC = () => {
               </div>
               <div className="flex items-center space-x-3">
                 <Phone size={20} className="text-[#14A800]" />
-                <span>+228 90 45 31 53 / +225 01 51 15 46 16</span>
+                <span>+228 90 45 31 53 / +225 01 52 89 16 90</span>
               </div>
             </div>
           </div>

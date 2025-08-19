@@ -15,6 +15,7 @@
 Africa Clean is a leading environmental services company based in Lomé, Togo, founded in 2018 (originally as Groupe Lumière Jeunesse). We specialize in professional cleaning, waste management, landscaping, and eco-friendly solutions across West Africa.
 
 ### 🏆 Our Achievements
+
 - **2020**: Winner of CONFEJES Youth Entrepreneurship Program
 - **2021**: Best Initiative Award at FFJGRD2021 (Francophone Youth Fair on Waste Management)
 - **2021**: 2nd Prize at COJECC2021 Environmental Protection Project
@@ -23,6 +24,7 @@ Africa Clean is a leading environmental services company based in Lomé, Togo, f
 ## ✨ Features
 
 ### 🧹 **Core Services**
+
 - **Nettoie-Pro**: Professional cleaning for offices, residences, healthcare facilities
 - **Eco-Jardin**: Landscape design, garden creation and maintenance
 - **Natura-Potager**: Organic vegetable garden creation
@@ -31,10 +33,12 @@ Africa Clean is a leading environmental services company based in Lomé, Togo, f
 - **FOM Logistics**: Moving and transportation services
 
 ### 🛠️ **Products**
+
 - **EcoTrash Bins**: Eco-friendly waste containers made from recycled materials
 - **Ecological Cleaning Products**: Biodegradable, non-toxic cleaning solutions
 
 ### 📚 **Training Programs**
+
 - Surface Technician Certification
 - Healthcare Hygiene Specialist Training
 - Landscaping and Gardening Courses
@@ -66,7 +70,8 @@ src/
 ## 🛠️ Installation & Setup
 
 ### Prerequisites
-- Node.js 18+ 
+
+- Node.js 18+
 - npm or yarn
 
 ### Installation
@@ -100,6 +105,7 @@ npm run type-check   # Run TypeScript compiler check
 The project follows a domain-driven design approach with reusable components:
 
 ### Form Components
+
 - `Input` - Standard input with validation and clear functionality
 - `SearchInput` - Debounced search input with icons
 - `Textarea` - Multi-line text input
@@ -108,10 +114,12 @@ The project follows a domain-driven design approach with reusable components:
 - `Toggle` - Switch component with size variants
 
 ### Action Components
+
 - `Button` - Flexible button component with CVA styling
 - `Badge` - Status and label display component
 
 ### UI Components
+
 - `Toast` - Notification system with multiple types
 - `SpinLoader` - Loading indicator
 
@@ -122,8 +130,9 @@ The application is primarily in French, serving the Francophone West African mar
 ## 📱 Responsive Design
 
 Built with mobile-first approach using Tailwind CSS, ensuring optimal experience across:
+
 - 📱 Mobile devices
-- 📱 Tablets  
+- 📱 Tablets
 - 💻 Desktop computers
 
 ## 🤝 Contributing
@@ -137,7 +146,9 @@ We welcome contributions! Please follow these steps:
 5. Open a Pull Request
 
 ### Commit Convention
+
 We use conventional commits:
+
 - `feat:` - New features
 - `fix:` - Bug fixes
 - `docs:` - Documentation updates
@@ -148,11 +159,13 @@ We use conventional commits:
 ## 📞 Contact Information
 
 **Africa Clean SARL**
+
 - 📍 **Address**: Djidjolé, derrière le CMS, Lomé-Togo
 - 📧 **Email**: africaclean.contact@gmail.com
-- 📱 **Phone**: +228 90 45 31 53 / +225 01 51 15 46 16
+- 📱 **Phone**: +228 90 45 31 53 / +225 01 52 89 16 90
 
 ### Social Media
+
 - [Facebook](https://www.facebook.com/share/1CPRhr5DdT/)
 - [LinkedIn](https://www.linkedin.com/company/africacleantg/)
 - [Twitter/X](https://x.com/africacleanTg)
