@@ -202,8 +202,8 @@ const ServicesPage: React.FC = () => {
         "Récoltes toute l'année",
       ],
       images: [
+        "/images/services/natura-potager-4.jpg",
         "/images/services/natura-potager-1.png",
-        "/images/services/natura-potager-2.png",
         "/images/services/natura-potager-3.jpg",
       ],
       stats: [
@@ -279,7 +279,7 @@ const ServicesPage: React.FC = () => {
       images: [
         "/images/services/nettoie-event-1.jpg",
         "/images/services/nettoie-event-2.jpg",
-        "/images/services/nettoie-event-3.jpg",
+        "/images/services/nettoie-event-3.png",
       ],
       stats: [
         { label: "Événements nettoyés", value: "200+" },

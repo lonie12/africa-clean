@@ -9,11 +9,11 @@ const ProductsServicesOverview: React.FC = () => {
             Introduction
           </h2>
           <p className="text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed">
-            AFRICA CLEAN est STARTUP spécialisée dans le secteur de CleanTech,
-            il offre des Services d'Entretien et nettoyage des locaux, création
-            et entretien d'espaces verts, gestion des Déchets, Fabrication des
-            poubelles et détergents écologiques avec une équipe dynamique et
-            professionnelle. Disponible 7jr/7 H24
+            AFRICA CLEAN est une STARTUP spécialisée dans le secteur de
+            CleanTech, elle offre des Services d'Entretien et nettoyage des
+            locaux, création et entretien d'espaces verts, gestion des Déchets,
+            Fabrication des poubelles et détergents écologiques avec une équipe
+            dynamique et professionnelle. Disponible 7jr/7 H24
           </p>
         </div>
 
