@@ -33,6 +33,18 @@ const ProductsPage: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white overflow-hidden">
       {/* Hero Section */}
       <section className="py-16 bg-gradient-to-r from-[#14A800] to-[#128700] text-white relative overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <img
+            src="/images/pages/PAGE_PRODUIT.png"
+            alt="Produits Africa Clean"
+            className="w-full h-full object-cover"
+            onError={(e) => {
+              e.currentTarget.style.display = 'none';
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#14A800]/85 to-[#128700]/75"></div>
+        </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
             Nos Produits Écologiques
