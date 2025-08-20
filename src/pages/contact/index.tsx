@@ -196,7 +196,18 @@ const ContactPage: React.FC = () => {
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-[#14A800] to-[#128700] text-white py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-black/20"></div>
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <img
+            src="/images/pages/PAGE_CONTACT.jpg"
+            alt="Contact Africa Clean"
+            className="w-full h-full object-cover"
+            onError={(e) => {
+              e.currentTarget.style.display = 'none';
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#14A800]/85 to-[#128700]/75"></div>
+        </div>
         <div className="relative max-w-6xl mx-auto px-6 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             Contactez-Nous
