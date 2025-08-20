@@ -1,5 +1,11 @@
 import { Outlet } from "react-router";
+import ScrollToTop from "@/components/common/ScrollToTop";
 
 export default function RootLayout() {
-  return <Outlet />;
+  return (
+    <>
+      <ScrollToTop />
+      <Outlet />
+    </>
+  );
 }
