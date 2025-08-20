@@ -319,8 +319,13 @@ const ServicesPage: React.FC = () => {
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-[#14A800] to-[#128700] text-white py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div className="relative max-w-6xl mx-auto px-6 text-center">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-[#14A800]/80"></div>
+          {/* Placeholder for background image - use a green texture or pattern */}
+          <div className="absolute inset-0 opacity-20 bg-gradient-to-br from-transparent via-green-600/20 to-green-800/30"></div>
+        </div>
+        <div className="relative max-w-6xl mx-auto px-6 text-center z-10">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             Nos Services & Formations
           </h1>
