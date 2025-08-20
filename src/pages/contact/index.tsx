@@ -206,7 +206,7 @@ const ContactPage: React.FC = () => {
               e.currentTarget.style.display = 'none';
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#14A800]/85 to-[#128700]/75"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-[#14A800]/55 to-[#128700]/45"></div>
         </div>
         <div className="relative max-w-6xl mx-auto px-6 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">

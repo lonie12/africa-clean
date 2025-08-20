@@ -40,10 +40,10 @@ const ProductsPage: React.FC = () => {
             alt="Produits Africa Clean"
             className="w-full h-full object-cover"
             onError={(e) => {
-              e.currentTarget.style.display = 'none';
+              e.currentTarget.style.display = "none";
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#14A800]/85 to-[#128700]/75"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#14A800]/70 to-[#128700]/60"></div>
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
@@ -98,12 +98,12 @@ const ProductsPage: React.FC = () => {
                 Poubelles ECOTRASH
               </h3>
               <p className="text-lg text-gray-700 leading-relaxed mb-8">
-                Les poubelles EcoTrash se distinguent par leur design
-                pratique, durable et respectueux de l'environnement. Conçues
-                pour le tri sélectif, elles facilitent le recyclage lors des
-                événements, dans les entreprises ou à la maison. Fabriquées à
-                partir de matériaux recyclés et recyclables, elles contribuent
-                activement à une démarche zéro déchet.
+                Les poubelles EcoTrash se distinguent par leur design pratique,
+                durable et respectueux de l'environnement. Conçues pour le tri
+                sélectif, elles facilitent le recyclage lors des événements,
+                dans les entreprises ou à la maison. Fabriquées à partir de
+                matériaux recyclés et recyclables, elles contribuent activement
+                à une démarche zéro déchet.
               </p>
             </div>
 
@@ -165,8 +165,8 @@ const ProductsPage: React.FC = () => {
                 d'ingrédients naturels, biodégradables et sans substances
                 nocives. Parfaits pour un usage régulier, ils assurent une
                 efficacité optimale tout en préservant votre santé et la
-                planète. Que ce soit pour des événements, des espaces publics
-                ou des foyers, nos solutions garantissent propreté, hygiène et
+                planète. Que ce soit pour des événements, des espaces publics ou
+                des foyers, nos solutions garantissent propreté, hygiène et
                 impact réduit sur l'environnement.
               </p>
             </div>

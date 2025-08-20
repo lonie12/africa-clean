@@ -132,10 +132,10 @@ const AboutPage: React.FC = () => {
             alt="À propos d'Africa Clean"
             className="w-full h-full object-cover"
             onError={(e) => {
-              e.currentTarget.style.display = 'none';
+              e.currentTarget.style.display = "none";
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#14A800]/80 to-[#128700]/70"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-[#14A800]/65 to-[#128700]/55"></div>
         </div>
         <div className="relative max-w-6xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
