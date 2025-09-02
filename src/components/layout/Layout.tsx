@@ -242,12 +242,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                   <Phone size={16} className="flex-shrink-0 text-[#14A800]" />
                   <span className="text-sm">+228 90 45 31 53</span>
                 </div>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-start space-x-2">
                   <EnvelopeSimple
                     size={16}
-                    className="flex-shrink-0 text-[#14A800]"
+                    className="mt-1 flex-shrink-0 text-[#14A800]"
                   />
-                  <span className="text-sm">africaclean.contact@gmail.com</span>
+                  <span className="text-sm break-all">africaclean.contact@gmail.com</span>
                 </div>
               </div>
             </div>

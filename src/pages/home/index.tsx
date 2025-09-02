@@ -4,6 +4,7 @@ import ProductsServicesOverview from "./ProductsServicesSection";
 import ConceptsSection from "./ConceptsSection";
 import InterventionModes from "./InterventionModesSection";
 import TrustSection from "./TrustSection";
+import TestimonialsSection from "./TestimonialsSection";
 import WhyChooseUs from "./WhyChooseUsSection";
 import ContactCTA from "./ContactCTASection";
 
@@ -24,6 +25,9 @@ const HomePage = () => {
 
       {/* They Trust Us - Scrolling Logos */}
       <TrustSection />
+
+      {/* Customer Testimonials */}
+      <TestimonialsSection />
 
       {/* Why Choose Us */}
       <WhyChooseUs />
