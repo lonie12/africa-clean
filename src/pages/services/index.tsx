@@ -321,9 +321,15 @@ const ServicesPage: React.FC = () => {
       <section className="relative bg-gradient-to-br from-[#14A800] to-[#128700] text-white py-20 overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[#14A800]/50"></div>
-          {/* Placeholder for background image - use a green texture or pattern */}
-          <div className="absolute inset-0 opacity-30 bg-gradient-to-br from-transparent via-green-600/20 to-green-800/30"></div>
+          <img
+            src="/images/pages/PAGE_SERVICE.jpg"
+            alt="Services Africa Clean"
+            className="w-full h-full object-cover"
+            onError={(e) => {
+              e.currentTarget.style.display = 'none';
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#14A800]/55 to-[#128700]/45"></div>
         </div>
         <div className="relative max-w-6xl mx-auto px-6 text-center z-10">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
