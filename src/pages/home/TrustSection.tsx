@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 interface Client {
   name: string;
@@ -8,6 +9,10 @@ interface Client {
 interface Partner {
   name: string;
   logo: string;
+}
+interface statsType{
+  label:string,
+  value:string
 }
 
 const TrustSection: React.FC = () => {
@@ -32,7 +37,8 @@ const TrustSection: React.FC = () => {
     { name: "CONFEJES", logo: "/images/partners/4.png" },
     { name: "PNUD Togo", logo: "/images/partners/5.png" },
   ];
-
+const {t}=useTranslation()
+const stats = t('trustSection.stats',{returnObjects:true}) as statsType[]
   return (
     <>
       <section className="py-16 bg-gray-50">
@@ -40,11 +46,10 @@ const TrustSection: React.FC = () => {
           {/* Header */}
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-[#212121] mb-4">
-              Ils Nous Font Confiance
+              {t('trustSection.title')}
             </h2>
             <p className="text-xl text-gray-700 max-w-2xl mx-auto">
-              Plus de 500 clients satisfaits nous font confiance pour leurs
-              besoins en nettoyage et services écologiques
+              {t('trustSection.description')}
             </p>
           </div>
 
@@ -54,7 +59,7 @@ const TrustSection: React.FC = () => {
               <div className="flex items-center space-x-4">
                 <div className="w-12 h-1 bg-[#14A800] rounded"></div>
                 <h3 className="text-2xl font-bold text-[#212121]">
-                  Nos Clients
+              {t('cover.ourCostomer')}
                 </h3>
                 <div className="w-12 h-1 bg-[#14A800] rounded"></div>
               </div>
@@ -93,7 +98,7 @@ const TrustSection: React.FC = () => {
               <div className="flex items-center space-x-4">
                 <div className="w-12 h-1 bg-[#14A800] rounded"></div>
                 <h3 className="text-2xl font-bold text-[#212121]">
-                  Nos Partenaires
+              {t('cover.ourPartner')}
                 </h3>
                 <div className="w-12 h-1 bg-[#14A800] rounded"></div>
               </div>
@@ -131,41 +136,32 @@ const TrustSection: React.FC = () => {
           {/* Statistics */}
           <div className="bg-gradient-to-r from-[#14A800] to-[#128700] rounded-2xl p-8 text-center text-white shadow-xl">
             <div className="grid md:grid-cols-3 gap-8">
-              <div className="transform hover:scale-105 transition-transform duration-300">
-                <div className="text-3xl md:text-4xl font-bold mb-2">500+</div>
-                <div className="text-lg opacity-90">Clients Satisfaits</div>
+                {stats.map((item,idx)=>(
+              <div key={idx} className="transform hover:scale-105 transition-transform duration-300">
+   <div className="text-3xl md:text-4xl font-bold mb-2">{item.value}</div>
+                <div className="text-lg opacity-90">{item.label}</div>
               </div>
-              <div className="transform hover:scale-105 transition-transform duration-300">
-                <div className="text-3xl md:text-4xl font-bold mb-2">50+</div>
-                <div className="text-lg opacity-90">
-                  Partenaires de Confiance
-                </div>
-              </div>
-              <div className="transform hover:scale-105 transition-transform duration-300">
-                <div className="text-3xl md:text-4xl font-bold mb-2">6+</div>
-                <div className="text-lg opacity-90">Années d'Expérience</div>
-              </div>
+                ))}
             </div>
           </div>
 
           {/* Call to Action */}
           <div className="text-center mt-12">
             <p className="text-gray-600 mb-6 text-lg">
-              Rejoignez nos clients satisfaits et découvrez pourquoi ils nous
-              font confiance
+         {t("trustSection.slogan")}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <button
                 onClick={() => (window.location.href = "/contact")}
                 className="bg-[#14A800] hover:bg-[#128700] text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
               >
-                Devenir client
+                {t("cover.becomeCostomer")}
               </button>
               <button
                 onClick={() => (window.location.href = "/quote")}
                 className="border-2 border-[#14A800] text-[#14A800] hover:bg-[#14A800] hover:text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300"
               >
-                Demander un devis gratuit
+                 {t("cover.giveFreeQuote")}
               </button>
             </div>
           </div>

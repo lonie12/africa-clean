@@ -5,7 +5,7 @@ import { ToastProvider } from "./context/toast-context";
 import { ToastContainer } from "./components/Toast";
 import { AuthProvider } from "./context/auth-context";
 import { BlogProvider } from "./context/blog-context";
-
+import "./i18n";
 createRoot(document.getElementById("root")!).render(
  <AuthProvider>
     <BlogProvider>

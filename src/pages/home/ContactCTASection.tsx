@@ -4,30 +4,31 @@ import {
   Phone,
   WhatsappLogo,
 } from "@phosphor-icons/react";
+import { useTranslation } from "react-i18next";
 
 const ContactCTA: React.FC = () => {
+  const {t}= useTranslation()
   return (
     <section className="py-16 bg-gray-900 text-white">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Vous avez un projet ambitieux à concrétiser ou souhaitez devenir
-            apporteur d’affaires ?
+            {t('contactCTA.title')}
           </h2>
           <p className="text-xl opacity-90 mb-8">
-            Vous souhaitez discuter d'un partenariat B2B / B2C ? <br />
-            Vous souhaitez tout simplement avoir des informations
-            complémentaires ?
+            {t('contactCTA.description')}<br/>
+             {t('contactCTA.secondDescription')}
+
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
           <div className="bg-white/10 p-8 rounded-xl">
-            <h3 className="text-2xl font-bold mb-6">Contacts Infos</h3>
+            <h3 className="text-2xl font-bold mb-6">{t('cover.contactInfo')}</h3>
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
                 <MapPin size={20} className="text-[#14A800]" />
-                <span>Siège social: Djidjolé, derrière le CMS, Lomé-Togo</span>
+                <span>{t('cover.headOffice')}</span>
               </div>
               <div className="flex items-center space-x-3">
                 <EnvelopeSimple size={20} className="text-[#14A800]" />
@@ -42,18 +43,19 @@ const ContactCTA: React.FC = () => {
 
           <div className="bg-white/10 p-8 rounded-xl">
             <h3 className="text-2xl font-bold mb-6">
-              Demande de Partenariat ou d'Info Complémentaire
+              {t('homeContact.title')}
             </h3>
             <div className="space-y-4">
               <button className="w-full bg-[#14A800] hover:bg-[#128700] text-white py-3 px-6 rounded-lg font-semibold transition-all flex items-center justify-center space-x-2">
                 <WhatsappLogo size={20} />
-                <span>Contactez-nous sur WhatsApp</span>
+                <span>{t('homeContact.whatsappContact')}</span>
               </button>
               <button className="w-full border border-white/30 hover:bg-white/10 text-white py-3 px-6 rounded-lg font-semibold transition-all">
-                Envoyer un email
+              {t('cover.emailContact')}
               </button>
               <button className="w-full border border-white/30 hover:bg-white/10 text-white py-3 px-6 rounded-lg font-semibold transition-all">
-                Demander un devis gratuit
+              {t('cover.giveFreeQuote')}
+
               </button>
             </div>
           </div>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ArrowRight } from "@phosphor-icons/react";
+import { useTranslation } from "react-i18next";
 
 interface Concept {
   id: string;
@@ -8,80 +9,19 @@ interface Concept {
   image: string;
   category: string;
   href: string;
-  color: string; // Couleur spécifique pour chaque concept
+  color: string; // Specific color for each concept
 }
 
 const ConceptsSection: React.FC = () => {
   const [hoveredConcept, setHoveredConcept] = useState<string | null>(null);
-
-  const concepts: Concept[] = [
-    {
-      id: "nettoie-pro",
-      title: "Nettoie-Pro",
-      description:
-        "Solutions de nettoyage professionnel pour bureaux, résidences, industries et centres de santé avec une approche éco-responsable.",
-      image: "/images/services/nettoie-pro.jpg",
-      category: "Nettoyage",
-      href: "/services#nettoie-pro",
-      color: "#14A800", // Vert principal
-    },
-    {
-      id: "eco-jardin",
-      title: "Eco-Jardin",
-      description:
-        "Conception paysagiste 3D, aménagement et entretien d'espaces verts durables et esthétiques.",
-      image: "/images/services/eco-jardin.jpg",
-      category: "Espaces Verts",
-      href: "/services#eco-jardin",
-      color: "#22C55E", // Vert plus clair
-    },
-    {
-      id: "natura-potager",
-      title: "Natura-Potager",
-      description:
-        "Création et gestion de jardins potagers biologiques pour une alimentation saine et locale.",
-      image: "/images/services/natura-potager.jpg",
-      category: "Agriculture Bio",
-      href: "/services#natura-potager",
-      color: "#16A34A", // Vert nature
-    },
-    {
-      id: "nettoie-event",
-      title: "Nettoie-Event",
-      description:
-        "Services complets de nettoyage avant, pendant et après vos événements pour garantir la propreté.",
-      image: "/images/services/nettoie-event.jpg",
-      category: "Événementiel",
-      href: "/services#nettoie-event",
-      color: "#0EA5E9", // Bleu
-    },
-    {
-      id: "eco-event",
-      title: "Éco-Event",
-      description:
-        "Gestion écologique des déchets événementiels avec collecte, tri et recyclage pour un impact minimal.",
-      image: "/images/services/eco-event.jpg",
-      category: "Événementiel",
-      href: "/services#eco-event",
-      color: "#0284C7", // Bleu plus foncé
-    },
-    {
-      id: "sante-pro",
-      title: "Santé-Pro",
-      description:
-        "Nous garantissons l'hygiène et la propreté dans vos centres de santé.",
-      image: "/images/services/sante-pro.png",
-      category: "Santé",
-      href: "/services#sante-pro",
-      color: "#DC2626", // Rouge médical
-    },
-  ];
-
+const {t}= useTranslation()
+     const conceptsSection = t('conceptsSection', { returnObjects: true }) as any;
+  const concepts: Concept[] = conceptsSection?.concepts || [];
   const handleConceptClick = (concept: Concept) => {
     window.location.href = concept.href;
   };
 
-  const handleDevisClick = (conceptId: string, e: React.MouseEvent) => {
+  const handleQuoteClick = (conceptId: string, e: React.MouseEvent) => {
     e.stopPropagation();
     window.location.href = `/quote?concept=${conceptId}`;
   };
@@ -92,11 +32,11 @@ const ConceptsSection: React.FC = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-[#212121] mb-4">
-            Nos Concepts
+            Our Concepts
           </h2>
           <p className="text-xl text-gray-700 max-w-2xl mx-auto">
-            6 domaines d'expertise pour répondre à tous vos besoins avec des
-            solutions durables et innovantes
+            6 areas of expertise to meet all your needs with sustainable and
+            innovative solutions
           </p>
         </div>
 
@@ -111,7 +51,6 @@ const ConceptsSection: React.FC = () => {
             >
               {/* Circular Image Container */}
               <div className="relative mb-6">
-                {/* Animated Border Ring */}
                 <div
                   className={`absolute -inset-2 rounded-full transition-all duration-500 ${
                     hoveredConcept === concept.id
@@ -126,7 +65,6 @@ const ConceptsSection: React.FC = () => {
                   <div className="w-full h-full rounded-full bg-gray-50"></div>
                 </div>
 
-                {/* Static Colored Border */}
                 <div
                   className={`absolute -inset-1 rounded-full transition-all duration-300 ${
                     hoveredConcept === concept.id ? "scale-110" : "scale-100"
@@ -134,7 +72,6 @@ const ConceptsSection: React.FC = () => {
                   style={{ backgroundColor: concept.color }}
                 ></div>
 
-                {/* Main Image Circle */}
                 <div
                   className="relative w-48 h-48 rounded-full overflow-hidden cursor-pointer transform transition-all duration-500 hover:scale-105"
                   onClick={() => handleConceptClick(concept)}
@@ -148,7 +85,6 @@ const ConceptsSection: React.FC = () => {
                     }}
                   />
 
-                  {/* Overlay with Description */}
                   <div
                     className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${
                       hoveredConcept === concept.id
@@ -169,7 +105,6 @@ const ConceptsSection: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Category Badge */}
                   <div className="absolute top-4 left-4">
                     <span
                       className="text-white px-3 py-1 rounded-full text-xs font-medium shadow-lg"
@@ -179,7 +114,6 @@ const ConceptsSection: React.FC = () => {
                     </span>
                   </div>
 
-                  {/* Pulsing Dot Indicator */}
                   <div className="absolute bottom-4 right-4">
                     <div
                       className={`w-3 h-3 rounded-full transition-all duration-300 ${
@@ -191,7 +125,6 @@ const ConceptsSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Content Below Circle */}
               <div className="text-center max-w-xs">
                 <h3
                   className="text-xl font-bold mb-4 transition-colors duration-300 group-hover:text-[#14A800]"
@@ -203,10 +136,9 @@ const ConceptsSection: React.FC = () => {
                   {concept.title}
                 </h3>
 
-                {/* Action Buttons */}
                 <div className="flex flex-col space-y-3">
                   <button
-                    onClick={(e) => handleDevisClick(concept.id, e)}
+                    onClick={(e) => handleQuoteClick(concept.id, e)}
                     className="w-full py-3 px-6 rounded-full font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg text-white"
                     style={{
                       backgroundColor: concept.color,
@@ -216,7 +148,7 @@ const ConceptsSection: React.FC = () => {
                           : "none",
                     }}
                   >
-                    Demander un Devis
+                    {t('cover.quote')}
                   </button>
 
                   <button
@@ -232,7 +164,7 @@ const ConceptsSection: React.FC = () => {
                           : "transparent",
                     }}
                   >
-                    <span className="text-sm font-medium">En savoir plus</span>
+                    <span className="text-sm font-medium"> {t('cover.more')}</span>
                     <ArrowRight size={16} />
                   </button>
                 </div>
@@ -244,14 +176,13 @@ const ConceptsSection: React.FC = () => {
         {/* Call to Action */}
         <div className="text-center mt-16">
           <p className="text-gray-600 mb-6 text-lg">
-            Besoin d'une solution personnalisée ? Nos experts sont à votre
-            disposition.
+            {t('conceptsSection.action')}
           </p>
           <button
             onClick={() => (window.location.href = "/contact")}
             className="bg-[#14A800] hover:bg-[#128700] text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
           >
-            Contactez nos experts
+            {t('cover.contactExpert')}
           </button>
         </div>
       </div>
