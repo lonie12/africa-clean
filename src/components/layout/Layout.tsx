@@ -1,32 +1,41 @@
 import React, { useState, type ReactNode } from "react";
 import { Phone, MapPin, EnvelopeSimple, List, X } from "@phosphor-icons/react";
 import { Outlet } from "react-router";
+import { useTranslation } from "react-i18next";
 
 interface LayoutProps {
   children?: ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const {t,i18n} = useTranslation()
+
+  const [language,setLanguage]= useState(i18n.language)
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+ const changeLanguage = () => {
+    const newLang = language === "fr" ? "en" : "fr";
+    setLanguage(newLang);
+    i18n.changeLanguage(newLang);
+  };
 
   const navLinks = [
-    { href: "/", label: "Accueil" },
-    { href: "/produits", label: "Produits" },
-    { href: "/services", label: "Services" },
-    { href: "/a-propos", label: "À Propos" },
-    // { href: "/galeries", label: "Galeries" }, // Uncomment if galleries are available
-    { href: "/blog", label: "Blog" }, // Uncomment if blog is available
-    { href: "/contact", label: "Contact" },
+    { href: "/", label: t("home.navigation.home") },
+    { href: "/produits", label: t("home.navigation.products") },
+    { href: "/services", label: t("home.navigation.service") },
+    { href: "/a-propos", label: t("home.navigation.about") },
+    { href: "/blog", label: t("home.navigation.blog") },
+    { href: "/contact", label: t("home.navigation.contact") },
   ];
 
   const serviceLinks = [
-    { href: "/services#nettoie-pro", label: "Nettoyage Pro" },
-    { href: "/services#eco-jardin", label: "Eco-Jardin" },
-    { href: "/services#natura-potager", label: "Natura-Potager" },
-    { href: "/services#eco-event", label: "Eco-Event" },
-    { href: "/services#sante-pro", label: "Santé-Pro" },
+  { href: "/services#nettoie-pro", label:t("home.services.links.nettoie_pro")  },
+    { href: "/services#eco-jardin", label: t("home.services.links.eco_jardin") },
+    { href: "/services#natura-potager", label: t("home.services.links.natura_potager") },
+    { href: "/services#eco-event", label: t("home.services.links.eco_event") },
+    { href: "/services#sante-pro", label: t("home.services.links.sante_pro") },
     // { href: "/services/fom-logistics", label: "FOM Logistics" },
-    { href: "/quote", label: "Demander un Devis" },
+    { href: "/quote", label: t("cover.quote") },
   ];
 
   const socialLinks = [
@@ -95,7 +104,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                   }}
                 />
                 <span className="text-xl font-bold text-[#212121]">
-                  AFRICA CLEAN
+                  AFRICA CLEAN 
                 </span>
               </div>
             </a>
@@ -114,9 +123,15 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               ))}
               <button
                 className="bg-[#14A800] hover:bg-[#128700] text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 transform hover:scale-105"
+                onClick={changeLanguage}
+              >
+                {language.toUpperCase()}
+              </button>
+                <button
+                className="bg-[#14A800] hover:bg-[#128700] text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 transform hover:scale-105"
                 onClick={() => (window.location.href = "/quote")}
               >
-                Devis Gratuit
+                {t("cover.freeQuote")}
               </button>
             </nav>
 
@@ -144,7 +159,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                   </a>
                 ))}
                 <button className="w-full bg-[#14A800] hover:bg-[#128700] text-white px-4 py-2 rounded-lg font-medium transition-all">
-                  Devis Gratuit
+                  {t("cover.freeQuote")}
                 </button>
               </nav>
             </div>
@@ -173,7 +188,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <span className="text-lg font-bold">AFRICA CLEAN</span>
               </div>
               <p className="text-gray-400 mb-4">
-                Pour une Afrique Propre et Durable !
+                {t('cover.slogan')}
               </p>
               <div className="flex space-x-4">
                 {socialLinks.map((social, index) => (
@@ -235,7 +250,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                     className="mt-1 flex-shrink-0 text-[#14A800]"
                   />
                   <span className="text-sm">
-                    Djidjolé, derrière le CMS, Lomé-Togo
+                    {t('cover.headOffice')}
                   </span>
                 </div>
                 <div className="flex items-center space-x-2">
@@ -256,8 +271,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           {/* Copyright */}
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
             <p className="text-sm">
-              &copy; 2025 AFRICA CLEAN. Tous droits réservés. Pour une Afrique
-              Propre et Durable !
+              &copy; {t('cover.footer')}
             </p>
           </div>
         </div>

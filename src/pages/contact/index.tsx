@@ -24,6 +24,7 @@ import { CustomSelect } from "../../components/forms/custom-select";
 import { useToast } from "../../context/toast-context";
 import { Send } from "iconsax-react";
 import Button from "@/components/actions/button";
+import { useTranslation } from "react-i18next";
 
 interface ContactFormData {
   firstName: string;
@@ -37,6 +38,21 @@ interface ContactFormData {
   urgency: string;
 }
 
+interface ContactFormItem{
+  label:string,
+  placeholder:string
+}
+interface ContactForm {
+  firstName: ContactFormItem;
+  lastName: ContactFormItem;
+  email: ContactFormItem;
+  phone: ContactFormItem;
+  company?: ContactFormItem;
+  subject: ContactFormItem;
+  service: ContactFormItem;
+  message: ContactFormItem;
+  urgency: ContactFormItem;
+}
 const ContactPage: React.FC = () => {
   const { success, error } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -52,6 +68,8 @@ const ContactPage: React.FC = () => {
     urgency: "",
   });
 
+  const {t}= useTranslation()
+  const contactInput = t('contact.formSection.input',{returnObjects:true}) as ContactForm
   const serviceOptions = [
     { value: "nettoie-pro", label: "Nettoie-Pro - Nettoyage professionnel" },
     { value: "sante-pro", label: "Santé-Pro - Hygiène centres de santé" },
@@ -74,14 +92,14 @@ const ContactPage: React.FC = () => {
   const contactInfo = [
     {
       icon: <MapPin size={24} />,
-      title: "Adresse",
+      title: t('cover.address'),
       info: "Djidjolé, derrière le CMS",
       subInfo: "Lomé-Togo",
       color: "#14A800",
     },
     {
       icon: <Phone size={24} />,
-      title: "Téléphone",
+      title: contactInput.phone.label,
       info: "+228 90 45 31 53",
       subInfo: "+225 01 52 89 16 90",
       color: "#0284C7",
@@ -97,7 +115,7 @@ const ContactPage: React.FC = () => {
     },
     {
       icon: <Clock size={24} />,
-      title: "Horaires",
+      title: t('cover.Schedules'),
       info: "Lun - Sam: 7h00 - 18h00",
       subInfo: "Urgences: 24h/24",
       color: "#7C3AED",
@@ -210,11 +228,10 @@ const ContactPage: React.FC = () => {
         </div>
         <div className="relative max-w-6xl mx-auto px-6 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Contactez-Nous
+           {t('contact.title')}
           </h1>
           <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-            Une question, un projet, une urgence ? Notre équipe est à votre
-            disposition pour vous accompagner.
+           {t('contact.description')}
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <a
@@ -222,7 +239,7 @@ const ContactPage: React.FC = () => {
               className="bg-white text-[#14A800] px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 flex items-center space-x-2"
             >
               <Phone size={20} />
-              <span>Appeler maintenant</span>
+              <span>{t('cover.callNow')}</span>
             </a>
             <a
               href="https://wa.me/22890453153"
@@ -257,11 +274,10 @@ const ContactPage: React.FC = () => {
               <div className="bg-white rounded-3xl shadow-xl p-8 lg:p-12">
                 <div className="mb-8">
                   <h2 className="text-3xl font-bold text-[#212121] mb-4">
-                    Envoyez-nous un message
+                    {t("contact.formSection.title")}
                   </h2>
                   <p className="text-gray-600 text-lg">
-                    Remplissez le formulaire ci-dessous et nous vous répondrons
-                    rapidement.
+                    {t("contact.formSection.description")}
                   </p>
                 </div>
 
@@ -269,8 +285,8 @@ const ContactPage: React.FC = () => {
                   {/* Personal Info */}
                   <div className="grid md:grid-cols-2 gap-6">
                     <Input
-                      label="Prénom *"
-                      placeholder="Votre prénom"
+                      label={contactInput.lastName.label}
+                      placeholder={contactInput.lastName.placeholder}
                       value={formData.firstName}
                       onChange={(e) =>
                         handleInputChange("firstName", e.target.value)
@@ -278,8 +294,8 @@ const ContactPage: React.FC = () => {
                       required
                     />
                     <Input
-                      label="Nom *"
-                      placeholder="Votre nom"
+                      label={contactInput.firstName.label}
+                      placeholder={contactInput.lastName.placeholder}
                       value={formData.lastName}
                       onChange={(e) =>
                         handleInputChange("lastName", e.target.value)
@@ -290,9 +306,9 @@ const ContactPage: React.FC = () => {
 
                   <div className="grid md:grid-cols-2 gap-6">
                     <Input
-                      label="Email *"
+                      label={contactInput.email.label}
                       type="email"
-                      placeholder="votre@email.com"
+                      placeholder={contactInput.email.placeholder}
                       value={formData.email}
                       onChange={(e) =>
                         handleInputChange("email", e.target.value)
@@ -300,7 +316,7 @@ const ContactPage: React.FC = () => {
                       required
                     />
                     <Input
-                      label="Téléphone *"
+                      label={contactInput.phone.label}
                       type="tel"
                       placeholder="+228 XX XX XX XX"
                       value={formData.phone}
@@ -313,8 +329,8 @@ const ContactPage: React.FC = () => {
 
                   {/* Company */}
                   <Input
-                    label="Entreprise / Organisation"
-                    placeholder="Nom de votre entreprise (optionnel)"
+                    label={contactInput.company?.label}
+                    placeholder={contactInput.company?.placeholder}
                     value={formData.company}
                     onChange={(e) =>
                       handleInputChange("company", e.target.value)
@@ -323,8 +339,8 @@ const ContactPage: React.FC = () => {
 
                   {/* Subject */}
                   <Input
-                    label="Sujet"
-                    placeholder="Objet de votre demande"
+                    label={contactInput.subject.label}
+                    placeholder={contactInput.subject.placeholder}
                     value={formData.subject}
                     onChange={(e) =>
                       handleInputChange("subject", e.target.value)
@@ -334,29 +350,29 @@ const ContactPage: React.FC = () => {
                   {/* Service & Urgency */}
                   <div className="grid md:grid-cols-2 gap-6">
                     <CustomSelect
-                      label="Service concerné"
+                      label={contactInput.service.label}
                       options={serviceOptions}
                       value={formData.service}
                       onChange={(value) =>
                         handleInputChange("service", value || "")
                       }
-                      placeholder="Sélectionner un service"
+                      placeholder={contactInput.service.placeholder}
                     />
                     <CustomSelect
-                      label="Urgence"
+                      label={contactInput.urgency.label}
                       options={urgencyOptions}
                       value={formData.urgency}
                       onChange={(value) =>
                         handleInputChange("urgency", value || "")
                       }
-                      placeholder="Niveau d'urgence"
+                      placeholder={contactInput.urgency.placeholder}
                     />
                   </div>
 
                   {/* Message */}
                   <Textarea
-                    label="Message *"
-                    placeholder="Décrivez votre demande en détail..."
+                    label={contactInput.message.label}
+                    placeholder={contactInput.message.placeholder+"..."}
                     rows={6}
                     value={formData.message}
                     onChange={(e) =>
@@ -378,19 +394,19 @@ const ContactPage: React.FC = () => {
                     {isSubmitting ? (
                       <>
                         <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-                        <span>Envoi en cours...</span>
+                        <span>{t('cover.SendingInProgress')}</span>
                       </>
                     ) : (
                       <>
                         <Send color="white" size={20} />
-                        <span>Envoyer le message</span>
+                        <span>{t('cover.sendMessage')}</span>
                       </>
                     )}
                   </Button>
 
                   <div className="flex items-center text-sm text-gray-600 mt-4">
                     <Info size={16} className="mr-2" />
-                    <span>* Champs obligatoires</span>
+                    <span>* {t('cover.requiredFields')}</span>
                   </div>
                 </form>
               </div>
@@ -431,7 +447,7 @@ const ContactPage: React.FC = () => {
               {/* Social Media */}
               <div className="bg-white rounded-2xl p-6 shadow-lg">
                 <h3 className="font-semibold text-lg text-[#212121] mb-4">
-                  Suivez-nous
+                {t('cover.followUs')}
                 </h3>
                 <div className="grid grid-cols-3 gap-3">
                   {socialLinks.map((social, index) => (
@@ -455,14 +471,14 @@ const ContactPage: React.FC = () => {
 
               {/* Quick Actions */}
               <div className="bg-gradient-to-br from-[#14A800] to-[#128700] rounded-2xl p-6 text-white">
-                <h3 className="font-semibold text-lg mb-4">Actions Rapides</h3>
+                <h3 className="font-semibold text-lg mb-4">{t('cover.quickActions')}</h3>
                 <div className="space-y-3">
                   <button
                     onClick={() => (window.location.href = "/quote")}
                     className="w-full bg-white/20 hover:bg-white/30 p-3 rounded-xl transition-all duration-300 flex items-center space-x-3"
                   >
                     <ChatCircle size={20} />
-                    <span>Demander un devis</span>
+                    <span>{t('cover.quote')}</span>
                     <ArrowRight size={16} className="ml-auto" />
                   </button>
                   <button
@@ -470,7 +486,7 @@ const ContactPage: React.FC = () => {
                     className="w-full bg-white/20 hover:bg-white/30 p-3 rounded-xl transition-all duration-300 flex items-center space-x-3"
                   >
                     <Buildings size={20} />
-                    <span>Voir nos services</span>
+                    <span>{t('cover.showDiscover')}</span>
                     <ArrowRight size={16} className="ml-auto" />
                   </button>
                   <a
@@ -495,10 +511,11 @@ const ContactPage: React.FC = () => {
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-[#212121] mb-4">
-              Notre Localisation
+             {t('contact.mapSection.title')}
             </h2>
             <p className="text-xl text-gray-700">
-              Venez nous rendre visite à notre siège social à Lomé
+                         {t('contact.mapSection.description')}
+
             </p>
           </div>
 
@@ -506,7 +523,7 @@ const ContactPage: React.FC = () => {
             <div className="lg:flex">
               <div className="lg:w-1/3 p-8 lg:p-12 bg-gradient-to-br from-[#14A800] to-[#128700] text-white">
                 <h3 className="text-2xl font-bold mb-6">
-                  Informations pratiques
+                         {t('cover.practicalInformation')}
                 </h3>
 
                 <div className="space-y-6">
@@ -514,7 +531,7 @@ const ContactPage: React.FC = () => {
                     <MapPin size={24} className="mr-4 mt-1 flex-shrink-0" />
                     <div>
                       <h4 className="font-semibold text-lg mb-1">
-                        Adresse complète
+                         {t('cover.fullAddress')}
                       </h4>
                       <p className="opacity-90">
                         Djidjolé, derrière le CMS
@@ -528,7 +545,8 @@ const ContactPage: React.FC = () => {
                     <Clock size={24} className="mr-4 mt-1 flex-shrink-0" />
                     <div>
                       <h4 className="font-semibold text-lg mb-1">
-                        Horaires de bureau
+                         {t('cover.officeHours')}
+                       
                       </h4>
                       <p className="opacity-90">
                         Lundi - Samedi: 7h00 - 18h00
@@ -559,8 +577,7 @@ const ContactPage: React.FC = () => {
 
                 <div className="mt-8 pt-6 border-t border-white/20">
                   <p className="text-sm opacity-90">
-                    <strong>Transport :</strong> Accessible en taxi, moto-taxi
-                    et transport en commun. Parking disponible sur site.
+                    <strong>Transport :</strong>{t('cover.transport')}
                   </p>
                 </div>
               </div>
@@ -599,36 +616,37 @@ const ContactPage: React.FC = () => {
       <section className="py-16 bg-white">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-[#212121] mb-8">
-            Besoin d'aide immédiate ?
+            {t('contact.additional.title')}
           </h2>
 
           <div className="grid md:grid-cols-2 gap-8 mb-12">
             <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6">
               <Phone size={40} className="text-blue-600 mx-auto mb-4" />
               <h3 className="text-xl font-bold text-[#212121] mb-3">
-                Urgences 24h/24
+            {t('contact.additional.emergencies.title')}
+
               </h3>
               <p className="text-gray-700 mb-4">
-                Pour les interventions urgentes de nettoyage, désinfection ou
-                gestion de déchets.
+                         {t('contact.additional.emergencies.description')}
+
               </p>
               <a
                 href="tel:+22890453153"
                 className="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition-all duration-300 inline-flex items-center space-x-2"
               >
                 <Phone size={18} />
-                <span>Appeler maintenant</span>
+                <span>{t('cover.callNow')}</span>
               </a>
             </div>
 
             <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-6">
               <WhatsappLogo size={40} className="text-green-600 mx-auto mb-4" />
               <h3 className="text-xl font-bold text-[#212121] mb-3">
-                Chat en direct
+                         {t('contact.additional.liveChat.title')}
+
               </h3>
               <p className="text-gray-700 mb-4">
-                Posez vos questions et obtenez des réponses rapides via
-                WhatsApp.
+                         {t('contact.additional.liveChat.description')}
               </p>
               <a
                 href="https://wa.me/22890453153"
@@ -637,29 +655,31 @@ const ContactPage: React.FC = () => {
                 className="bg-green-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-green-700 transition-all duration-300 inline-flex items-center space-x-2"
               >
                 <WhatsappLogo size={18} />
-                <span>Ouvrir WhatsApp</span>
+                <span>{t('cover.openWhatsapp')}</span>
               </a>
             </div>
           </div>
 
           <div className="bg-gradient-to-r from-[#14A800] to-[#128700] rounded-3xl p-8 text-white">
-            <h3 className="text-2xl font-bold mb-4">Engagement Qualité</h3>
+            <h3 className="text-2xl font-bold mb-4">
+             {t('contact.title')}
+
+            </h3>
             <p className="text-lg opacity-90 mb-6">
-              Nous nous engageons à répondre à toutes vos demandes dans les plus
-              brefs délais. Votre satisfaction est notre priorité.
+             {t('contact.description')}
             </p>
             <div className="flex items-center justify-center space-x-8 text-sm">
               <div className="flex items-center space-x-2">
                 <CheckCircle size={20} />
-                <span>Réponse sous 24h</span>
+                <span>{t('cover.responseWithin24Hours')}</span>
               </div>
               <div className="flex items-center space-x-2">
                 <CheckCircle size={20} />
-                <span>Devis gratuit</span>
+                <span>{t('cover.freeQuote')}</span>
               </div>
               <div className="flex items-center space-x-2">
                 <CheckCircle size={20} />
-                <span>Conseil personnalisé</span>
+                <span>{t('cover.personalizedAdvice')}</span>
               </div>
             </div>
           </div>

@@ -16,9 +16,11 @@ import {
   CheckCircle,
   Phone,
   EnvelopeSimple,
+  Lock,
+  Medal
 } from "@phosphor-icons/react";
-import { Award, Lock } from "iconsax-react";
 import WhatsAppFloatingButton from "@/components/common/WhatsAppButton";
+import { useTranslation } from "react-i18next";
 
 interface Achievement {
   year: string;
@@ -27,92 +29,72 @@ interface Achievement {
   organization: string;
   color: string;
 }
+interface ProfileType{
+  icon:string,
+  title:string,
+  formationAcademique:{
+    title:string,
+    items:string[]
+  },
+  formationsComplementaires:{
+    title:string,
+    items:string[]
+  },
+  experience:{
+    title:string,
+    description:string
+  },
+}
+interface AboutStatsType{
+  value:string,
+  label:string
+}
+interface StatsType{
+  icon:string,
+  title:string,
+  subtitle:string,
+  description:string
+  color:string
+}
+interface whyChooseUsTypes{
+  title:string;subtitle:string,
+  features:StatsType[]
 
+}
+const IconMaping :Record<string,React.ElementType>={
+   User,
+  Trophy,
+  Users,
+  Target,
+  Heart,
+  Lock,
+  Eye,
+  Handshake,
+  ArrowRight,
+  Calendar,
+  MapPin,
+  GraduationCap,
+  Briefcase,
+  Star,
+  CheckCircle,
+  Phone,
+  EnvelopeSimple,
+  Medal
+}
 const AboutPage: React.FC = () => {
+  const {t}=useTranslation()
   const [activeTab, setActiveTab] = useState<"mission" | "vision" | "values">(
     "mission"
   );
+const aboutStats = t('about.stats',{returnObjects:true}) as AboutStatsType[]
+const summaryPhrase = t('about.summary.phrases',{returnObjects:true}) as  string []
+const historyStats = t('about.history.stats',{returnObjects:true}) as  StatsType []
+  const achievements = t('about.history.achievements',{returnObjects:true}) as  Achievement []
 
-  const achievements: Achievement[] = [
-    {
-      year: "2020",
-      title: "Lauréat PPEJ CONFEJES",
-      description:
-        "Meilleure entreprise jeune du secteur de nettoyages écologiques professionnels",
-      organization: "CONFEJES",
-      color: "#14A800",
-    },
-    {
-      year: "2021",
-      title: "Lauréat Foire Francophone #FFJGRD2021",
-      description:
-        "Meilleure initiative de la 2ème édition sur la Gestion et le Recyclage des Déchets",
-      organization: "Foire Francophone",
-      color: "#0284C7",
-    },
-    {
-      year: "2021",
-      title: "Lauréat AgriTalkture",
-      description:
-        "Concours de Pitch de meilleures initiatives estudiantines agro-écologiques urbaine",
-      organization: "IAAS – TOGO",
-      color: "#16A34A",
-    },
-    {
-      year: "2021",
-      title: "2ème Prix COJECC2021",
-      description:
-        "Protection de l'environnement avec le projet 'rendre les déchets Utiles'",
-      organization: "PNUD Togo & ONG Jeunes Verts",
-      color: "#DC2626",
-    },
-    {
-      year: "2022",
-      title: "Finaliste Total Energie",
-      description:
-        "Concours Startups avec le projet numérisation de la gestion des déchets",
-      organization: "Total Energie",
-      color: "#F59E0B",
-    },
-  ];
-
-  const coreValues = [
-    {
-      icon: <Heart size={40} />,
-      title: "Engagement Écologique",
-      description:
-        "Nous nous engageons à protéger l'environnement à travers des pratiques durables et des produits écologiques.",
-      color: "#16A34A",
-    },
-    {
-      icon: <Users size={40} />,
-      title: "Excellence du Service",
-      description:
-        "Nous visons l'excellence dans chaque intervention avec des équipes formées et du matériel professionnel.",
-      color: "#14A800",
-    },
-    {
-      icon: <Handshake size={40} />,
-      title: "Partenariat Durable",
-      description:
-        "Nous construisons des relations de confiance à long terme avec nos clients et partenaires.",
-      color: "#0284C7",
-    },
-    {
-      icon: <Award color="white" size={40} />,
-      title: "Innovation Continue",
-      description:
-        "Nous innovons constamment pour proposer des solutions toujours plus efficaces et respectueuses.",
-      color: "#7C3AED",
-    },
-    {
-      icon: <Lock color="white" size={40} />,
-      title: "Confidentialité",
-      description:
-        "La confidentialité est pour nous un principe sacré : tout ce que nous voyons, entendons ou découvrons reste strictement confidentiel.",
-      color: "#FF0000",
-    },
-  ];
+  const coreValues = t('about.history.coreValues',{returnObjects:true}) as  StatsType []
+  const tabContent = t('about.tabContent',{returnObjects:true}) as  string []
+  const profile = t('about.profile',{returnObjects:true}) as  ProfileType 
+  const whyChooseUs = t('about.whyChooseUs',{returnObjects:true}) as  whyChooseUsTypes
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -141,53 +123,41 @@ const AboutPage: React.FC = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                À Propos d'Africa Clean
+               {t('about.title')}
               </h1>
               <p className="text-xl md:text-2xl mb-8 leading-relaxed">
-                Depuis 2018, nous rendons vos locaux propres et durables avec
-                une approche éco-responsable et des solutions innovantes.
+               {t('about.description')}
               </p>
               <div className="flex flex-wrap gap-4">
                 <button
                   onClick={() => scrollToSection("histoire")}
                   className="bg-white text-[#14A800] px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105"
                 >
-                  Notre Histoire
+                  {t('cover.ourHistory')}
                 </button>
                 <button
                   onClick={() => scrollToSection("equipe")}
                   className="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-[#14A800] transition-all duration-300"
                 >
-                  Rencontrer l'équipe
+                  {t('cover.MeetTheTeam')}
                 </button>
               </div>
             </div>
             <div className="relative">
               <div className="bg-white/10 backdrop-blur rounded-3xl p-8 text-center">
                 <h3 className="text-2xl font-bold mb-4">
-                  Pour une Afrique Propre et Durable !
+                 {t('cover.slogan')}
                 </h3>
                 <div className="grid grid-cols-2 gap-6">
-                  <div>
-                    <div className="text-3xl font-bold text-yellow-300">6+</div>
+                  {aboutStats.map((item,idx)=>(
+                    <div key={idx}>
+                    <div className="text-3xl font-bold text-yellow-300">{item.value}</div>
                     <div className="text-sm opacity-90">
-                      Années d'expérience
+                      {item.label}
                     </div>
                   </div>
-                  <div>
-                    <div className="text-3xl font-bold text-yellow-300">
-                      200+
-                    </div>
-                    <div className="text-sm opacity-90">Clients satisfaits</div>
-                  </div>
-                  <div>
-                    <div className="text-3xl font-bold text-yellow-300">6</div>
-                    <div className="text-sm opacity-90">Concepts innovants</div>
-                  </div>
-                  <div>
-                    <div className="text-3xl font-bold text-yellow-300">5</div>
-                    <div className="text-sm opacity-90">Prix remportés</div>
-                  </div>
+                  ))}
+                  
                 </div>
               </div>
             </div>
@@ -210,25 +180,18 @@ const AboutPage: React.FC = () => {
       <section className="py-16 bg-white">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-[#212121] mb-8">
-            Qui sommes-nous ?
+           {t('about.summary.title')}
           </h2>
           <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-3xl p-8 lg:p-12">
             <p className="text-lg text-gray-700 leading-relaxed mb-6">
-              Chez <strong className="text-[#14A800]">AFRICA CLEAN</strong> nous
-              mettons la technologie et l'innovation au service de l’hygiène et
-              de l’environnement, avec un objectif clair : vous offrir des
-              solutions efficaces, durables et personnalisées.
+                         {t('about.summary.house')}
+ <strong className="text-[#14A800]"> AFRICA CLEAN</strong>{summaryPhrase[0] }
             </p>
             <p className="text-lg text-gray-700 leading-relaxed mb-6">
-              AFRICA CLEAN est une startup spécialisée dans le secteur de
-              CleanTech : la fabrication de poubelles écologiques à partir de
-              matériaux recyclés, la gestion des déchets et le nettoyage lors
-              d’événements et la création d’espaces verts et des jardins
-              potagers.
+          {  summaryPhrase[1]}
             </p>
             <p className="text-xl font-semibold text-[#14A800]">
-              Chaque service est pensé pour allier efficacité, qualité et
-              respect de l'environnement.
+             {summaryPhrase[2]}
             </p>
           </div>
         </div>
@@ -242,62 +205,40 @@ const AboutPage: React.FC = () => {
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-[#212121] mb-4">
-              Notre Histoire
+             {t('cover.ourHistory')}
             </h2>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-              Un parcours d'innovation et d'engagement pour l'environnement
+               {t('about.history.description')}
             </p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
-            <div>
-              <div className="bg-white rounded-3xl p-8 shadow-lg">
+              {historyStats.map((item,idx)=>{
+                const Icon = IconMaping[item.icon]
+                return(
+                   <div key={idx} className="bg-white rounded-3xl p-8 shadow-lg">
                 <div className="flex items-center mb-6">
-                  <Calendar size={30} className="text-[#14A800] mr-4" />
+                  <Icon size={30} className="text-[#14A800] mr-4" />
                   <h3 className="text-2xl font-bold text-[#212121]">
-                    Les Débuts (2018)
+                  {item.title}
                   </h3>
                 </div>
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  La Société <strong>AFRICA CLEAN</strong> fut créée en 2018
-                  sous le nom de <strong>GROUPE LUMIERE JEUNESSE</strong>. Au
-                  départ, l'entreprise assurait des prestations d'entretien et
-                  nettoyage professionnels des locaux ainsi que la conception,
-                  la réalisation et l'entretien d'espaces verts et de jardins
-                  potagers.
+                  {item.subtitle}
                 </p>
                 <p className="text-gray-700 leading-relaxed">
-                  Cependant, la société a étendu ses activités pour inclure la
-                  gestion de déchets et le nettoyage événementiels, le
-                  déménagement et le transport des biens et marchandises, ainsi
-                  que la fabrication des poubelles écologiques et
-                  personnalisées.
+                  {item.description}
                 </p>
               </div>
-            </div>
-            <div>
-              <div className="bg-white rounded-3xl p-8 shadow-lg">
-                <div className="flex items-center mb-6">
-                  <Star size={30} className="text-[#14A800] mr-4" />
-                  <h3 className="text-2xl font-bold text-[#212121]">
-                    Évolution (2023)
-                  </h3>
-                </div>
-                <p className="text-gray-700 leading-relaxed">
-                  En 2023, l'entreprise a changé de nom pour devenir{" "}
-                  <strong className="text-[#14A800]">AFRICA CLEAN</strong>, afin
-                  de mieux refléter sa mission de fournir des services de
-                  nettoyage et d'entretien de qualité supérieure à sa clientèle,
-                  avec une vision élargie vers toute l'Afrique.
-                </p>
-              </div>
-            </div>
+                )
+              })}
+             
           </div>
 
           {/* Timeline des récompenses */}
           <div className="mb-16">
             <h3 className="text-2xl font-bold text-[#212121] text-center mb-12">
-              Nos Distinctions
+             {t('cover.ourDistinctions')}
             </h3>
             <div className="relative">
               {/* Timeline line */}
@@ -357,10 +298,10 @@ const AboutPage: React.FC = () => {
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-[#212121] mb-4">
-              Notre Mission, Vision & Valeurs
+             {t('cover.ourVision')}, Vision & {t('cover.values')}
             </h2>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-              Les piliers qui guident notre engagement quotidien
+            {t('cover.missionSlogan')}
             </p>
           </div>
 
@@ -374,7 +315,7 @@ const AboutPage: React.FC = () => {
                   icon: <Target size={20} />,
                 },
                 { key: "vision", label: "Vision", icon: <Eye size={20} /> },
-                { key: "values", label: "Valeurs", icon: <Heart size={20} /> },
+                { key: "values", label: t('cover.values'), icon: <Heart size={20} /> },
               ].map((tab) => (
                 <button
                   key={tab.key}
@@ -400,14 +341,11 @@ const AboutPage: React.FC = () => {
               <div className="bg-gradient-to-r from-green-50 to-green-100 rounded-3xl p-8 lg:p-12 text-center">
                 <Target size={60} className="text-[#14A800] mx-auto mb-6" />
                 <h3 className="text-2xl font-bold text-[#212121] mb-6">
-                  Notre Mission
+                 {t('cover.ourMission')}
                 </h3>
                 <p className="text-lg text-gray-700 leading-relaxed">
-                  Chez <strong className="text-[#14A800]">AFRICA CLEAN</strong>,
-                  nous mettons la technologie et l'innovation au service de
-                  l'hygiène et de l'environnement, avec un objectif clair : vous
-                  offrir des solutions efficaces, durables et personnalisées
-                  pour une Afrique propre et durable.
+                  {t('cover.house')} <strong className="text-[#14A800]">AFRICA CLEAN </strong>,
+                  {tabContent[0]}
                 </p>
               </div>
             )}
@@ -416,21 +354,19 @@ const AboutPage: React.FC = () => {
               <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-3xl p-8 lg:p-12 text-center">
                 <Eye size={60} className="text-blue-600 mx-auto mb-6" />
                 <h3 className="text-2xl font-bold text-[#212121] mb-6">
-                  Notre Vision
+                                 {t('cover.ourVision')}
                 </h3>
                 <p className="text-lg text-gray-700 leading-relaxed">
-                  Devenir le leader africain des solutions écologiques de
-                  nettoyage et d'entretien, en contribuant activement à la
-                  création d'un environnement propre et durable pour les
-                  générations futures à travers l'innovation et l'excellence du
-                  service.
+               { tabContent[1]}
                 </p>
               </div>
             )}
 
             {activeTab === "values" && (
               <div className="grid md:grid-cols-2 gap-8">
-                {coreValues.map((value, index) => (
+                {coreValues.map((value, index) => {
+                  const Icon = IconMaping[value.icon]
+                  return (
                   <div
                     key={index}
                     className="bg-white rounded-2xl p-6 shadow-lg border-l-4"
@@ -441,7 +377,7 @@ const AboutPage: React.FC = () => {
                         className="p-3 rounded-full mr-4"
                         style={{ backgroundColor: value.color, color: "white" }}
                       >
-                        {value.icon}
+                        <Icon size={30}  />
                       </div>
                       <h4 className="text-xl font-bold text-[#212121]">
                         {value.title}
@@ -451,7 +387,7 @@ const AboutPage: React.FC = () => {
                       {value.description}
                     </p>
                   </div>
-                ))}
+                )})}
               </div>
             )}
           </div>
@@ -466,10 +402,11 @@ const AboutPage: React.FC = () => {
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-[#212121] mb-4">
-              Rencontrez Notre Équipe
+             {t('about.teamSection.title')}
             </h2>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-              Des professionnels passionnés au service de votre satisfaction
+                           {t('about.teamSection.description')}
+
             </p>
           </div>
 
@@ -491,7 +428,7 @@ const AboutPage: React.FC = () => {
                   <h3 className="text-2xl font-bold mb-2">
                     AGBEKO Koffi Lucien
                   </h3>
-                  <p className="text-lg opacity-90 mb-4">Promoteur Gérant</p>
+                  <p className="text-lg opacity-90 mb-4">{t('cover.badge')}</p>
                   <div className="flex justify-center space-x-4">
                     <a
                       href="tel:+22890453153"
@@ -510,7 +447,7 @@ const AboutPage: React.FC = () => {
 
                 <div className="lg:w-2/3 p-8 lg:p-12">
                   <h4 className="text-2xl font-bold text-[#212121] mb-6">
-                    Parcours & Expertise
+                   {profile.title}
                   </h4>
 
                   <div className="space-y-6">
@@ -521,18 +458,13 @@ const AboutPage: React.FC = () => {
                       />
                       <div>
                         <h5 className="font-semibold text-lg text-[#212121] mb-2">
-                          Formation Académique
+                        {profile.formationAcademique.title}
                         </h5>
                         <ul className="text-gray-700 space-y-1">
-                          <li>• Licence en Économie et Gestion</li>
-                          <li>
-                            • BAC+4 en Gestion de Projet (spécialisé en projets
-                            agricoles et environnementaux)
-                          </li>
-                          <li>
-                            • Licence en Science de l'Éducation et de la
-                            Formation
-                          </li>
+                          {profile.formationAcademique.items.map((items,idx)=>(
+                          <li key={idx}>• {items}</li>
+
+                          ))}
                         </ul>
                       </div>
                     </div>
@@ -544,14 +476,13 @@ const AboutPage: React.FC = () => {
                       />
                       <div>
                         <h5 className="font-semibold text-lg text-[#212121] mb-2">
-                          Formations Complémentaires
+                         {profile.formationsComplementaires.title}
                         </h5>
                         <ul className="text-gray-700 space-y-1">
-                          <li>• Économie circulaire et Gestion de déchets</li>
-                          <li>• Ingénierie de surfaces</li>
-                          <li>• Entrepreneuriat et Marketing digital</li>
-                          <li>• Transport et logistiques</li>
-                          <li>• Gestion de ressources humaines</li>
+                        {profile.formationsComplementaires.items.map((items,idx)=>(
+                          <li key={idx}>• {items}</li>
+
+                          ))}
                         </ul>
                       </div>
                     </div>
@@ -563,16 +494,11 @@ const AboutPage: React.FC = () => {
                       />
                       <div>
                         <h5 className="font-semibold text-lg text-[#212121] mb-2">
-                          Expérience
+                         {profile.experience.title}
                         </h5>
                         <p className="text-gray-700">
-                          Ayant débuté en tant que technicien de surface pour
-                          subvenir à ses besoins dès sa première année
-                          universitaire, il a mis ses compétences
-                          organisationnelles et entrepreneuriales à profit pour
-                          fonder l'entreprise qui est désormais l'un des leaders
-                          dans le domaine des services de nettoyage et
-                          d'entretien au Togo et en Afrique.
+                                               {profile.experience.description}
+
                         </p>
                       </div>
                     </div>
@@ -585,19 +511,17 @@ const AboutPage: React.FC = () => {
           {/* Team Values */}
           <div className="text-center">
             <h3 className="text-2xl font-bold text-[#212121] mb-8">
-              Rejoignez Notre Équipe
+            {t('about.teamsValue.title')}
             </h3>
             <p className="text-lg text-gray-700 mb-8 max-w-3xl mx-auto">
-              Vous partagez nos valeurs et souhaitez contribuer à une Afrique
-              plus propre et durable ? Nous recherchons constamment des talents
-              passionnés pour rejoindre notre mission.
+            {t('about.teamsValue.description')}
             </p>
             <button
               onClick={() => (window.location.href = "/contact")}
               className="bg-[#14A800] hover:bg-[#128700] text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl flex items-center mx-auto space-x-2"
             >
               <Users size={20} />
-              <span>Rejoindre l'équipe</span>
+              <span>{t('cover.joiningTheTeam')}</span>
               <ArrowRight size={20} />
             </button>
           </div>
@@ -609,79 +533,45 @@ const AboutPage: React.FC = () => {
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Pourquoi Choisir Africa Clean ?
+             { whyChooseUs.title}
             </h2>
             <p className="text-xl opacity-90 max-w-3xl mx-auto">
-              6 raisons qui font de nous votre partenaire de confiance
+             { whyChooseUs.subtitle}
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                icon: <CheckCircle size={40} />,
-                title: "Produits Écologiques",
-                description:
-                  "Utilisation exclusive de produits respectueux de l'environnement",
-              },
-              {
-                icon: <Award color="yellow" size={40} />,
-                title: "Matériels Professionnels",
-                description:
-                  "Équipements et procédés ayant un moindre impact environnemental",
-              },
-              {
-                icon: <Users size={40} />,
-                title: "Équipes Qualifiées",
-                description:
-                  "Professionnels formés et disponibles 24h/24 & 7j/7",
-              },
-              {
-                icon: <Star size={40} />,
-                title: "Prix Abordables",
-                description:
-                  "Tarifs compétitifs avec 10% de réduction sur votre 1ère commande",
-              },
-              {
-                icon: <MapPin size={40} />,
-                title: "Couverture Étendue",
-                description:
-                  "Interventions dans toutes les régions du Togo et en Afrique de l'ouest",
-              },
-              {
-                icon: <Heart size={40} />,
-                title: "Satisfaction Client",
-                description:
-                  "Engagement qualité avec suivi personnalisé de chaque prestation",
-              },
-            ].map((feature, index) => (
+            {whyChooseUs.features.map((feature, index) => {
+              const Icon = IconMaping[feature.icon]
+              return(
               <div
                 key={index}
                 className="bg-white/10 backdrop-blur rounded-2xl p-6 text-center"
               >
                 <div className="text-yellow-300 mb-4 flex justify-center">
-                  {feature.icon}
+                  <Icon  size={30}/>
                 </div>
                 <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
-                <p className="opacity-90">{feature.description}</p>
+                <p className="opacity-90">{feature.subtitle}</p>
               </div>
-            ))}
+            )})}
           </div>
 
           <div className="text-center mt-12">
             <div className="bg-white/10 backdrop-blur rounded-2xl p-8 max-w-2xl mx-auto">
               <h3 className="text-2xl font-bold mb-4">
-                10% de réduction offerte !
+                {t('cover.discoverQualify')}
               </h3>
               <p className="text-lg opacity-90 mb-6">
-                Sur votre première commande pour découvrir la qualité de nos
-                services
+                              {t('cover.discover')}
+
               </p>
               <button
                 onClick={() => (window.location.href = "/quote")}
                 className="bg-white text-[#14A800] px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105"
               >
-                Profiter de l'offre
+                                         {t('cover.ClaimYourOffer')}
+
               </button>
             </div>
           </div>
@@ -692,24 +582,25 @@ const AboutPage: React.FC = () => {
       <section className="py-16 bg-white">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-[#212121] mb-6">
-            Prêt à démarrer avec nous ?
+           {t('about.cTAContact.title')}
           </h2>
           <p className="text-xl text-gray-700 mb-8">
-            Contactez-nous dès aujourd'hui pour discuter de vos besoins et
-            découvrir comment nous pouvons vous accompagner.
+                     {t('about.cTAContact.description')}
+
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={() => (window.location.href = "/contact")}
               className="bg-[#14A800] hover:bg-[#128700] text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105"
             >
-              Nous contacter
+              {t('cover.contactUs')}
             </button>
             <button
               onClick={() => (window.location.href = "/quote")}
               className="border-2 border-[#14A800] text-[#14A800] px-8 py-4 rounded-full font-semibold hover:bg-[#14A800] hover:text-white transition-all duration-300"
             >
-              Demander un devis
+              {t('cover.quote')}
+
             </button>
           </div>
         </div>

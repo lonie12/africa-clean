@@ -3,8 +3,21 @@ import { Recycle, Leaf, ShoppingCart, Sparkle } from "@phosphor-icons/react";
 import CircularProductDisplay from "@/components/features/products/CircularProductDisplay";
 import WhatsAppFloatingButton from "@/components/common/WhatsAppButton";
 import { Award } from "iconsax-react";
+import { useTranslation } from "react-i18next";
 
+interface FeaturesType {
+  icon: string;
+  title: string;
+  description: string;
+}
+const IconMap: Record<string, React.ElementType> = {
+  Award,
+  Leaf,
+  Sparkle,
+  Recycle
+};
 const ProductsPage: React.FC = () => {
+  const { t } = useTranslation();
   // Images pour les poubelles EcoTrash (simplifiées)
   const ecoTrashImages = [
     { id: "ecotrash-1", src: "/images/products/ecotrash/1.jpg" },
@@ -28,7 +41,15 @@ const ProductsPage: React.FC = () => {
     { id: "cleaning-4", src: "/images/products/ecoclean/4.jpg" },
     { id: "cleaning-5", src: "/images/products/ecoclean/5.jpg" },
   ];
-
+  const features = t("productPage.features", {
+    returnObjects: true,
+  }) as FeaturesType[];
+  const items = t("productPage.items", {
+    returnObjects: true,
+  }) as FeaturesType[];
+  const whyChooseStats = t("productPage.whyChoose.whyChooseStats", {
+    returnObjects: true,
+  }) as FeaturesType[]; 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white overflow-hidden">
       {/* Hero Section */}
@@ -47,38 +68,26 @@ const ProductsPage: React.FC = () => {
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Nos Produits Écologiques
+            {t("productPage.title")}
           </h1>
           <p className="text-xl md:text-2xl mb-8 opacity-90 max-w-3xl mx-auto">
-            Des solutions innovantes et durables pour un environnement plus
-            propre
+            {t("productPage.description")}
           </p>
 
           {/* Feature highlights */}
           <div className="grid md:grid-cols-3 gap-8 mt-12">
-            <div className="flex flex-col items-center space-y-3">
-              <div className="bg-white/20 p-4 rounded-full">
-                <Award color="white" size={32} className="text-white" />
-              </div>
-              <h3 className="font-semibold">Qualité Premium</h3>
-              <p className="text-sm opacity-80">Produits certifiés et testés</p>
-            </div>
-            <div className="flex flex-col items-center space-y-3">
-              <div className="bg-white/20 p-4 rounded-full">
-                <Leaf size={32} className="text-white" />
-              </div>
-              <h3 className="font-semibold">100% Écologique</h3>
-              <p className="text-sm opacity-80">
-                Respectueux de l'environnement
-              </p>
-            </div>
-            <div className="flex flex-col items-center space-y-3">
-              <div className="bg-white/20 p-4 rounded-full">
-                <Sparkle size={32} className="text-white" />
-              </div>
-              <h3 className="font-semibold">Innovation</h3>
-              <p className="text-sm opacity-80">Technologies avancées</p>
-            </div>
+            {features.map((item, idx) => {
+              const Icon = IconMap[item.icon];
+              return (
+                <div key={idx} className="flex flex-col items-center space-y-3">
+                  <div className="bg-white/20 p-4 rounded-full">
+                    <Icon color="white" size={32} className="text-white" />
+                  </div>
+                  <h3 className="font-semibold">{item.title}</h3>
+                  <p className="text-sm opacity-80">{item.description}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
 
@@ -95,15 +104,10 @@ const ProductsPage: React.FC = () => {
             {/* Texte à gauche sur desktop, en haut sur mobile */}
             <div className="flex-1 text-center lg:text-left">
               <h3 className="text-2xl md:text-3xl font-bold text-[#212121] mb-4">
-                Poubelles ECOTRASH
+                {items[0].title}
               </h3>
               <p className="text-lg text-gray-700 leading-relaxed mb-8">
-                Les poubelles EcoTrash se distinguent par leur design pratique,
-                durable et respectueux de l'environnement. Conçues pour le tri
-                sélectif, elles facilitent le recyclage lors des événements,
-                dans les entreprises ou à la maison. Fabriquées à partir de
-                matériaux recyclés et recyclables, elles contribuent activement
-                à une démarche zéro déchet.
+                {items[0].description}
               </p>
             </div>
 
@@ -158,16 +162,10 @@ const ProductsPage: React.FC = () => {
             {/* Texte à droite sur desktop, en bas sur mobile */}
             <div className="flex-1 text-center lg:text-left">
               <h3 className="text-2xl md:text-3xl font-bold text-[#212121] mb-4">
-                Produits d'Entretien Écologiques EcoClean
+                {items[1].title}
               </h3>
               <p className="text-lg text-gray-700 leading-relaxed mb-8">
-                Nos produits d'entretien écologiques sont formulés à base
-                d'ingrédients naturels, biodégradables et sans substances
-                nocives. Parfaits pour un usage régulier, ils assurent une
-                efficacité optimale tout en préservant votre santé et la
-                planète. Que ce soit pour des événements, des espaces publics ou
-                des foyers, nos solutions garantissent propreté, hygiène et
-                impact réduit sur l'environnement.
+                {items[1].description}
               </p>
             </div>
           </div>
@@ -179,45 +177,24 @@ const ProductsPage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-[#212121] mb-4">
-              Pourquoi Choisir Nos Produits ?
+            {t('productPage.whyChoose.title')}
             </h2>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                icon: <Leaf size={32} className="text-[#14A800]" />,
-                title: "Écologique",
-                description: "Produits respectueux de l'environnement",
-              },
-              {
-                icon: (
-                  <Award color="#14A800" size={32} className="text-[#14A800]" />
-                ),
-                title: "Certifié",
-                description: "Qualité garantie et certifications officielles",
-              },
-              {
-                icon: <Recycle size={32} className="text-[#14A800]" />,
-                title: "Recyclable",
-                description: "Conçus dans une démarche d'économie circulaire",
-              },
-              {
-                icon: <Sparkle size={32} className="text-[#14A800]" />,
-                title: "Efficace",
-                description: "Performance optimale pour tous vos besoins",
-              },
-            ].map((feature, index) => (
+            {whyChooseStats.map((feature, index) => {
+              const Icon = IconMap[feature.icon];
+              return(
               <div key={index} className="text-center group">
                 <div className="bg-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110">
-                  {feature.icon}
+                                    <Icon color="#128700" size={32}  />
                 </div>
                 <h3 className="text-xl font-semibold text-[#212121] mb-3">
                   {feature.title}
                 </h3>
                 <p className="text-gray-600">{feature.description}</p>
               </div>
-            ))}
+            )})}
           </div>
         </div>
       </section>
@@ -226,24 +203,24 @@ const ProductsPage: React.FC = () => {
       <section className="py-16 bg-[#14A800] text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Prêt à Passer à l'Écologique ?
+            {t('productPage.cTASection.title')}
           </h2>
           <p className="text-xl mb-8 opacity-90">
-            Contactez-nous pour découvrir nos produits et obtenir un devis
-            personnalisé
+            {t('productPage.cTASection.description')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={() => (window.location.href = "/contact")}
               className="bg-white text-[#14A800] px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
             >
-              Nous Contacter
+            {t('cover.contactUs')}
+
             </button>
             <button
               onClick={() => (window.location.href = "/quote")}
               className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:bg-white hover:text-[#14A800]"
             >
-              Demander un Devis
+            {t('cover.quote')}
             </button>
           </div>
         </div>

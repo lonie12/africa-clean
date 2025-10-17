@@ -1,36 +1,33 @@
 import React, { useState, useEffect } from "react";
 import { CaretLeft, CaretRight } from "@phosphor-icons/react";
+import { useTranslation } from "react-i18next";
 
 interface Slide {
   image: string;
   title: string;
-  subtitle: string;
   cta: string;
 }
 
 const HeroSection: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+const {t}=useTranslation()
+const subtitles: string[] = t("hero.subtitle", { returnObjects: true }) as string[];
 
   const slides: Slide[] = [
     {
       image: "/images/acceuil/acc1.jpg",
-      title: "Pour une Afrique Propre et Durable !",
-      subtitle:
-        "Solutions professionnelles de nettoyage et services écologiques",
-      cta: "Demander un devis gratuit",
+      title: t('cover.slogan'),
+      cta: t('cover.quote'),
     },
     {
       image: "/images/acceuil/acc2.jpg",
-      title: "Services de Nettoyage Professionnel",
-      subtitle:
-        "Bureaux, résidences, centres de santé avec une approche éco-responsable",
-      cta: "Découvrir nos services",
+      title: subtitles[1],
+      cta:  t('cover.service'),
     },
     {
       image: "/images/acceuil/acc3.png",
-      title: "Création d'Espaces Verts",
-      subtitle: "Conception paysagiste 3D, jardins potagers bio et entretien",
-      cta: "Voir nos réalisations",
+      title: subtitles[2],
+      cta:   t('cover.project'),
     },
   ];
 
@@ -95,7 +92,7 @@ const HeroSection: React.FC = () => {
                 {slide.title}
               </h1>
               <p className="text-lg md:text-xl lg:text-2xl mb-8 opacity-90 max-w-3xl mx-auto leading-relaxed animate-fade-in-up animation-delay-200">
-                {slide.subtitle}
+                {subtitles[index]}
               </p>
               <button
                 onClick={() => handleCtaClick(slide.cta)}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Star, Quotes, ArrowLeft, ArrowRight, User, ChatCircle, X, PaperPlaneTilt } from "@phosphor-icons/react";
 import { useForm, ValidationError } from '@formspree/react';
+import { useTranslation } from "react-i18next";
 
 interface Testimonial {
   id: number;
@@ -12,76 +13,19 @@ interface Testimonial {
   service: string;
   location: string;
 }
+interface StatsType{
+  number:string,
+  label:string
+}
 
 const TestimonialsSection: React.FC = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [showForm, setShowForm] = useState(false);
   const [rating, setRating] = useState(5);
   const [state, handleSubmit] = useForm("xgvllynn"); // Remplace par ton Form ID
-
-  const testimonials: Testimonial[] = [
-    {
-      id: 1,
-      name: "Adjo MENSAH",
-      company: "Centre Médical Saint-Joseph",
-      role: "Directrice Administrative",
-      content: "Africa Clean a transformé nos standards d'hygiène hospitalière. Leur expertise en Santé-Pro et leur respect des protocoles de désinfection nous ont permis d'améliorer significativement la qualité de nos services médicaux.",
-      rating: 5,
-      service: "Santé-Pro",
-      location: "Lomé, Togo"
-    },
-    {
-      id: 2,
-      name: "Koffi AGBEKO",
-      company: "Hôtel Golden Tulip",
-      role: "Responsable Entretien",
-      content: "Un service impeccable ! L'équipe Nettoie-Pro assure un entretien quotidien de nos locaux avec un professionnalisme remarquable. Nos clients apprécient toujours la propreté et la fraîcheur de nos espaces.",
-      rating: 5,
-      service: "Nettoie-Pro",
-      location: "Lomé, Togo"
-    },
-    {
-      id: 3,
-      name: "Marie KOUAKOU",
-      company: "Résidence Villa Verde",
-      role: "Propriétaire",
-      content: "Le service Eco-Jardin a dépassé nos attentes ! Notre espace vert est maintenant magnifique et l'entretien écologique respecte parfaitement l'environnement. Les plans 3D étaient très précis.",
-      rating: 5,
-      service: "Eco-Jardin",
-      location: "Abidjan, Côte d'Ivoire"
-    },
-    {
-      id: 4,
-      name: "Didier TOSSOU",
-      company: "Festival des Arts de Lomé",
-      role: "Coordinateur Événementiel",
-      content: "Africa Clean a géré parfaitement les déchets de notre festival avec Éco-Event. Les poubelles personnalisées étaient superbes et le tri sélectif a sensibilisé nos 5000 participants !",
-      rating: 5,
-      service: "Éco-Event",
-      location: "Lomé, Togo"
-    },
-    {
-      id: 5,
-      name: "Fatima IBRAHIM",
-      company: "Famille Ibrahim",
-      role: "Mère de famille",
-      content: "Notre jardin potager Natura-Potager nous permet de nourrir toute la famille avec des légumes 100% bio. L'équipe nous a bien formés pour l'auto-gestion. Merci Africa Clean !",
-      rating: 5,
-      service: "Natura-Potager",
-      location: "Kara, Togo"
-    },
-    {
-      id: 6,
-      name: "Emmanuel ASANTE",
-      company: "Pharmacie Nouvelle",
-      role: "Pharmacien Titulaire",
-      content: "La formation Technicien de surfaces spécialisé en milieu hospitalier a été excellente. Mon équipe maîtrise maintenant parfaitement les protocoles d'hygiène pharmaceutique.",
-      rating: 5,
-      service: "Formation",
-      location: "Sokodé, Togo"
-    }
-  ];
-
+const {t}=useTranslation()
+  const testimonials= t('testimonialsSection.testimonials',{returnObjects:true}) as Testimonial[] 
+const stats = t('testimonialsSection.stats',{returnObjects:true}) as StatsType[]
   // Auto-play testimonials
   useEffect(() => {
     const timer = setInterval(() => {
@@ -153,12 +97,11 @@ const TestimonialsSection: React.FC = () => {
           <div className="flex items-center justify-center mb-6">
             <Quotes size={40} className="text-[#14A800] mr-4" />
             <h2 className="text-3xl md:text-4xl font-bold text-[#212121]">
-              Ce que disent nos clients
+              {t('testimonialsSection.title')}
             </h2>
           </div>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-            Découvrez les témoignages de satisfaction de nos clients qui nous font confiance
-            pour leurs besoins de nettoyage, d'hygiène et d'aménagement écologique.
+              {t('testimonialsSection.description')}
           </p>
         </div>
 
@@ -251,12 +194,7 @@ const TestimonialsSection: React.FC = () => {
 
         {/* Stats Section */}
         <div className="mt-16 grid md:grid-cols-4 gap-6">
-          {[
-            { number: "200+", label: "Clients satisfaits" },
-            { number: "98%", label: "Taux de satisfaction" },
-            { number: "6", label: "Services spécialisés" },
-            { number: "5+", label: "Années d'expérience" }
-          ].map((stat, index) => (
+          {stats.map((stat, index) => (
             <div key={index} className="text-center bg-white rounded-2xl p-6 shadow-lg">
               <div className="text-3xl font-bold text-[#14A800] mb-2">
                 {stat.number}
@@ -275,10 +213,11 @@ const TestimonialsSection: React.FC = () => {
             className="bg-[#14A800] hover:bg-[#128700] text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl flex items-center space-x-2 mx-auto"
           >
             <ChatCircle size={20} />
-            <span>Partager votre expérience</span>
+            <span>              {t('testimonialsSection.footer.title')}
+</span>
           </button>
           <p className="text-gray-600 text-sm mt-2">
-            Votre témoignage nous aide à améliorer nos services
+             {t('testimonialsSection.footer.description')}
           </p>
         </div>
       </div>
@@ -293,7 +232,7 @@ const TestimonialsSection: React.FC = () => {
                 <div className="flex items-center space-x-3">
                   <ChatCircle size={32} className="text-[#14A800]" />
                   <h3 className="text-2xl font-bold text-[#212121]">
-                    Partagez votre expérience
+             {t('testimonialsSection.footer.title')}
                   </h3>
                 </div>
                 <button

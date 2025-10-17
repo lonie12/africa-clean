@@ -1,0 +1,903 @@
+{
+  "home": {
+    "navigation": {
+      "home": "Home",
+      "products": "Products",
+      "service": "Services",
+      "about": "About",
+      "blog": "Blog",
+      "contact": "Contact"
+    },
+    "services": {
+      "links": {
+        "nettoie_pro": "Pro Cleaning",
+        "eco_jardin": "Eco-Garden",
+        "natura_potager": "Organic Garden",
+        "eco_event": "Eco-Event",
+        "sante_pro": "Health-Pro"
+      }
+    }
+  },
+  "hero": {
+    "subtitle": [
+      "Professional cleaning solutions for businesses and individuals",
+      "Eco-friendly services for a healthy and sustainable environment",
+      "Creation and maintenance of green spaces and organic vegetable gardens",
+      "Industrial cleaning, offices, and healthcare centers with an eco-responsible approach",
+      "Solutions tailored to your needs, fast and effective"
+    ]
+  },
+  "productsServices": {
+    "title": "Introduction",
+    "intro": "AFRICA CLEAN is a STARTUP specializing in the CleanTech sector, offering cleaning and maintenance services, creation and upkeep of green spaces, waste management, production of eco-friendly bins and detergents, with a dynamic and professional team. Available 7 days a week, 24 hours a day.",
+    "productsTitle": "Our Products",
+    "products": [
+      {
+        "title": "ECOTRASH Bins",
+        "description": "Eco-friendly customized bins made from electronic waste. Sustainable and environmentally friendly design.",
+        "href": "/products#ecotrash",
+        "icon": "Recycle"
+      },
+      {
+        "title": "Eco-Friendly Cleaning Products",
+        "description": "Biodegradable detergents, descalers, and cleaners without harmful substances, offering optimal efficiency while protecting your health and the planet.",
+        "href": "/products#ecoclean",
+        "icon": "Leaf"
+      }
+    ],
+    "servicesTitle": "Our Services",
+    "services": [
+      "Professional cleaning (offices, residences, industries)",
+      "Creation and maintenance of green spaces",
+      "Organic vegetable gardens",
+      "Event waste management",
+      "Transport and moving services",
+      "Training for hygiene, cleanliness, and associated services"
+    ],
+    "servicesCta": "See all our services"
+  },
+  "conceptsSection": {
+    "title": "Our Concepts",
+    "intro": "6 areas of expertise to meet all your needs with sustainable and innovative solutions",
+    "concepts": [
+      {
+        "id": "nettoie-pro",
+        "title": "Pro-Clean",
+        "description": "Professional cleaning solutions for offices, residences, industries, and healthcare centers with an eco-responsible approach.",
+        "image": "/images/services/nettoie-pro.jpg",
+        "category": "Cleaning",
+        "href": "/services#pro-clean",
+        "color": "#14A800"
+      },
+      {
+        "id": "eco-jardin",
+        "title": "Eco-Garden",
+        "description": "3D landscaping design, creation, and maintenance of sustainable and aesthetic green spaces.",
+        "image": "/images/services/eco-jardin.jpg",
+        "category": "Green Spaces",
+        "href": "/services#eco-garden",
+        "color": "#22C55E"
+      },
+      {
+        "id": "natura-potager",
+        "title": "Organic Garden",
+        "description": "Creation and management of organic vegetable gardens for healthy and local food.",
+        "image": "/images/services/natura-potager.jpg",
+        "category": "Organic Farming",
+        "href": "/services#organic-garden",
+        "color": "#16A34A"
+      },
+      {
+        "id": "nettoie-event",
+        "title": "Event-Clean",
+        "description": "Complete cleaning services before, during, and after your events to ensure cleanliness.",
+        "image": "/images/services/nettoie-event.jpg",
+        "category": "Events",
+        "href": "/services#event-clean",
+        "color": "#0EA5E9"
+      },
+      {
+        "id": "eco-event",
+        "title": "Eco-Event",
+        "description": "Eco-responsible waste management for events, including collection, sorting, and recycling for minimal environmental impact.",
+        "image": "/images/services/eco-event.jpg",
+        "category": "Events",
+        "href": "/services#eco-event",
+        "color": "#0284C7"
+      },
+      {
+        "id": "sante-pro",
+        "title": "Health-Pro",
+        "description": "We guarantee hygiene and cleanliness in your healthcare centers.",
+        "image": "/images/services/sante-pro.png",
+        "category": "Healthcare",
+        "href": "/services#health-pro",
+        "color": "#DC2626"
+      }
+    ],
+    "ctaText": "Need a personalized solution? Our experts are ready to assist you.",
+    "ctaButton": "Contact our experts",
+    "action": "Need a personalized solution? Our experts are ready to assist you."
+  },
+  "interventionModes": {
+    "title": "Our Intervention Modes",
+    "description": "Two intervention modes tailored to your needs",
+    "tab": [
+      {
+        "title": "One-Time Interventions",
+        "icon": "Star",
+        "description": "One-time interventions such as post-construction cleaning, general maintenance, or specific tasks in a single visit.",
+        "items": [
+          "Post-construction cleaning",
+          "General maintenance",
+          "Emergency intervention",
+          "Specific tasks"
+        ]
+      },
+      {
+        "title": "Regular Maintenance",
+        "icon": "Recycle",
+        "description": "Regular maintenance, carried out according to a monthly, quarterly, semi-annual, or annual contract.",
+        "items": [
+          "Monthly contract",
+          "Quarterly contract",
+          "Semi-annual contract",
+          "Annual contract"
+        ]
+      }
+    ]
+  },
+  "trustSection": {
+    "title": "They Trust Us",
+    "description": "Over 500 satisfied clients trust us for their cleaning and eco-friendly service needs",
+    "stats": [
+      {
+        "value": "500+",
+        "label": "Satisfied Clients"
+      },
+      {
+        "value": "50+",
+        "label": "Trusted Partners"
+      },
+      {
+        "value": "6+",
+        "label": "Years of Experience"
+      }
+    ],
+    "slogan": "Join our satisfied clients and discover why they trust us"
+  },
+  "testimonialsSection": {
+    "title": "What Our Clients Say",
+    "description": "Discover the testimonials from our clients who trust us for their cleaning, hygiene, and eco-friendly needs.",
+    "testimonials": [
+      {
+        "id": 1,
+        "name": "Adjo MENSAH",
+        "company": "Saint-Joseph Medical Center",
+        "role": "Administrative Director",
+        "content": "Africa Clean has transformed our hospital hygiene standards. Their expertise in Health-Pro and their adherence to disinfection protocols have significantly improved the quality of our medical services.",
+        "rating": 5,
+        "service": "Health-Pro",
+        "location": "Lomé, Togo"
+      },
+      {
+        "id": 2,
+        "name": "Koffi AGBEKO",
+        "company": "Golden Tulip Hotel",
+        "role": "Maintenance Manager",
+        "content": "Impeccable service! The Pro Cleaning team ensures daily maintenance of our premises with remarkable professionalism. Our clients always appreciate the cleanliness and freshness of our spaces.",
+        "rating": 5,
+        "service": "Pro Cleaning",
+        "location": "Lomé, Togo"
+      },
+      {
+        "id": 3,
+        "name": "Marie KOUAKOU",
+        "company": "Villa Verde Residence",
+        "role": "Owner",
+        "content": "The Eco-Garden service exceeded our expectations! Our green space is now beautiful, and the ecological maintenance perfectly respects the environment. The 3D plans were very accurate.",
+        "rating": 5,
+        "service": "Eco-Garden",
+        "location": "Abidjan, Côte d'Ivoire"
+      },
+      {
+        "id": 4,
+        "name": "Didier TOSSOU",
+        "company": "Lomé Arts Festival",
+        "role": "Event Coordinator",
+        "content": "Africa Clean perfectly managed the waste at our festival with Eco-Event. The personalized bins were fantastic, and the sorting initiative educated our 5000 participants!",
+        "rating": 5,
+        "service": "Eco-Event",
+        "location": "Lomé, Togo"
+      },
+      {
+        "id": 5,
+        "name": "Fatima IBRAHIM",
+        "company": "Ibrahim Family",
+        "role": "Mother",
+        "content": "Our Natura-Potager garden allows our family to eat 100% organic vegetables. The team trained us well for self-management. Thank you, Africa Clean!",
+        "rating": 5,
+        "service": "Natura-Potager",
+        "location": "Kara, Togo"
+      },
+      {
+        "id": 6,
+        "name": "Emmanuel ASANTE",
+        "company": "Pharmacie Nouvelle",
+        "role": "Chief Pharmacist",
+        "content": "The Surface Technician training in a healthcare setting was excellent. My team now perfectly understands pharmaceutical hygiene protocols.",
+        "rating": 5,
+        "service": "Training",
+        "location": "Sokodé, Togo"
+      }
+    ],
+    "stats": [
+      { "number": "200+", "label": "Satisfied Clients" },
+      { "number": "98%", "label": "Satisfaction Rate" },
+      { "number": "6", "label": "Specialized Services" },
+      { "number": "5+", "label": "Years of Experience" }
+    ],
+    "footer": {
+      "title": "Share Your Experience",
+      "description": "Your testimonial helps us improve our services"
+    }
+  },
+  "whyChooseUs": {
+    "title": "Why Choose AFRICA CLEAN?",
+    "advantages": [
+      {
+        "icone": "Leaf",
+        "title": "Eco-Friendly Products",
+        "description": "Exclusive use of environmentally friendly products."
+      },
+      {
+        "icone": "Users",
+        "title": "Qualified Teams",
+        "description": "Trained and experienced professionals available 24/7."
+      },
+      {
+        "icone": "Trophy",
+        "title": "Affordable Prices",
+        "description": "Competitive rates with a 10% discount on your first order."
+      },
+      {
+        "icone": "MapPin",
+        "title": "Wide Coverage",
+        "description": "Services available across all regions of Togo and West Africa."
+      }
+    ],
+    "footerDescription": "Get 10% off your first order!",
+    "footerButton": "Take Advantage of the Offer"
+  },
+  "contactCTA": {
+    "title": "Do you have an ambitious project to complete or wish to become a business partner?",
+    "description": "Would you like to discuss a B2B / B2C partnership?",
+    "secondDescription": "Or would you simply like more information?"
+  },
+  "productPage": {
+    "title": "Our Ecological Products",
+    "description": "Innovative and sustainable solutions for a cleaner environment",
+    "features": [
+      {
+        "icon": "Award",
+        "title": "Premium Quality",
+        "description": "Certified and tested products"
+      },
+      {
+        "icon": "Leaf",
+        "title": "100% Ecological",
+        "description": "Environmentally friendly"
+      },
+      {
+        "icon": "Sparkle",
+        "title": "Innovation",
+        "description": "Advanced technologies"
+      }
+    ],
+    "items": [
+      {
+        "title": "ECOTRASH Bins",
+        "description": "EcoTrash bins stand out with their practical, durable, and environmentally friendly design. Designed for selective sorting, they make recycling easier at events, businesses, or at home. Made from recycled and recyclable materials, they actively contribute to a zero-waste approach."
+      },
+      {
+        "title": "EcoClean Cleaning Products",
+        "description": "Our EcoClean cleaning products are formulated with natural, biodegradable ingredients, free from harmful substances. Perfect for regular use, they ensure optimal effectiveness while protecting your health and the planet. Whether for events, public spaces, or homes, our solutions guarantee cleanliness, hygiene, and a reduced environmental impact."
+      }
+    ],
+    "whyChoose": {
+      "title": "Why Choose Our Products?",
+      "whyChooseStats": [
+        {
+          "icon": "Leaf",
+          "title": "Ecological",
+          "description": "Environmentally friendly products"
+        },
+        {
+          "icon": "Award",
+          "title": "Certified",
+          "description": "Guaranteed quality and official certifications"
+        },
+        {
+          "icon": "Recycle",
+          "title": "Recyclable",
+          "description": "Designed with a circular economy approach"
+        },
+        {
+          "icon": "Sparkle",
+          "title": "Effective",
+          "description": "Optimal performance for all your needs"
+        }
+      ]
+    },
+    "cTASection": {
+      "title": "Ready to Switch to Eco-Friendly?",
+      "description": "Contact us to discover our products and get a personalized quote"
+    }
+  },
+  "servicePage": {
+    "title": "Our Services & Trainings",
+    "description": "6 innovative concepts and professional training to meet all your needs",
+    "concepts": [
+      {
+        "id": "nettoie-pro",
+        "title": "Nettoie-Pro",
+        "subtitle": "Always clean premises, our daily commitment",
+        "description": "Professional cleaning solutions for all types of spaces with an eco-friendly approach and qualified teams.",
+        "color": "#14A800",
+        "gradient": "from-green-500 to-green-600",
+        "services": [
+          "Regular office cleaning",
+          "Regular home cleaning",
+          "Cleaning of pharmacies and hospitals",
+          "Disinfection and decontamination",
+          "Post-construction cleaning",
+          "Machine washing",
+          "High-rise cleaning",
+          "Lighting cleaning",
+          "Pest control and rodent extermination"
+        ],
+        "benefits": [
+          "Professional and qualified teams",
+          "Certified eco-friendly products",
+          "24/7 availability",
+          "State-of-the-art professional equipment",
+          "Compliance with hygiene standards"
+        ],
+        "stats": [
+          { "label": "Satisfied clients", "value": "200+" },
+          { "label": "Interventions per month", "value": "500+" },
+          { "label": "Trained teams", "value": "50+" }
+        ]
+      },
+      {
+        "id": "sante-pro",
+        "title": "Santé-Pro",
+        "subtitle": "We ensure hygiene and cleanliness in your healthcare centers",
+        "description": "Specialized expertise in hospital and pharmaceutical hygiene with strict protocols and qualified staff.",
+        "color": "#DC2626",
+        "gradient": "from-red-500 to-red-600",
+        "services": [
+          "Design of sanitary hygiene & building maintenance plans",
+          "Regular cleaning of pharmacies and hospitals",
+          "Disinfection, Decontamination",
+          "Pest control, Rodent extermination"
+        ],
+        "benefits": [
+          "Staff trained in hospital standards",
+          "Strict disinfection protocols",
+          "Medical-grade approved products",
+          "Compliance with HACCP standards",
+          "Emergency intervention possible"
+        ],
+        "stats": [
+          { "label": "Healthcare centers", "value": "15+" },
+          { "label": "Pharmacies", "value": "20+" },
+          { "label": "Years of experience", "value": "6+" }
+        ]
+      },
+      {
+        "id": "eco-jardin",
+        "title": "Eco-Jardin",
+        "subtitle": "Design and creation of sustainable green spaces",
+        "description": "Professional landscaping with 3D design, creation, and maintenance of eco-friendly green spaces.",
+        "color": "#22C55E",
+        "gradient": "from-green-400 to-green-500",
+        "services": [
+          "3D landscaping design",
+          "Creation of green spaces: lawns, flowers, etc.",
+          "Maintenance of green spaces: watering, weeding, mowing, and hedge trimming",
+          "Pest control and fertilization"
+        ],
+        "benefits": [
+          "Custom designs with 3D plans",
+          "Selection of plants adapted to the climate",
+          "Economical watering techniques",
+          "Eco-friendly maintenance without pesticides",
+          "Year-round personalized follow-up"
+        ],
+        "stats": [
+          { "label": "Gardens created", "value": "100+" },
+          { "label": "m² landscaped", "value": "5000+" },
+          { "label": "Species planted", "value": "50+" }
+        ]
+      },
+      {
+        "id": "natura-potager",
+        "title": "Natura-Potager",
+        "subtitle": "Organic vegetable gardens for healthy eating",
+        "description": "Creation and management of organic vegetable gardens with soil study, vegetable selection, and natural cultivation techniques.",
+        "color": "#16A34A",
+        "gradient": "from-green-600 to-green-700",
+        "services": [
+          "Soil study and vegetable adaptation suggestions",
+          "Planting various types of vegetables",
+          "Maintenance and pest control as needed"
+        ],
+        "benefits": [
+          "100% organic vegetable production",
+          "Permaculture techniques",
+          "Space optimization",
+          "Training for self-management",
+          "Harvests all year round"
+        ],
+        "stats": [
+          { "label": "Vegetable gardens created", "value": "80+" },
+          { "label": "Families fed", "value": "200+" },
+          { "label": "Varieties cultivated", "value": "30+" }
+        ]
+      },
+      {
+        "id": "eco-event",
+        "title": "Éco-Event",
+        "subtitle": "Ecological waste management for events",
+        "description": "Complete waste management solutions for events with sorting, recycling, and ecological communication.",
+        "color": "#0284C7",
+        "gradient": "from-blue-500 to-blue-600",
+        "services": [
+          "Eco-friendly branding design",
+          "Provision of branded and personalized bins",
+          "Collection, sorting, and processing of event waste",
+          "Disposal and recycling of waste"
+        ],
+        "benefits": [
+          "Zero waste events possible",
+          "Personalized bins with your branding",
+          "Professional waste sorting",
+          "Public awareness",
+          "Reduced carbon footprint"
+        ],
+        "stats": [
+          { "label": "Events managed", "value": "150+" },
+          { "label": "Tons recycled", "value": "50+" },
+          { "label": "Participants raised awareness", "value": "10000+" }
+        ]
+      },
+      {
+        "id": "nettoie-event",
+        "title": "Nettoie-Event",
+        "subtitle": "Event cleaning before, during, and after",
+        "description": "Complete cleaning services for all types of events with strategic intervention and dedicated teams.",
+        "color": "#0EA5E9",
+        "gradient": "from-sky-500 to-sky-600",
+        "services": [
+          "Design of strategic event hygiene plan",
+          "Eco-friendly cleaning before, during, and after events",
+          "Disinfection and pest control of sites"
+        ],
+        "benefits": [
+          "Intervention in 3 complete phases",
+          "Dedicated teams on-site",
+          "Real-time cleaning",
+          "Emergency management",
+          "Strict deadline compliance"
+        ],
+        "stats": [
+          { "label": "Events cleaned", "value": "200+" },
+          { "label": "Hours of intervention", "value": "5000+" },
+          { "label": "Client satisfaction", "value": "98%" }
+        ]
+      }
+    ],
+    "formation": {
+      "description": "We have a professional training center for hygiene, cleaning, and related services",
+      "subtitle": "Available Training Programs",
+      "items": [
+        {
+          "title": "Surface Technician: Cleaning Agent",
+          "duration": "2 weeks"
+        },
+        {
+          "title": "Surface Technician: Hygiene and Cleaning Agent in Healthcare Settings",
+          "duration": "3 weeks"
+        },
+        {
+          "title": "Surface Technician: Gardener and/or Landscaper",
+          "duration": "4 weeks"
+        }
+      ],
+      "footer": {
+        "title": "Interested in our training programs?",
+        "description": "Contact us for more information on our training programs and the upcoming sessions available."
+      },
+      "cTAService": {
+        "title": "Ready to start your project?",
+        "description": "Our experts are available to assess your needs and provide the right solution for you."
+      }
+    }
+  },
+  "about": {
+    "title": "About Africa Clean",
+    "description": "Since 2018, we make your premises clean and sustainable with an eco-friendly approach and innovative solutions.",
+    "stats": [
+      {
+        "value": "6+",
+        "label": "Years of Experience"
+      },
+      {
+        "value": "200+",
+        "label": "Satisfied Clients"
+      },
+      {
+        "value": "6",
+        "label": "Innovative Concepts"
+      },
+      {
+        "value": "5",
+        "label": "Awards Won"
+      }
+    ],
+    "summary": {
+      "title": "Who We Are",
+      "house": "At the house of",
+      "phrases": [
+        "We put technology and innovation at the service of hygiene and the environment, with a clear goal: to provide effective, sustainable, and personalized solutions.",
+        "AFRICA CLEAN is a startup specialized in the CleanTech sector: manufacturing eco-friendly bins from recycled materials, waste management, event cleaning, and creating green spaces and vegetable gardens.",
+        "Each service is designed to combine efficiency, quality, and respect for the environment."
+      ]
+    },
+    "history": {
+      "description": "A journey of innovation and commitment to the environment",
+      "stats": [
+        {
+          "icon": "Calendar",
+          "title": "Beginnings (2018)",
+          "subtitle": "Founded as GROUPE LUMIERE JEUNESSE",
+          "description": "AFRICA CLEAN was founded in 2018 under the name GROUPE LUMIERE JEUNESSE. Initially, the company provided professional cleaning and maintenance services for premises as well as the design, creation, and maintenance of green spaces and vegetable gardens.\n\nLater, the company expanded its activities to include waste management and event cleaning, moving and transporting goods, as well as manufacturing eco-friendly and customized bins."
+        },
+        {
+          "icon": "Star",
+          "title": "Evolution (2023)",
+          "subtitle": "Renamed AFRICA CLEAN",
+          "description": "In 2023, the company changed its name to AFRICA CLEAN to better reflect its mission of providing high-quality cleaning and maintenance services to clients, with a broader vision across Africa."
+        }
+      ],
+      "achievements": [
+        {
+          "year": "2020",
+          "title": "PPEJ CONFEJES Winner",
+          "description": "Best young company in the professional eco-cleaning sector",
+          "organization": "CONFEJES",
+          "color": "#14A800"
+        },
+        {
+          "year": "2021",
+          "title": "Francophone Fair #FFJGRD2021 Winner",
+          "description": "Best initiative of the 2nd edition on Waste Management and Recycling",
+          "organization": "Francophone Fair",
+          "color": "#0284C7"
+        },
+        {
+          "year": "2021",
+          "title": "AgriTalkture Winner",
+          "description": "Pitch competition for the best urban agro-ecological student initiatives",
+          "organization": "IAAS – TOGO",
+          "color": "#16A34A"
+        },
+        {
+          "year": "2021",
+          "title": "2nd Prize COJECC2021",
+          "description": "Environmental protection project 'Making Waste Useful'",
+          "organization": "UNDP Togo & NGO Young Greens",
+          "color": "#DC2626"
+        },
+        {
+          "year": "2022",
+          "title": "Total Energy Finalist",
+          "description": "Startup competition for the digital waste management project",
+          "organization": "Total Energy",
+          "color": "#F59E0B"
+        }
+      ],
+      "coreValues": [
+        {
+          "icon": "Heart",
+          "title": "Ecological Commitment",
+          "description": "We are committed to protecting the environment through sustainable practices and eco-friendly products.",
+          "color": "#16A34A"
+        },
+        {
+          "icon": "Users",
+          "title": "Service Excellence",
+          "description": "We aim for excellence in every intervention with trained teams and professional equipment.",
+          "color": "#14A800"
+        },
+        {
+          "icon": "Handshake",
+          "title": "Sustainable Partnership",
+          "description": "We build long-term trust relationships with our clients and partners.",
+          "color": "#0284C7"
+        },
+        {
+          "icon": "Medal",
+          "title": "Continuous Innovation",
+          "description": "We constantly innovate to offer ever more efficient and respectful solutions.",
+          "color": "#7C3AED"
+        },
+        {
+          "icon": "Lock",
+          "title": "Confidentiality",
+          "description": "Confidentiality is a sacred principle for us: everything we see, hear, or discover remains strictly confidential.",
+          "color": "#FF0000"
+        }
+      ]
+    },
+    "tabContent": [
+      "We put technology and innovation at the service of hygiene and the environment, with a clear goal: to provide effective, sustainable, and personalized solutions for a clean and sustainable Africa.",
+      "To become the African leader in ecological cleaning and maintenance solutions, actively contributing to a clean and sustainable environment for future generations through innovation and service excellence."
+    ],
+    "teamSection": {
+      "title": "Meet Our Team",
+      "description": "Passionate professionals dedicated to your satisfaction"
+    },
+    "profile": {
+      "title": "Career & Expertise",
+      "formationAcademique": {
+        "title": "Academic Background",
+        "items": [
+          "Bachelor's in Economics and Management",
+          "BAC+4 in Project Management (specialized in agricultural and environmental projects)",
+          "Bachelor's in Education and Training Sciences"
+        ]
+      },
+      "formationsComplementaires": {
+        "title": "Additional Training",
+        "items": [
+          "Circular Economy and Waste Management",
+          "Surface Engineering",
+          "Entrepreneurship and Digital Marketing",
+          "Transport and Logistics",
+          "Human Resource Management"
+        ]
+      },
+      "experience": {
+        "title": "Experience",
+        "description": "Starting as a cleaning technician to support himself during his first university year, he leveraged his organizational and entrepreneurial skills to found the company, which is now one of the leaders in cleaning and maintenance services in Togo and Africa."
+      }
+    },
+    "teamsValue": {
+      "title": "Join Our Team",
+      "description": "Do you share our values and want to contribute to a cleaner and sustainable Africa? We are constantly looking for passionate talent to join our mission."
+    },
+    "whyChooseUs": {
+      "title": "Why Choose Africa Clean?",
+      "subtitle": "6 reasons that make us your trusted partner",
+      "features": [
+        {
+          "title": "Eco-Friendly Products",
+          "description": "Exclusive use of environmentally friendly products",
+          "icon": "CheckCircle"
+        },
+        {
+          "title": "Professional Equipment",
+          "description": "Equipment and processes with minimal environmental impact",
+          "icon": "Medal"
+        },
+        {
+          "title": "Qualified Teams",
+          "description": "Professionals trained and available 24/7",
+          "icon": "Users"
+        },
+        {
+          "title": "Affordable Prices",
+          "description": "Competitive rates with 10% off your first order",
+          "icon": "Star"
+        },
+        {
+          "title": "Wide Coverage",
+          "description": "Operations across all regions of Togo and West Africa",
+          "icon": "MapPin"
+        },
+        {
+          "title": "Customer Satisfaction",
+          "description": "Quality commitment with personalized follow-up for every service",
+          "icon": "Heart"
+        }
+      ]
+    },
+    "cTAContact": {
+      "title": "Ready to get started with us?",
+      "description": "Contact us today to discuss your needs and discover how we can support you."
+    }
+  },
+
+  "blog": {
+    "title": "Africa Clean Blog",
+    "description": "Discover our tips, news, and expertise in eco-friendly cleaning and sustainable services.",
+    "cTASection": {
+      "title": "Stay up to date with our latest news",
+      "description": "Discover our latest advice and innovations in eco-friendly cleaning.",
+      "input": {
+        "firstName": {
+          "label": "First Name *",
+          "placeholder": "Your first name"
+        },
+        "lastName": {
+          "label": "Last Name *",
+          "placeholder": "Your last name"
+        },
+        "email": {
+          "label": "Email *",
+          "placeholder": "your@email.com"
+        },
+        "phone": {
+          "label": "Phone *",
+          "placeholder": "+228 XX XX XX XX"
+        },
+        "company": {
+          "label": "Company / Organization",
+          "placeholder": "Your company name (optional)"
+        },
+        "subject": {
+          "label": "Subject",
+          "placeholder": "Topic of your request"
+        },
+        "service": {
+          "label": "Related Service",
+          "placeholder": "Select a service"
+        },
+        "urgency": {
+          "label": "Urgency",
+          "placeholder": "Level of urgency"
+        },
+        "message": {
+          "label": "Message *",
+          "placeholder": "Write your message here"
+        }
+      }
+    }
+  },
+  "contact": {
+  "title": "Contact Us",
+  "description": "A question, a project, an emergency? Our team is at your disposal to assist you.",
+  "formSection": {
+    "title": "Send us a message",
+    "description": "Fill out the form below and we will get back to you quickly.",
+    "input": {
+      "firstName": {
+        "label": "First Name *",
+        "placeholder": "Your first name"
+      },
+      "lastName": {
+        "label": "Last Name *",
+        "placeholder": "Your last name"
+      },
+      "email": {
+        "label": "Email *",
+        "placeholder": "your@email.com"
+      },
+      "phone": {
+        "label": "Phone *",
+        "placeholder": "+228 XX XX XX XX"
+      },
+      "company": {
+        "label": "Company / Organization",
+        "placeholder": "Your company name (optional)"
+      },
+      "subject": {
+        "label": "Subject",
+        "placeholder": "Topic of your request"
+      },
+      "service": {
+        "label": "Related Service",
+        "placeholder": "Select a service"
+      },
+      "urgency": {
+        "label": "Urgency",
+        "placeholder": "Level of urgency"
+      },
+      "message": {
+        "label": "Message *",
+        "placeholder": "Write your message here"
+      }
+    }
+  },
+  "mapSection": {
+    "title": "Our Location",
+    "description": "Come visit us at our headquarters in Lomé"
+  },
+  "additional": {
+    "title": "Need immediate help?",
+    "emergencies": {
+      "title": "24/7 Emergencies",
+      "description": "For urgent cleaning, disinfection, or waste management interventions."
+    },
+    "liveChat": {
+      "title": "Live Chat",
+      "description": "Ask your questions and get quick answers via WhatsApp."
+    }
+  },
+  "cTASection": {
+    "title": "Quality Commitment",
+    "description": "We are committed to responding to all your requests as quickly as possible. Your satisfaction is our priority."
+  }
+},
+
+  "homeContact": {
+    "title": "Partnership or Additional Information Request",
+    "whatsappContact": "Contact us on WhatsApp"
+  },
+  "cover": {
+    "emailContact": "Send an Email",
+    "quote": "Request a Quote",
+    "freeQuote": "Free Quote",
+    "slogan": "For a Clean and Sustainable Africa!",
+    "footer": "2025 AFRICA CLEAN. All Rights Reserved. For a Clean and Sustainable Africa!",
+    "service": "Discover our services",
+    "project": "See our projects",
+    "more": "Learn more",
+    "contactExpert": "Contact our experts",
+    "freeQuoteNow": "Request a Free Quote Now",
+    "ourCustomer": "Our Customers",
+    "ourPartner": "Our Partners",
+    "becomeCustomer": "Become a Client",
+    "giveFreeQuote": "Request a Free Quote",
+    "contactInfo": "Contact Information",
+    "headOffice": "Head Office: Djidjolé, behind CMS, Lomé, Togo",
+    "contactUs": "Contact Us",
+    "ourFormation": "Our Formation",
+    "ourServices": "Our services",
+    "ourNotion": "Discover our concepts",
+    "whyChoose": " Why choose us",
+    "ourHistory": "Our History",
+    "MeetTheTeam": "Meet the Team",
+    "ourDistinctions": "Our Distinctions",
+    "ourVision": "Our Vision",
+    "ourMission": "Our Mission",
+    "house": "At the house of",
+    "values": "Values",
+    "missionSlogan": "The pillars that guide our daily commitment",
+    "badge": "Founder & Manager",
+    "joiningTheTeam": "Join the Team",
+    "discoverQualify": "10% Discount Offered!",
+    "discover": "On your first order to discover the quality of our services",
+    "ClaimYourOffer": "Claim the Offer",
+    "filterByTag": "Filter by tag",
+    "searchAnArticle": "Search for an article...",
+    "allTags": "All tags",
+    "search": "Search",
+    "clearAllFilters": "Clear all filters",
+    "researchInProgress": "Search in progress",
+    "noArticleFound": "No article found",
+    "activeFilters": "Active filters",
+    "seeAllArticles": "See all articles",
+    "found": "Found",
+    "read": "Read",
+    "callNow": "Call now",
+    "sendMessage": "Send message",
+    "SendingInProgress": "Sending...",
+    "requiredFields": "Required fields",
+    "showDiscover": "See our services",
+    "practicalInformation": "Practical information",
+    "fullAddress": "Full address",
+    "officeHours": "Office hours",
+    "transport": "Accessible by taxi, motorbike taxi, and public transport. Parking available on site.",
+    "openWhatsapp": "Open WhatsApp",
+    "responseWithin24Hours": "Response within 24 hours",
+    "personalizedAdvice": "Personalized advice",
+        "followUs":"Follow us",
+    "Schedules":"Schedules",
+    "address":"Address",
+    "quickActions":"Quick Actions"
+
+  }
+}

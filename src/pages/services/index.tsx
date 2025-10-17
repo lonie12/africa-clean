@@ -10,6 +10,7 @@ import {
 } from "@phosphor-icons/react";
 import { Building, GraduationCap } from "@phosphor-icons/react";
 import WhatsAppFloatingButton from "@/components/common/WhatsAppButton";
+import { useTranslation } from "react-i18next";
 
 interface ConceptDetail {
   id: string;
@@ -27,7 +28,10 @@ interface ConceptDetail {
     value: string;
   }[];
 }
-
+interface FormationsType {
+  title: string;
+  duration: string;
+}
 const ServicesPage: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>("");
 
@@ -52,14 +56,17 @@ const ServicesPage: React.FC = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  const { t } = useTranslation();
+  const translationConcepts = t("servicePage.concepts", {
+    returnObjects: true,
+  }) as ConceptDetail[];
 
   const concepts: ConceptDetail[] = [
     {
       id: "nettoie-pro",
-      title: "Nettoie-Pro",
-      subtitle: "Vos locaux toujours propres, notre engagement au quotidien",
-      description:
-        "Solutions de nettoyage professionnel pour tous types d'espaces avec une approche éco-responsable et des équipes qualifiées.",
+      title: translationConcepts[0].title,
+      subtitle: translationConcepts[0].subtitle,
+      description: translationConcepts[0].description,
       icon: (
         <img
           src="/images/services/nettoiepro-logo.png"
@@ -69,42 +76,20 @@ const ServicesPage: React.FC = () => {
       color: "#14A800",
       // color: "#14A800",
       gradient: "from-green-500 to-green-600",
-      services: [
-        "Entretien courant de bureaux",
-        "Entretien courant de maison",
-        "Nettoyage des pharmacies et hôpitaux",
-        "Désinfection et décontamination",
-        "Entretien fin chantier",
-        "Lavage à la machine",
-        "Nettoyage en hauteur",
-        "Nettoyage de luminaires",
-        "Désinsectisation et dératisation",
-      ],
-      benefits: [
-        "Équipes professionnelles et qualifiées",
-        "Produits écologiques certifiés",
-        "Intervention 24h/24 et 7j/7",
-        "Matériel professionnel de pointe",
-        "Respect des normes d'hygiène",
-      ],
+      services: translationConcepts[0].services,
+      benefits: translationConcepts[0].benefits,
       images: [
         "/images/services/nettoie-pro-1.jpg",
         "/images/services/nettoie-pro-2.jpg",
         "/images/services/nettoie-pro-3.jpg",
       ],
-      stats: [
-        { label: "Clients satisfaits", value: "200+" },
-        { label: "Interventions/mois", value: "500+" },
-        { label: "Équipes formées", value: "50+" },
-      ],
+      stats: translationConcepts[0].stats,
     },
     {
       id: "sante-pro",
-      title: "Santé-Pro",
-      subtitle:
-        "Nous garantissons l'hygiène et la propreté dans vos centres de santé",
-      description:
-        "Expertise spécialisée en hygiène hospitalière et pharmaceutique avec des protocoles stricts et du personnel qualifié.",
+      title: translationConcepts[1].title,
+      subtitle: translationConcepts[1].subtitle,
+      description: translationConcepts[1].description,
       icon: (
         <img
           src="/images/services/santepro-logo.png"
@@ -113,36 +98,20 @@ const ServicesPage: React.FC = () => {
       ),
       color: "#DC2626",
       gradient: "from-red-500 to-red-600",
-      services: [
-        "Conception de plan d'hygiène sanitaire & de maintenance des bâtiments",
-        "Entretien & Nettoyage courant des Pharmacies et Hôpitaux",
-        "Désinfection, Décontamination",
-        "Désinsectisation, Dératisation",
-      ],
-      benefits: [
-        "Personnel formé aux normes hospitalières",
-        "Protocoles de désinfection stricts",
-        "Produits homologués pour le médical",
-        "Respect des normes HACCP",
-        "Intervention d'urgence possible",
-      ],
+      services: translationConcepts[1].services,
+      benefits: translationConcepts[1].benefits,
       images: [
         "/images/services/sante-pro-1.jpg",
         "/images/services/sante-pro-2.jpg",
         "/images/services/sante-pro-3.jpg",
       ],
-      stats: [
-        { label: "Centres de santé", value: "15+" },
-        { label: "Pharmacies", value: "20+" },
-        { label: "Ans d'expérience", value: "6+" },
-      ],
+      stats: translationConcepts[0].stats,
     },
     {
       id: "eco-jardin",
-      title: "Eco-Jardin",
-      subtitle: "Conception et création d'espaces verts durables",
-      description:
-        "Aménagement paysager professionnel avec conception 3D, création et entretien d'espaces verts respectueux de l'environnement.",
+      title: translationConcepts[2].title,
+      subtitle: translationConcepts[2].subtitle,
+      description: translationConcepts[2].description,
       icon: (
         <img
           src="/images/services/ecojardin-logo.png"
@@ -151,36 +120,20 @@ const ServicesPage: React.FC = () => {
       ),
       color: "#22C55E",
       gradient: "from-green-400 to-green-500",
-      services: [
-        "Conception paysagiste 3D",
-        "Création d'espaces verts : gazons, fleurs...",
-        "Entretien d'espaces verts : arrosage, désherbage, tonte, et taille de haie",
-        "Désinsectisation et fertilisation",
-      ],
-      benefits: [
-        "Conception sur mesure avec plans 3D",
-        "Sélection de plantes adaptées au climat",
-        "Techniques d'arrosage économiques",
-        "Entretien écologique sans pesticides",
-        "Suivi personnalisé toute l'année",
-      ],
+      services: translationConcepts[2].services,
+      benefits: translationConcepts[2].benefits,
       images: [
         "/images/services/eco-jardin-1.jpg",
         "/images/services/eco-jardin-2.jpg",
         "/images/services/eco-jardin-3.jpg",
       ],
-      stats: [
-        { label: "Jardins créés", value: "100+" },
-        { label: "m² aménagés", value: "5000+" },
-        { label: "Espèces plantées", value: "50+" },
-      ],
+      stats: translationConcepts[2].stats,
     },
     {
       id: "natura-potager",
-      title: "Natura-Potager",
-      subtitle: "Jardins potagers biologiques pour une alimentation saine",
-      description:
-        "Création et gestion de potagers bio avec étude de sol, sélection de légumes adaptés et techniques de culture naturelle.",
+      title: translationConcepts[3].title,
+      subtitle: translationConcepts[3].subtitle,
+      description: translationConcepts[3].description,
       icon: (
         <img
           src="/images/services/naturapotager-logo.jpg"
@@ -189,35 +142,20 @@ const ServicesPage: React.FC = () => {
       ),
       color: "#16A34A",
       gradient: "from-green-600 to-green-700",
-      services: [
-        "Étude de sol et proposition de légumes adaptés",
-        "Plantation de différentes sortes de légumes",
-        "Entretien et désinsectisation au besoin",
-      ],
-      benefits: [
-        "Production de légumes 100% bio",
-        "Techniques de permaculture",
-        "Optimisation de l'espace disponible",
-        "Formation à l'auto-gestion",
-        "Récoltes toute l'année",
-      ],
+      services: translationConcepts[3].services,
+      benefits: translationConcepts[3].benefits,
       images: [
         "/images/services/natura-potager-4.jpg",
         "/images/services/natura-potager-1.png",
         "/images/services/natura-potager-3.jpg",
       ],
-      stats: [
-        { label: "Potagers créés", value: "80+" },
-        { label: "Familles nourries", value: "200+" },
-        { label: "Variétés cultivées", value: "30+" },
-      ],
+      stats: translationConcepts[3].stats,
     },
     {
       id: "eco-event",
-      title: "Éco-Event",
-      subtitle: "Gestion écologique des déchets événementiels",
-      description:
-        "Solutions complètes de gestion des déchets pour événements avec tri, recyclage et communication écologique.",
+      title: translationConcepts[4].title,
+      subtitle: translationConcepts[4].subtitle,
+      description: translationConcepts[4].description,
       icon: (
         <img
           src="/images/services/ecoevent-logo.jpg"
@@ -226,36 +164,20 @@ const ServicesPage: React.FC = () => {
       ),
       color: "#0284C7",
       gradient: "from-blue-500 to-blue-600",
-      services: [
-        "Conception d'identité de Branding écologique",
-        "Mise à disposition des poubelles brandées et personnalisées",
-        "Collecte, tri et traitement de déchets événementiels",
-        "Évacuation et recyclage des déchets",
-      ],
-      benefits: [
-        "Événements zéro déchet possibles",
-        "Poubelles personnalisées à votre image",
-        "Tri sélectif professionnel",
-        "Sensibilisation du public",
-        "Bilan carbone réduit",
-      ],
+      services: translationConcepts[4].services,
+      benefits: translationConcepts[4].benefits,
       images: [
         "/images/services/eco-event-1.jpg",
         "/images/services/eco-event-2.jpg",
         "/images/services/eco-event-3.jpg",
       ],
-      stats: [
-        { label: "Événements gérés", value: "150+" },
-        { label: "Tonnes recyclées", value: "50+" },
-        { label: "Participants sensibilisés", value: "10000+" },
-      ],
+      stats: translationConcepts[4].stats,
     },
     {
       id: "nettoie-event",
-      title: "Nettoie-Event",
-      subtitle: "Nettoyage événementiel avant, pendant et après",
-      description:
-        "Services complets de nettoyage pour tous types d'événements avec intervention stratégique et équipes dédiées.",
+      title: translationConcepts[5].title,
+      subtitle: translationConcepts[5].subtitle,
+      description: translationConcepts[5].description,
       icon: (
         <img
           src="/images/services/nettoieevent-logo.jpg"
@@ -264,46 +186,34 @@ const ServicesPage: React.FC = () => {
       ),
       color: "#0EA5E9",
       gradient: "from-sky-500 to-sky-600",
-      services: [
-        "Conception de plan stratégique d'hygiène événementielle",
-        "Entretien, nettoyage écologique, avant, pendant et après événement",
-        "Désinfection et désinsectisation régulière des sites",
-      ],
-      benefits: [
-        "Intervention en 3 phases complètes",
-        "Équipes dédiées sur site",
-        "Nettoyage en temps réel",
-        "Gestion des urgences",
-        "Respect des délais stricts",
-      ],
+      services: translationConcepts[5].services,
+      benefits: translationConcepts[5].benefits,
       images: [
         "/images/services/nettoie-event-1.jpg",
         "/images/services/nettoie-event-2.jpg",
         "/images/services/nettoie-event-3.png",
       ],
-      stats: [
-        { label: "Événements nettoyés", value: "200+" },
-        { label: "Heures d'intervention", value: "5000+" },
-        { label: "Satisfaction client", value: "98%" },
-      ],
+      stats: translationConcepts[5].stats,
     },
   ];
 
+  const formationsItemes = t("servicePage.formation.items", {
+    returnObjects: true,
+  }) as FormationsType[];
   const formations = [
     {
-      title: "Technicien de surfaces : Agent de Nettoyage",
-      duration: "2 semaines",
+      title: formationsItemes[0].title,
+      duration: formationsItemes[2].duration,
       image: "/images/formations/nettoyage.jpg",
     },
     {
-      title:
-        "Technicien de surfaces : Agent d'hygiène et de propreté en milieu hospitalier",
-      duration: "3 semaines",
+      title: formationsItemes[1].title,
+      duration: formationsItemes[1].duration,
       image: "/images/formations/hospitalier.jpg",
     },
     {
-      title: "Technicien de surfaces : Jardinier et/ou paysagiste",
-      duration: "4 semaines",
+      title: formationsItemes[2].title,
+      duration: formationsItemes[2].duration,
       image: "/images/formations/jardinier.jpg",
     },
   ];
@@ -326,31 +236,30 @@ const ServicesPage: React.FC = () => {
             alt="Services Africa Clean"
             className="w-full h-full object-cover"
             onError={(e) => {
-              e.currentTarget.style.display = 'none';
+              e.currentTarget.style.display = "none";
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-br from-[#14A800]/55 to-[#128700]/45"></div>
         </div>
         <div className="relative max-w-6xl mx-auto px-6 text-center z-10">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Nos Services & Formations
+            {t("servicePage.title")}
           </h1>
           <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-            6 concepts innovants et des formations professionnelles pour
-            répondre à tous vos besoins
+            {t("servicePage.description")}
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <button
               onClick={() => scrollToSection("concepts")}
               className="bg-white text-[#14A800] px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105"
             >
-              Découvrir nos concepts
+              {t("cover.ourNotion")}
             </button>
             <button
               onClick={() => scrollToSection("formations")}
               className="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-[#14A800] transition-all duration-300"
             >
-              Nos formations
+              {t("cover.ourFormation")}
             </button>
           </div>
         </div>
@@ -423,9 +332,10 @@ const ServicesPage: React.FC = () => {
           {/* Concept Details */}
           {concepts.map((concept, index) => (
             <div
-              key={concept.id}
-              id={concept.id}
-              data-section={concept.id}
+              key={index}
+              // key={concept.id}
+              // id={concept.id}
+              // data-section={concept.id}
               className="mb-24 scroll-mt-32"
             >
               <div
@@ -462,7 +372,7 @@ const ServicesPage: React.FC = () => {
                         className="mr-2"
                         style={{ color: concept.color }}
                       />
-                      Nos prestations
+                      {t("cover.ourServices")}
                     </h4>
                     <div className="grid gap-3">
                       {concept.services.map((service, idx) => (
@@ -486,7 +396,7 @@ const ServicesPage: React.FC = () => {
                         className="mr-2"
                         style={{ color: concept.color }}
                       />
-                      Pourquoi nous choisir
+                      {t("cover.whyChoose")}
                     </h4>
                     <div className="grid gap-2">
                       {concept.benefits.map((benefit, idx) => (
@@ -528,7 +438,7 @@ const ServicesPage: React.FC = () => {
                     className="w-full py-4 px-8 rounded-full font-semibold text-white transition-all duration-300 transform hover:scale-105 hover:shadow-xl flex items-center justify-center space-x-2"
                     style={{ backgroundColor: concept.color }}
                   >
-                    <span>Demander un devis gratuit</span>
+                    <span>{t("cover.freeQuote")}</span>
                     <ArrowRight size={20} />
                   </button>
                 </div>
@@ -572,16 +482,15 @@ const ServicesPage: React.FC = () => {
             <div className="flex items-center justify-center mb-6">
               <GraduationCap size={40} className="text-purple-600 mr-4" />
               <h2 className="text-3xl md:text-4xl font-bold text-[#212121]">
-                Nos Formations
+                {t("cover.ourFormation")}
               </h2>
             </div>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto mb-8">
-              Nous disposons d'un centre de formation professionnelle aux
-              métiers d'hygiène, de propreté et des services associés
+              {t("servicePage.formation.description")}
             </p>
             <div className="bg-white rounded-2xl p-8 shadow-lg max-w-4xl mx-auto">
               <h3 className="text-2xl font-bold text-[#212121] mb-6">
-                Programmes de Formation Disponibles
+                {t("servicePage.formation.subtitle")}
               </h3>
               <div className="grid md:grid-cols-3 gap-8">
                 {formations.map((formation, index) => (
@@ -623,11 +532,10 @@ const ServicesPage: React.FC = () => {
           {/* Contact for Formation */}
           <div className="bg-gradient-to-r from-purple-600 to-indigo-600 rounded-3xl p-8 text-white text-center">
             <h3 className="text-2xl font-bold mb-4">
-              Intéressé par nos formations ?
+              {t("servicePage.formation.footer.title")}
             </h3>
             <p className="text-lg mb-6 opacity-90">
-              Contactez-nous pour plus d'informations sur nos programmes de
-              formation et les prochaines sessions disponibles.
+              {t("servicePage.formation.footer.description")}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
@@ -641,7 +549,7 @@ const ServicesPage: React.FC = () => {
                 href="mailto:africaclean.contact@gmail.com"
                 className="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-purple-600 transition-all duration-300"
               >
-                Nous contacter
+                {t("cover.contactUs")}
               </a>
             </div>
           </div>
@@ -652,24 +560,23 @@ const ServicesPage: React.FC = () => {
       <section className="py-16 bg-[#14A800] text-white">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Prêt à démarrer votre projet ?
+            {t("servicePage.formation.cTAService.title")}
           </h2>
           <p className="text-xl mb-8 opacity-90">
-            Nos experts sont à votre disposition pour étudier vos besoins et
-            vous proposer la solution adaptée.
+            {t("servicePage.formation.cTAService.description")}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={() => (window.location.href = "/quote")}
               className="bg-white text-[#14A800] px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105"
             >
-              Demander un devis gratuit
+              {t("cover.giveFreeQuote")}
             </button>
             <button
               onClick={() => (window.location.href = "/contact")}
               className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-[#14A800] transition-all duration-300"
             >
-              Nous contacter
+              {t("cover.contactUs")}
             </button>
           </div>
         </div>
