@@ -242,33 +242,33 @@
       "description": "Your testimonial helps us improve our services"
     }
   },
-  "whyChooseUs":
-  {"title": "Why Choose AFRICA CLEAN?",
-"advantages": [
-  {
-    "icone": "Leaf",
-    "title": "Eco-Friendly Products",
-    "description": "Exclusive use of environmentally friendly products."
+  "whyChooseUs": {
+    "title": "Why Choose AFRICA CLEAN?",
+    "advantages": [
+      {
+        "icone": "Leaf",
+        "title": "Eco-Friendly Products",
+        "description": "Exclusive use of environmentally friendly products."
+      },
+      {
+        "icone": "Users",
+        "title": "Qualified Teams",
+        "description": "Trained and experienced professionals available 24/7."
+      },
+      {
+        "icone": "Trophy",
+        "title": "Affordable Prices",
+        "description": "Competitive rates with a 10% discount on your first order."
+      },
+      {
+        "icone": "MapPin",
+        "title": "Wide Coverage",
+        "description": "Services available across all regions of Togo and West Africa."
+      }
+    ],
+    "footerDescription": "Get 10% off your first order!",
+    "footerButton": "Take Advantage of the Offer"
   },
-  {
-    "icone": "Users",
-    "title": "Qualified Teams",
-    "description": "Trained and experienced professionals available 24/7."
-  },
-  {
-    "icone": "Trophy",
-    "title": "Affordable Prices",
-    "description": "Competitive rates with a 10% discount on your first order."
-  },
-  {
-    "icone": "MapPin",
-    "title": "Wide Coverage",
-    "description": "Services available across all regions of Togo and West Africa."
-  }
-],
-"footerDescription": "Get 10% off your first order!",
-"footerButton": "Take Advantage of the Offer"
-},
   "contactCTA": {
     "title": "Do you have an ambitious project to complete or wish to become a business partner?",
     "description": "Would you like to discuss a B2B / B2C partnership?",
@@ -498,31 +498,31 @@
         ]
       }
     ],
-    "formation":{
-  "description": "We have a professional training center for hygiene, cleaning, and related services",
-  "subtitle": "Available Training Programs",
-  "items":[
-  {
-    "title": "Surface Technician: Cleaning Agent",
-    "duration": "2 weeks"
-  },
-  {
-    "title": "Surface Technician: Hygiene and Cleaning Agent in Healthcare Settings",
-    "duration": "3 weeks"
-  },
-  {
-    "title": "Surface Technician: Gardener and/or Landscaper",
-    "duration": "4 weeks"
-  }
-],"footer": {
-  "title": "Interested in our training programs?",
-  "description": "Contact us for more information on our training programs and the upcoming sessions available."
-},
-"cTAService": {
-  "title": "Ready to start your project?",
-  "description": "Our experts are available to assess your needs and provide the right solution for you."
-}
-
+    "formation": {
+      "description": "We have a professional training center for hygiene, cleaning, and related services",
+      "subtitle": "Available Training Programs",
+      "items": [
+        {
+          "title": "Surface Technician: Cleaning Agent",
+          "duration": "2 weeks"
+        },
+        {
+          "title": "Surface Technician: Hygiene and Cleaning Agent in Healthcare Settings",
+          "duration": "3 weeks"
+        },
+        {
+          "title": "Surface Technician: Gardener and/or Landscaper",
+          "duration": "4 weeks"
+        }
+      ],
+      "footer": {
+        "title": "Interested in our training programs?",
+        "description": "Contact us for more information on our training programs and the upcoming sessions available."
+      },
+      "cTAService": {
+        "title": "Ready to start your project?",
+        "description": "Our experts are available to assess your needs and provide the right solution for you."
+      }
     }
   },
   "about": {
@@ -718,8 +718,119 @@
       "title": "Ready to get started with us?",
       "description": "Contact us today to discuss your needs and discover how we can support you."
     }
-},
+  },
 
+  "blog": {
+    "title": "Africa Clean Blog",
+    "description": "Discover our tips, news, and expertise in eco-friendly cleaning and sustainable services.",
+    "cTASection": {
+      "title": "Stay up to date with our latest news",
+      "description": "Discover our latest advice and innovations in eco-friendly cleaning.",
+      "input": {
+        "firstName": {
+          "label": "First Name *",
+          "placeholder": "Your first name"
+        },
+        "lastName": {
+          "label": "Last Name *",
+          "placeholder": "Your last name"
+        },
+        "email": {
+          "label": "Email *",
+          "placeholder": "your@email.com"
+        },
+        "phone": {
+          "label": "Phone *",
+          "placeholder": "+228 XX XX XX XX"
+        },
+        "company": {
+          "label": "Company / Organization",
+          "placeholder": "Your company name (optional)"
+        },
+        "subject": {
+          "label": "Subject",
+          "placeholder": "Topic of your request"
+        },
+        "service": {
+          "label": "Related Service",
+          "placeholder": "Select a service"
+        },
+        "urgency": {
+          "label": "Urgency",
+          "placeholder": "Level of urgency"
+        },
+        "message": {
+          "label": "Message *",
+          "placeholder": "Write your message here"
+        }
+      }
+    }
+  },
+  "contact": {
+  "title": "Contact Us",
+  "description": "A question, a project, an emergency? Our team is at your disposal to assist you.",
+  "formSection": {
+    "title": "Send us a message",
+    "description": "Fill out the form below and we will get back to you quickly.",
+    "input": {
+      "firstName": {
+        "label": "First Name *",
+        "placeholder": "Your first name"
+      },
+      "lastName": {
+        "label": "Last Name *",
+        "placeholder": "Your last name"
+      },
+      "email": {
+        "label": "Email *",
+        "placeholder": "your@email.com"
+      },
+      "phone": {
+        "label": "Phone *",
+        "placeholder": "+228 XX XX XX XX"
+      },
+      "company": {
+        "label": "Company / Organization",
+        "placeholder": "Your company name (optional)"
+      },
+      "subject": {
+        "label": "Subject",
+        "placeholder": "Topic of your request"
+      },
+      "service": {
+        "label": "Related Service",
+        "placeholder": "Select a service"
+      },
+      "urgency": {
+        "label": "Urgency",
+        "placeholder": "Level of urgency"
+      },
+      "message": {
+        "label": "Message *",
+        "placeholder": "Write your message here"
+      }
+    }
+  },
+  "mapSection": {
+    "title": "Our Location",
+    "description": "Come visit us at our headquarters in Lomé"
+  },
+  "additional": {
+    "title": "Need immediate help?",
+    "emergencies": {
+      "title": "24/7 Emergencies",
+      "description": "For urgent cleaning, disinfection, or waste management interventions."
+    },
+    "liveChat": {
+      "title": "Live Chat",
+      "description": "Ask your questions and get quick answers via WhatsApp."
+    }
+  },
+  "cTASection": {
+    "title": "Quality Commitment",
+    "description": "We are committed to responding to all your requests as quickly as possible. Your satisfaction is our priority."
+  }
+},
 
   "homeContact": {
     "title": "Partnership or Additional Information Request",
@@ -742,24 +853,51 @@
     "giveFreeQuote": "Request a Free Quote",
     "contactInfo": "Contact Information",
     "headOffice": "Head Office: Djidjolé, behind CMS, Lomé, Togo",
-    "contactUs":"Contact Us",
-    "ourFormation":"Our Formation",
-    "ourServices":"Our services",
-   "ourNotion":"Discover our concepts",
-    "whyChoose":" Why choose us",
-  "ourHistory": "Our History",
-  "MeetTheTeam": "Meet the Team",
-  "ourDistinctions": "Our Distinctions",
-  "ourVision": "Our Vision",
-  "ourMission": "Our Mission",
-  "house": "At the house of",
-  "values": "Values",
-  "missionSlogan": "The pillars that guide our daily commitment",
-  "badge": "Founder & Manager",
-  "joiningTheTeam": "Join the Team",
-  "discoverQualify": "10% Discount Offered!",
-  "discover": "On your first order to discover the quality of our services",
-  "ClaimYourOffer": "Claim the Offer"
+    "contactUs": "Contact Us",
+    "ourFormation": "Our Formation",
+    "ourServices": "Our services",
+    "ourNotion": "Discover our concepts",
+    "whyChoose": " Why choose us",
+    "ourHistory": "Our History",
+    "MeetTheTeam": "Meet the Team",
+    "ourDistinctions": "Our Distinctions",
+    "ourVision": "Our Vision",
+    "ourMission": "Our Mission",
+    "house": "At the house of",
+    "values": "Values",
+    "missionSlogan": "The pillars that guide our daily commitment",
+    "badge": "Founder & Manager",
+    "joiningTheTeam": "Join the Team",
+    "discoverQualify": "10% Discount Offered!",
+    "discover": "On your first order to discover the quality of our services",
+    "ClaimYourOffer": "Claim the Offer",
+    "filterByTag": "Filter by tag",
+    "searchAnArticle": "Search for an article...",
+    "allTags": "All tags",
+    "search": "Search",
+    "clearAllFilters": "Clear all filters",
+    "researchInProgress": "Search in progress",
+    "noArticleFound": "No article found",
+    "activeFilters": "Active filters",
+    "seeAllArticles": "See all articles",
+    "found": "Found",
+    "read": "Read",
+    "callNow": "Call now",
+    "sendMessage": "Send message",
+    "SendingInProgress": "Sending...",
+    "requiredFields": "Required fields",
+    "showDiscover": "See our services",
+    "practicalInformation": "Practical information",
+    "fullAddress": "Full address",
+    "officeHours": "Office hours",
+    "transport": "Accessible by taxi, motorbike taxi, and public transport. Parking available on site.",
+    "openWhatsapp": "Open WhatsApp",
+    "responseWithin24Hours": "Response within 24 hours",
+    "personalizedAdvice": "Personalized advice",
+        "followUs":"Follow us",
+    "Schedules":"Schedules",
+    "address":"Address",
+    "quickActions":"Quick Actions"
 
   }
 }

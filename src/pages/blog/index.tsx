@@ -16,6 +16,7 @@ import { useBlog } from "../../context/blog-context";
 import { SearchInput } from "../../components/forms/search-input";
 import WhatsAppFloatingButton from "@/components/common/WhatsAppButton";
 import type { BlogPost } from "../../context/blog-context";
+import { useTranslation } from "react-i18next";
 
 const BlogPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -168,6 +169,7 @@ const BlogPage: React.FC = () => {
     setSearchTerm("");
     setSelectedTag("");
   };
+  const {t}=useTranslation()
 
   const formatDate = (date: Date) => {
     return date.toLocaleDateString("fr-FR", {
@@ -625,11 +627,11 @@ const BlogPage: React.FC = () => {
         </div>
         <div className="relative max-w-6xl mx-auto px-6 text-center z-10">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Blog Africa Clean
+           {t('blog.title')}
           </h1>
           <p className="text-xl md:text-2xl mb-8 opacity-90 max-w-3xl mx-auto">
-            Découvrez nos conseils, actualités et expertise en nettoyage
-            écologique et services durables
+                   {t('blog.description')}
+
           </p>
         </div>
       </section>
@@ -641,7 +643,7 @@ const BlogPage: React.FC = () => {
             {/* Search */}
             <div className="flex-1 max-w-md">
               <SearchInput
-                placeholder="Rechercher un article..."
+                placeholder={t('cover.searchAnArticle')}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 onSearch={handleSearch}
@@ -652,14 +654,14 @@ const BlogPage: React.FC = () => {
             {/* Tag Filter */}
             <div className="flex items-center space-x-4">
               <span className="text-sm text-gray-600 whitespace-nowrap">
-                Filtrer par tag:
+              {t('cover.filterByTag')}
               </span>
               <select
                 value={selectedTag}
                 onChange={(e) => setSelectedTag(e.target.value)}
                 className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#14A800] focus:border-transparent"
               >
-                <option value="">Tous les tags</option>
+                <option value="">{t('cover.allTags')}</option>
                 {allTags.map((tag) => (
                   <option key={tag} value={tag}>
                     {tag}
@@ -672,11 +674,11 @@ const BlogPage: React.FC = () => {
           {/* Active Filters */}
           {(searchTerm || selectedTag) && (
             <div className="mt-4 flex items-center space-x-4">
-              <span className="text-sm text-gray-600">Filtres actifs:</span>
+              <span className="text-sm text-gray-600">{t('cover.activeFilters')}:</span>
               <div className="flex items-center space-x-2">
                 {searchTerm && (
                   <span className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-100 text-blue-800">
-                    Recherche: "{searchTerm}"
+                    {t('cover.search')}: "{searchTerm}"
                     <button
                       onClick={clearSearch}
                       className="ml-2 text-blue-600 hover:text-blue-800"
@@ -700,7 +702,7 @@ const BlogPage: React.FC = () => {
                   onClick={clearFilters}
                   className="text-sm text-gray-500 hover:text-gray-700 underline"
                 >
-                  Effacer tous les filtres
+                { t('cover.clearAllFilters')}
                 </button>
               </div>
             </div>
@@ -710,7 +712,7 @@ const BlogPage: React.FC = () => {
           {isSearching && (
             <div className="mt-4 flex items-center space-x-2 text-gray-600">
               <SpinnerGap size={16} className="animate-spin" />
-              <span className="text-sm">Recherche en cours...</span>
+              <span className="text-sm">{t('cover.researchInProgress')}...</span>
             </div>
           )}
         </div>
@@ -726,7 +728,7 @@ const BlogPage: React.FC = () => {
                 className="text-gray-300 mx-auto mb-4"
               />
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                Aucun article trouvé
+                {t('cover.noArticleFound')}
               </h3>
               <p className="text-gray-600 mb-6">
                 {searchTerm || selectedTag
@@ -738,7 +740,7 @@ const BlogPage: React.FC = () => {
                   onClick={clearFilters}
                   className="bg-[#14A800] hover:bg-[#128700] text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300"
                 >
-                  Voir tous les articles
+                  {t('cover.seeAllArticles')}
                 </button>
               )}
             </div>
@@ -748,7 +750,7 @@ const BlogPage: React.FC = () => {
               <div className="mb-8">
                 <p className="text-gray-600">
                   {filteredPosts.length} article
-                  {filteredPosts.length > 1 ? "s" : ""} trouvé
+                  {filteredPosts.length > 1 ? "s" : ""} {t('cover.found')}
                   {filteredPosts.length > 1 ? "s" : ""}
                 </p>
               </div>
@@ -821,7 +823,7 @@ const BlogPage: React.FC = () => {
                         </div>
 
                         <div className="inline-flex items-center space-x-2 text-[#14A800] hover:text-[#128700] font-semibold transition-colors">
-                          <span>Lire</span>
+                          <span>{t('cover.read')}</span>
                           <ArrowRight size={14} />
                         </div>
                       </div>
@@ -838,24 +840,25 @@ const BlogPage: React.FC = () => {
       <section className="py-16 bg-[#14A800] text-white">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Restez informé de nos actualités
+           {t('blog.cTASection.title')}
           </h2>
           <p className="text-xl mb-8 opacity-90">
-            Découvrez nos derniers conseils et innovations en matière de
-            nettoyage écologique
+                   {t('blog.cTASection.description')}
+
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={() => navigate("/contact")}
               className="bg-white text-[#14A800] px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105"
             >
-              Nous contacter
+             {t('cover.contactUs')}
             </button>
             <button
               onClick={() => navigate("/services")}
               className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:bg-white hover:text-[#14A800]"
             >
-              Découvrir nos services
+             {t('cover.ourNotion')}
+
             </button>
           </div>
         </div>

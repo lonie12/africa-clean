@@ -679,50 +679,123 @@
         "description": "Ayant débuté en tant que technicien de surface pour subvenir à ses besoins dès sa première année universitaire, il a mis ses compétences organisationnelles et entrepreneuriales à profit pour fonder l'entreprise qui est désormais l'un des leaders dans le domaine des services de nettoyage et d'entretien au Togo et en Afrique."
       }
     },
-    "teamsValue":{
-      "title":"  Rejoignez Notre Équipe",
-      "description":" Vous partagez nos valeurs et souhaitez contribuer à une Afrique plus propre et durable ? Nous recherchons constamment des talents              passionnés pour rejoindre notre mission."
+    "teamsValue": {
+      "title": "  Rejoignez Notre Équipe",
+      "description": " Vous partagez nos valeurs et souhaitez contribuer à une Afrique plus propre et durable ? Nous recherchons constamment des talents              passionnés pour rejoindre notre mission."
     },
     "whyChooseUs": {
-    "title": "Pourquoi Choisir Africa Clean ?",
-    "subtitle": "6 raisons qui font de nous votre partenaire de confiance",
-    "features": [
-      {
-        "title": "Produits Écologiques",
-        "description": "Utilisation exclusive de produits respectueux de l'environnement",
-        "icon": "CheckCircle"
-      },
-      {
-        "title": "Matériels Professionnels",
-        "description": "Équipements et procédés ayant un moindre impact environnemental",
-        "icon": "Medal"
-      },
-      {
-        "title": "Équipes Qualifiées",
-        "description": "Professionnels formés et disponibles 24h/24 & 7j/7",
-        "icon": "Users"
-      },
-      {
-        "title": "Prix Abordables",
-        "description": "Tarifs compétitifs avec 10% de réduction sur votre 1ère commande",
-        "icon": "Star"
-      },
-      {
-        "title": "Couverture Étendue",
-        "description": "Interventions dans toutes les régions du Togo et en Afrique de l'ouest",
-        "icon": "MapPin"
-      },
-      {
-        "title": "Satisfaction Client",
-        "description": "Engagement qualité avec suivi personnalisé de chaque prestation",
-        "icon": "Heart"
-      }
-    ]
+      "title": "Pourquoi Choisir Africa Clean ?",
+      "subtitle": "6 raisons qui font de nous votre partenaire de confiance",
+      "features": [
+        {
+          "title": "Produits Écologiques",
+          "description": "Utilisation exclusive de produits respectueux de l'environnement",
+          "icon": "CheckCircle"
+        },
+        {
+          "title": "Matériels Professionnels",
+          "description": "Équipements et procédés ayant un moindre impact environnemental",
+          "icon": "Medal"
+        },
+        {
+          "title": "Équipes Qualifiées",
+          "description": "Professionnels formés et disponibles 24h/24 & 7j/7",
+          "icon": "Users"
+        },
+        {
+          "title": "Prix Abordables",
+          "description": "Tarifs compétitifs avec 10% de réduction sur votre 1ère commande",
+          "icon": "Star"
+        },
+        {
+          "title": "Couverture Étendue",
+          "description": "Interventions dans toutes les régions du Togo et en Afrique de l'ouest",
+          "icon": "MapPin"
+        },
+        {
+          "title": "Satisfaction Client",
+          "description": "Engagement qualité avec suivi personnalisé de chaque prestation",
+          "icon": "Heart"
+        }
+      ]
+    },
+    "cTAContact": {
+      "title": " Prêt à démarrer avec nous ?",
+      "description": " Contactez-nous dès aujourd'hui pour discuter de vos besoins et découvrir comment nous pouvons vous accompagner."
+    }
   },
-  "cTAContact":{
-    "title":" Prêt à démarrer avec nous ?",
-    "description":" Contactez-nous dès aujourd'hui pour discuter de vos besoins et découvrir comment nous pouvons vous accompagner."
-  }
+  "blog": {
+    "title": "Blog Africa Clean",
+    "description": "Découvrez nos conseils, actualités et expertise en nettoyage écologique et services durables",
+    "cTASection": {
+      "title": "Restez informé de nos actualités",
+      "description": "  Découvrez nos derniers conseils et innovations en matière de nettoyage écologique"
+    }
+  },
+  "contact": {
+    "title": "Contactez-Nous",
+    "description": "Une question, un projet, une urgence ? Notre équipe est à votre disposition pour vous accompagner.",
+    "formSection": {
+      "title": " Envoyez-nous un message",
+      "description": "Remplissez le formulaire ci-dessous et nous vous répondrons rapidement.",
+      "input": {
+        "firstName": {
+          "label": "Prénom *",
+          "placeholder": "Votre prénom"
+        },
+        "lastName": {
+          "label": "Nom *",
+          "placeholder": "Votre nom"
+        },
+        "email": {
+          "label": "Email *",
+          "placeholder": "votre@email.com"
+        },
+        "phone": {
+          "label": "Téléphone *",
+          "placeholder": "+228 XX XX XX XX"
+        },
+        "company": {
+          "label": "Entreprise / Organisation",
+          "placeholder": "Nom de votre entreprise (optionnel)"
+        },
+        "subject": {
+          "label": "Sujet",
+          "placeholder": "Objet de votre demande"
+        },
+        "service": {
+          "label": "Service concerné",
+          "placeholder": "Sélectionner un service"
+        },
+        "urgency": {
+          "label": "Urgence",
+          "placeholder": "Niveau d'urgence"
+        },
+        "message": {
+          "label": "Message *",
+          "placeholder": "Écrivez votre message ici"
+        }
+      }
+    },
+    "mapSection": {
+      "title": "Notre Localisation",
+      "description": "Venez nous rendre visite à notre siège social à Lomé"
+    },
+    "additional": {
+      "title": "Besoin d'aide immédiate ?",
+      "emergencies": {
+        "title": "24/7 Emergencies",
+        "description": "For urgent cleaning, disinfection, or waste management interventions."
+      },
+      "liveChat": {
+        "title": "Live Chat",
+        "description": "Ask your questions and get quick answers via WhatsApp.  "
+      }
+    },
+    "cTASection": {
+      "title": "Engagement Qualité",
+      "description": " Nous nous engageons à répondre à toutes vos demandes dans les plus brefs délais. Votre satisfaction est notre priorité."
+    }
   },
 
   "homeContact": {
@@ -760,9 +833,36 @@
     "values": "Valeurs",
     "missionSlogan": "  Les piliers qui guident notre engagement quotidien",
     "badge": "Promoteur Gérant",
-    "joiningTheTeam":"Rejoindre l'équipe",
-    "discoverQualify":"10% de réduction offerte !",
-    "discover":"Sur votre première commande pour découvrir la qualité de nos services",
-    "ClaimYourOffer":"Profiter de l'offre"
+    "joiningTheTeam": "Rejoindre l'équipe",
+    "discoverQualify": "10% de réduction offerte !",
+    "discover": "Sur votre première commande pour découvrir la qualité de nos services",
+    "ClaimYourOffer": "Profiter de l'offre",
+    "filterByTag": "Filtrer par tag",
+    "searchAnArticle": "Rechercher un article...",
+    "allTags": "Tous les tags",
+    "search": "Recherche",
+    "clearAllFilters": "Effacer tous les filtres",
+    "researchInProgress": "Recherche en cours",
+    "noArticleFound": " Aucun article trouvé",
+    "activeFilters": "Filtres actifs",
+    "seeAllArticles": "Voir tous les articles ",
+    "found": "Trouvé",
+    "read": "Lire",
+    "callNow": "Appeler maintenant",
+    "sendMessage": "Envoyer le message",
+    "SendingInProgress": "Envoi en cours...",
+    "requiredFields": "Champs obligatoires",
+    "showDiscover": "Voir nos services",
+    "practicalInformation": "Informations pratiques",
+    "fullAddress": "Adresse complète",
+    "officeHours": "Horaires de bureau",
+    "transport": "Accessible en taxi, moto-taxi et transport en commun. Parking disponible sur site.",
+    "openWhatsapp": "Ouvrir WhatsApp",
+    "responseWithin24Hours":"Réponse sous 24h",
+    "personalizedAdvice":"Conseil personnalisé",
+    "followUs":"Suivez-nous",
+    "Schedules":"Horaires",
+    "address":"Adresse",
+    "quickActions":"Actions Rapides"
   }
 }
